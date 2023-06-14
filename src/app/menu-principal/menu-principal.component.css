@@ -1,0 +1,29 @@
+#telaMenu{
+background-color: #87BC9C;
+width: 35%;
+height: 45%;
+flex-direction: column;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 10px;
+}
+#flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1A4D2E;
+    width: 100fr;
+    height: 100vh;
+    
+}
+.opcao {
+    margin-bottom: 35px;
+    color: #1A4D2E;
+    font-size: larger;
+    
+}
+.opcao:hover{
+ 
+    border-bottom: 3px solid #1A4D2E;
+}
