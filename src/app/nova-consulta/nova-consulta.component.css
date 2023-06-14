@@ -1,0 +1,15 @@
+
+.parte-superior{
+    width: 100%;
+    height: 10%;
+    background-color: white;
+    border-radius: 10px;
+    border: 2px solid black;
+    
+}
+
+.conteiner{
+    background-color: #1A4D2E;
+    width: 100%;
+    height: 100vh;
+}
