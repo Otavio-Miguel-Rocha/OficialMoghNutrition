@@ -1,0 +1,57 @@
+#section-menu-inicial{
+    display: flex;
+    width: 100%;
+    height: 90vh;
+    justify-content: center;
+    align-items: center;
+    background-color: #1A4D2E;
+}
+#grid-login-register{
+    display: grid;
+    width: 60%;
+    height: 70%;
+    background-color: #1D5D36;
+    grid-template-columns: repeat(2,1fr);
+}
+#square-login{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #87BC9C;
+    align-items: center;
+    flex-direction: column;
+}
+#label-inputs-position{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 60%;
+    justify-content: space-evenly;
+}
+.label-inputs{
+    flex-direction: column;
+    height: 32%;
+}
+.labels-margem{
+    display: flex;
+    margin-left: 10%;
+    height: 30%;
+}
+.inputs{
+    display: flex;
+    width: 100%;
+    border-radius: 50px;
+    border: none;
+    background-color: #D9D9D9;
+    height: 70%;
+}
+
+.buttons{
+    display: flex;
+    width: 40%;
+    height: 10%;
+    border-radius: 100px;
+    border: none;
+    justify-content: center;
+    align-items: center;
+}
