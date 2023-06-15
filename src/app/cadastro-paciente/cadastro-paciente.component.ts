@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastroPacienteComponent implements OnInit {
 
-  constructor() { }
+  userIcon: string;
+  arrowBack: string;
+
+  constructor() { 
+    this.userIcon = '/assets/img/userImg.png';
+    this.arrowBack = '/assets/img/arrowBack.png';
+  }
 
   ngOnInit() {
   }
