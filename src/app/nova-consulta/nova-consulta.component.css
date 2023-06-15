@@ -1,15 +1,174 @@
 
+.fundo-da-novaConsulta{
+  
+    width: 90%;
+    height: 100%;
+    background-color: #87BC9C;
+    border-radius: 10px;
+    justify-content: center;
+}
 .parte-superior{
+    
     width: 100%;
-    height: 10%;
+    height: 4%;
     background-color: white;
     border-radius: 10px;
     border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     
 }
 
+#texto-consulta{
+margin-left: 1%;
+font-size: larger;
+}
+
+.container-do-cadastro{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 95%;
+}
+
+.cadastro-da-novaConsulta{
+    margin-top: 1%;
+    width: 95%;
+    height: 95%;
+    background-color: white;
+    border-radius: 10px;
+}
+
 .conteiner{
+    display: flex;
+    justify-content: center;
     background-color: #1A4D2E;
     width: 100%;
-    height: 100vh;
+    height: 200vh;
 }
+.container-inputs-superior{
+    height: 30%;
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-items: center;
+
+}
+
+input{
+    background-color: #D9D9D9;
+    border-radius: 8px;
+    height: 20%;
+    width: 70%;
+    border: none;
+
+}
+
+.inputs-com-texto{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.texto{
+    width: 68%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#texto-pricipal{
+    text-decoration: #1A4D2E;
+}
+
+#texto-principal{
+    font-size: large;
+}
+
+.conteiner-inputs-medio{
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    height: 20%;
+}
+p{
+    
+    font-family:'Times New Roman', Times, serif;
+}
+
+.background-textarea{
+    
+    display: flex;
+    justify-content: center;
+    width: 95%;
+    height: 100%;
+    background-color: #D9D9D9;
+    border-radius: 10px ;
+}
+
+textarea{
+    border-radius: 10px;
+}
+.conteiner-inputs-inferior{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.botoes{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    height: 7vh;
+}
+
+button{
+    border-radius: 8px;
+    width: 10%;
+    height: 60%;
+    border: solid balck 1 px;
+    
+}
+#cancelar{
+    background-color: #A10000;
+   
+    color: white;
+    font-size: bold;
+}
+#cancelar:hover{
+    background-color: #b62a2a;
+    cursor: pointer;
+}
+
+#cadastrar{
+    background-color: #006729;
+    color:white;
+    font-size: bold;
+}
+#cadastrar:hover{
+    background-color:#09883c ;
+    cursor: pointer;
+}
+
+
+textarea#myTextarea {
+    resize: vertical; /* Permite redimensionamento vertical */
+    min-height: 35vh; /* Define uma altura mínima */
+    min-width: 97%;
+    padding: 8px; /* Adiciona algum espaço interno para o texto */
+    font-family: Arial, sans-serif; /* Define a família de fontes */
+    font-size: 14px; /* Define o tamanho da fonte */
+    border: 1px solid #ccc; /* Adiciona uma borda */
+    border-radius: 4px; /* Adiciona bordas arredondadas */
+  }
+
+  .div-date{
+    display: flex;
+     height: 10%; 
+     width: 95%; 
+     justify-content: flex-start;
+  }
