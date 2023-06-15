@@ -35,7 +35,7 @@ font-size: larger;
 .cadastro-da-novaConsulta{
     margin-top: 1%;
     width: 95%;
-    height: 95%;
+    height: 99%;
     background-color: white;
     border-radius: 10px;
 }
@@ -48,7 +48,7 @@ font-size: larger;
     height: 200vh;
 }
 .container-inputs-superior{
-    height: 30%;
+    height: 25%;
     display:grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
@@ -158,12 +158,17 @@ button{
 textarea#myTextarea {
     resize: vertical; /* Permite redimensionamento vertical */
     min-height: 35vh; /* Define uma altura mínima */
+    max-height: 35vh;
     min-width: 97%;
     padding: 8px; /* Adiciona algum espaço interno para o texto */
     font-family: Arial, sans-serif; /* Define a família de fontes */
     font-size: 14px; /* Define o tamanho da fonte */
-    border: 1px solid #ccc; /* Adiciona uma borda */
+    border: 5px solid #D9D9D9; /* Adiciona uma borda */
     border-radius: 4px; /* Adiciona bordas arredondadas */
+    
+  }
+  textarea{
+
   }
 
   .div-date{
@@ -171,4 +176,5 @@ textarea#myTextarea {
      height: 10%; 
      width: 95%; 
      justify-content: flex-start;
+     flex-direction: column;
   }
