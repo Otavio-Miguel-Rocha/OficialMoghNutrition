@@ -1,29 +1,57 @@
 #telaMenu{
 background-color: #87BC9C;
 width: 35%;
-height: 45%;
+height: 70%;
 flex-direction: column;
 display: flex;
 align-items: center;
 justify-content: center;
 border-radius: 10px;
 }
+#BemVindo{
+    height: 20vh;
+    width: 100%;
+     display: flex;
+     justify-content: center;
+     align-items: center ;
+     color: #1A4D2E;
+     background-color: #1A4D2E;
+     font-size: larger;
+     
+  
+     
+ }
 #flex{
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: center;
     background-color: #1A4D2E;
-    width: 100fr;
-    height: 100vh;
+    width: 90fr;
+    height: 70vh;
     
 }
 .opcao {
-    margin-bottom: 35px;
+    margin-top: 5%;
+    margin-bottom: 7%;
     color: #1A4D2E;
-    font-size: larger;
+    font-size: 150%;
+    cursor: pointer;
+    box-sizing: border-box;
     
 }
 .opcao:hover{
- 
     border-bottom: 3px solid #1A4D2E;
+    
 }
+#border{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 18%;
+    width: 25%;
+    background-color: #ffffff;
+    border: 3px solid #87BC9C;
+    border-radius: 30px;
+  
+}
+
