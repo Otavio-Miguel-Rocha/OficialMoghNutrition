@@ -25,6 +25,7 @@ export class NavegacaoComponent implements OnInit {
         this.currentRoute = this.removeForwardTrace(this.currentRoute);
       });
   }
+  
 
   ngOnInit() {
   }
