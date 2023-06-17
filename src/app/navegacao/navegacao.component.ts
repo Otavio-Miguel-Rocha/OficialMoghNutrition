@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavegacaoComponent implements OnInit {
 
-  constructor() { }
+  logoMOGH : string;
+
+  constructor() { 
+    this.logoMOGH = '/assets/img/logoMOGH.png'
+  }
 
   ngOnInit() {
   }

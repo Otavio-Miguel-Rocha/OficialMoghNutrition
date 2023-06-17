@@ -5,17 +5,17 @@
       <h2>Bem-Vindo</h2>
       <div id="label-inputs-position" class="flex-direction-column">
         <div class="label-inputs flex-direction-column">
-          <label class="labels-margem">CRN</label>
+          <label class="labels-margem-esquerdo">CRN</label>
           <input
-            class="inputs"
+            class="inputs-esquerdo"
             type="text"
             placeholder="Insira o seu CRN aqui..."
           />
         </div>
         <div class="label-inputs flex-direction-column">
-          <label class="labels-margem">Senha</label>
+          <label class="labels-margem-esquerdo">Senha</label>
           <input
-            class="inputs"
+            class="inputs-esquerdo"
             type="password"
             placeholder="Insira sua senha aqui..."
           />
@@ -26,7 +26,7 @@
     <!--  -->
     <!-- register-button-square -->
     <div class="div-other-option flex-direction-column" *ngIf="!mode">
-      <button class="buttons" (click)="switchModeRegister()">
+      <button class="button-registrar" (click)="switchModeRegister()">
         Registrar-se
       </button>
       <h4>Não possui conta?</h4>
@@ -42,36 +42,36 @@
     <div class="square-lightgreen" *ngIf="mode">
       <h2>Faça seu Cadastro</h2>
       <div class="label-inputs-register flex-direction-column">
-        <label class="labels-margem">Nome Completo</label>
+        <label class="labels-margem-direito">Nome Completo</label>
         <input
-          class="inputs"
+          class="inputs-direito"
           type="text"
           placeholder="Insira seu nome completo aqui..."
         />
       </div>
       <div class="label-inputs-register flex-direction-column">
-        <label class="labels-margem">E-mail</label>
+        <label class="labels-margem-direito">E-mail</label>
         <input
-          class="inputs"
+          class="inputs-direito"
           type="text"
           placeholder="Insira seu e-mail aqui..."
         />
       </div>
       <div id="grid-password-crn">
         <div class="label-inputs flex-direction-column">
-          <label class="labels-margem">Senha</label>
+          <label class="labels-margem-direito">Senha</label>
           <input
-            class="inputs"
+            class="inputs-direito"
             type="text"
             placeholder="Crie uma senha aqui..."
           />
         </div>
         <div class="label-inputs flex-direction-column">
-          <label class="labels-margem">CRN</label>
-          <input class="inputs" type="text" placeholder="CRN-5/xxxx" />
+          <label class="labels-margem-direito">CRN</label>
+          <input class="inputs-direito" type="text" placeholder="CRN-5/xxxx" />
         </div>
       </div>
-      <button class="buttons">Registrar-se</button>
+      <button class="button-registrar">Registrar-se</button>
     </div>
   </div>
 </section>

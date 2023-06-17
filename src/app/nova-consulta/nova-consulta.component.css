@@ -93,10 +93,7 @@ input{
     grid-template-columns: repeat(3,1fr);
     height: 20%;
 }
-p{
-    
-    font-family:'Times New Roman', Times, serif;
-}
+
 
 .background-textarea{
     
