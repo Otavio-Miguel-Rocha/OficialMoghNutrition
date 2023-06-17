@@ -38,8 +38,10 @@
     </div>
   </div>
   <div class="center-square-relatorio" *ngIf="modalRelatorio">
-    <h1 id="tittle-relatorio">Relatórios</h1>
-    <!-- NGFOR -->
+    <div class="boxTitle">
+      <a (click)="voltarListaPacientes()"><img [src]="arrowBack" class="arrowBackIcon"></a>
+      <h2 id="tittle-relatorio">Otávio Miguel Rocha</h2>
+    </div>
     <div class="relatorios">
       <div class="relatorio">
         <div class="divs-grid-relatorio">
@@ -63,6 +65,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>    
+    <!-- NGFOR -->
   </div>
 </section>

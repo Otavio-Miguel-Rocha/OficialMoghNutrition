@@ -6,11 +6,14 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./lista-pacientes.component.css"],
 })
 export class ListaPacientesComponent implements OnInit {
+
   upArrowIcon: string;
   downArrowIcon: string;
+  arrowBack:string;
   constructor() {
-    this.upArrowIcon = "/assets/imgs/icons/up-arrow-icon.png";
-    this.downArrowIcon = "/assets/imgs/icons/down-arrow-icon.png";
+    this.upArrowIcon = "/assets/img/arrowClosedModal.png";
+    this.downArrowIcon = "/assets/img/arrowOpenModal.png";
+    this.arrowBack = '/assets/img/arrowBack.png';
   }
 
   ngOnInit() {}
@@ -29,10 +32,12 @@ export class ListaPacientesComponent implements OnInit {
 
 
   //RELATÓRIO INDIVIDUAL
-  modalRelatorio: boolean = true;
+  modalRelatorio: boolean = false;
   abrirRelatorios():void{
     this.modalRelatorio = true;
-
+  }
+  voltarListaPacientes():void{
+    this.modalRelatorio = false;
   }
   //
 }
