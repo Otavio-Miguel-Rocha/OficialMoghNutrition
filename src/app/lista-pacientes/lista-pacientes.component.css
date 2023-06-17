@@ -1,7 +1,7 @@
 #section-pacient-list {
   display: flex;
   width: 100vw;
-  height: 90vh;
+  height: 89.3vh;
   background-color: #1a4d2e;
   justify-content: center;
   align-items: center;
@@ -34,7 +34,7 @@
 }
 .arrow-icon {
   display: flex;
-  height: 40px;
+  height: 30px;
   width: auto;
 }
 
@@ -106,6 +106,21 @@
 }
 
 /* MODAL RELATORIOS */
+.boxTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  width: 98.1%;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #fff;
+}
+.arrowBackIcon {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
 .center-square-relatorio{
   display: flex;
   width: 80%;
@@ -116,9 +131,9 @@
   border-radius: 10px;
 }
 #tittle-relatorio{
-  margin-top: 2%;
-  font-size: 35px;
+  justify-content: center;
 }
+
 .relatorios{
   display: flex;
   width: 81%;
@@ -168,7 +183,7 @@
 .buttons-relatorios{
   display: flex;
   height: 30%;
-  width: 30%;
+  width: 35%;
   justify-content: center;
   align-items: center;
   cursor: pointer;

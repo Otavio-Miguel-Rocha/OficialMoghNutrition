@@ -183,9 +183,6 @@ textarea#myTextarea {
     border-radius: 4px; /* Adiciona bordas arredondadas */
     
   }
-  textarea{
-
-  }
 
   .div-date{
     display: flex;
