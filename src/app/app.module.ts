@@ -9,6 +9,7 @@ import { NovaConsultaComponent } from './nova-consulta/nova-consulta.component';
 import { NavegacaoComponent } from './navegacao/navegacao.component';
 import { AppRountingModule } from './app-routing.module';
 import { ListaPacientesComponent } from './lista-pacientes/lista-pacientes.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ListaPacientesComponent } from './lista-pacientes/lista-pacientes.compo
     ListaPacientesComponent,
     CadastroPacienteComponent,
     NovaConsultaComponent,
-    NavegacaoComponent
+    NavegacaoComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

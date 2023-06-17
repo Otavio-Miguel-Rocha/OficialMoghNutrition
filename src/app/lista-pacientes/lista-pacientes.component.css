@@ -195,3 +195,10 @@
 .white{
   background-color: white;
 }
+
+
+
+.low-opacity {
+  opacity: 0.5;
+  pointer-events: none;
+}

@@ -7,6 +7,7 @@ import { Component, OnInit } from "@angular/core";
 })
 export class ListaPacientesComponent implements OnInit {
 
+  //IMAGENS
   upArrowIcon: string;
   downArrowIcon: string;
   arrowBack:string;
@@ -18,10 +19,16 @@ export class ListaPacientesComponent implements OnInit {
 
   ngOnInit() {}
 
+  //MODAL CONFIRMAÇÃO
+    modalConfirmacao:boolean = false;
+    abrirModalConfirmacao():void{
+      this.modalConfirmacao = true;
+    }
+  //
 
   //DESCRIÇÃO DO PACIENTE
   modalDescricaoPaciente: boolean = true;
-
+  
   openModal(): void {
     this.modalDescricaoPaciente = true;
   }

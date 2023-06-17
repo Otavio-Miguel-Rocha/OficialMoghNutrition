@@ -1,6 +1,6 @@
 <section id="section-pacient-list">
   <!-- ngfor paciente of pacientes -->
-  <div class="center-square" *ngIf="!modalRelatorio">
+  <div class="center-square" *ngIf="!modalRelatorio" [class.low-opacity]="modalConfirmacao">
     <div class="pacient-square">
       <div class="div-pacient-square"><h1>Nome:</h1></div>
       <div class="div-pacient-square"><h1>E-mail:</h1></div>
@@ -30,6 +30,7 @@
           </button>
           <button 
           class="buttons-informations red-button"
+          (click)="abrirModalConfirmacao()"
           >
             Remover Paciente
           </button>
@@ -37,7 +38,7 @@
       </div>
     </div>
   </div>
-  <div class="center-square-relatorio" *ngIf="modalRelatorio">
+  <div class="center-square-relatorio" *ngIf="modalRelatorio" [class.low-opacity]="modalConfirmacao">
     <div class="boxTitle">
       <a (click)="voltarListaPacientes()"><img [src]="arrowBack" class="arrowBackIcon"></a>
       <h2 id="tittle-relatorio">Otávio Miguel Rocha</h2>
@@ -68,4 +69,9 @@
     </div>    
     <!-- NGFOR -->
   </div>
+  <app-modal 
+  *ngIf="modalConfirmacao" 
+  [titulo]="'Remover Usuário'"
+  [conteudo]="'O paciente será removido permanentemente.'"
+  ></app-modal>
 </section>

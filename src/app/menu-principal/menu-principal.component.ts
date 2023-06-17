@@ -12,4 +12,12 @@ export class MenuPrincipalComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  //MODAL CONFIRMAÇÃO
+    modalConfirmacao:boolean = false;
+    abrirModalConfirmacao():void{
+      this.modalConfirmacao = true;
+    }
+  //
+
 }
