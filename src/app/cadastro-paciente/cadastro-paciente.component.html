@@ -1,3 +1,31 @@
-<p>
-  cadastro-paciente works!
-</p>
+<div class="divPrincipal">
+  <div class="divBoxCadastroPaciente">
+    <div class="boxTitle">
+      <img [src]="arrowBack" class="arrowBackIcon">
+      <h1 class="title">Novo Paciente</h1>
+    </div>
+    <div class="divSubBox">
+      <div class="divCadastro">
+        <div class="ladoEsquerdo">
+          <p class="inputsName">Nome Completo :</p>
+          <input class="inputsText" type="text">
+          <p class="inputsName">E-mail :</p>
+          <input class="inputsText" type="text">
+          <p class="inputsName">Telefone :</p>
+          <input class="inputsText" type="text">
+          <p class="inputsName">Sexo :</p>
+          <input class="inputsCheck" type="checkbox">
+          <label>Masculino</label>
+          <input class="inputsCheck" type="checkbox">
+          <label>Feminino</label>
+          <p class="inputsName">Data de Nascimento :</p>
+          <input class="inputDate" type="date">
+        </div>
+        <div class="ladoDireito">
+          <img [src]="userIcon" class="userIcon">
+          <a href="#" class="cadastrarBtn">Cadastrar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    height: 4.6vh;
+    background-color: #1A4D2E;
+    padding: 20px;
+}
+
+.logo {
+    color: #fff;
+    font-weight: 100;
+    border-right: 2px solid #000;
+    padding-right: 20px;
+    font-size: 23px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nomePagina {
+    color: #87BC9C;
+    font-weight: bold;
+    font-size: 32px;
+    margin: 0 auto;
+}
