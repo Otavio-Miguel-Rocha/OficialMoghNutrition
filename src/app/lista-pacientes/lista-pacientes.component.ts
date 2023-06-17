@@ -15,12 +15,24 @@ export class ListaPacientesComponent implements OnInit {
 
   ngOnInit() {}
 
-  modal: boolean = true;
+
+  //DESCRIÇÃO DO PACIENTE
+  modalDescricaoPaciente: boolean = true;
 
   openModal(): void {
-    this.modal = true;
+    this.modalDescricaoPaciente = true;
   }
   closeModal(): void {
-    this.modal = false;
+    this.modalDescricaoPaciente = false;
   }
+  //
+
+
+  //RELATÓRIO INDIVIDUAL
+  modalRelatorio: boolean = true;
+  abrirRelatorios():void{
+    this.modalRelatorio = true;
+
+  }
+  //
 }

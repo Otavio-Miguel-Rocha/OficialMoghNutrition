@@ -1,19 +1,19 @@
 <section id="section-pacient-list">
   <!-- ngfor paciente of pacientes -->
-  <div id="center-square">
+  <div class="center-square" *ngIf="!modalRelatorio">
     <div class="pacient-square">
       <div class="div-pacient-square"><h1>Nome:</h1></div>
       <div class="div-pacient-square"><h1>E-mail:</h1></div>
       <div class="div-pacient-square" id="div-pacient-square-icon">
-        <a (click)="openModal()" style="cursor: pointer" *ngIf="!modal"
+        <a (click)="openModal()" style="cursor: pointer" *ngIf="!modalDescricaoPaciente"
           ><img [src]="upArrowIcon" class="arrow-icon"
         /></a>
-        <a (click)="closeModal()" style="cursor: pointer" *ngIf="modal"
+        <a (click)="closeModal()" style="cursor: pointer" *ngIf="modalDescricaoPaciente"
           ><img [src]="downArrowIcon" class="arrow-icon"
         /></a>
       </div>
     </div>
-    <div id="modal-square" *ngIf="modal">
+    <div id="modal-square" *ngIf="modalDescricaoPaciente">
       <div id="block-div-title-modal">
         <h1>Informações Gerais</h1>
       </div>
@@ -24,12 +24,43 @@
           <h2>Data de Nascimento:</h2>
         </div>
         <div id="buttons-pacient-informations">
-          <button class="buttons-informations green-button">
+          <button class="buttons-informations green-button"
+          (click)="abrirRelatorios()">
             Consultar Relatórios
           </button>
-          <button class="buttons-informations red-button">
+          <button 
+          class="buttons-informations red-button"
+          >
             Remover Paciente
           </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="center-square-relatorio" *ngIf="modalRelatorio">
+    <h1 id="tittle-relatorio">Relatórios</h1>
+    <!-- NGFOR -->
+    <div class="relatorios">
+      <div class="relatorio">
+        <div class="divs-grid-relatorio">
+          <ul class="list-items-relatorio">
+            <li>Altura: </li>
+            <li>Peso: </li>
+            <li>Percentual de Gordura: </li>
+            <li>Taxa Metabólica Basal: </li>
+            <li>Data da Consulta:</li>
+          </ul>
+        </div>
+        <div class="divs-grid-relatorio">
+          <ul class="list-items-relatorio" id="custom-altura">
+            <li>Triglicerídeos:</li>
+            <li>Diabetes:</li>
+            <li>Colesterol:</li>
+          </ul>
+          <div class="div-buttons-relatorios">
+            <button class="buttons-relatorios">Auto Feedback</button>
+            <button class="buttons-relatorios">Objetivo do Paciente</button>
+          </div>
         </div>
       </div>
     </div>
