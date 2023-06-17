@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-menu-inicial',
-  templateUrl: './menu-inicial.component.html',
-  styleUrls: ['./menu-inicial.component.css']
+  selector: "app-menu-inicial",
+  templateUrl: "./menu-inicial.component.html",
+  styleUrls: ["./menu-inicial.component.css"],
 })
 export class MenuInicialComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  mode: boolean = false;
+
+  switchModeLogin(): void {
+    this.mode = false;
   }
-
+  switchModeRegister(): void {
+    this.mode = true;
+  }
 }

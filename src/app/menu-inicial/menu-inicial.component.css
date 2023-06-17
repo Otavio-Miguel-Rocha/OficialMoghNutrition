@@ -1,0 +1,84 @@
+/* CSS GERAIS */
+#section-menu-inicial {
+  display: flex;
+  width: 100%;
+  height: 90vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #1a4d2e;
+}
+#grid-login-register {
+  display: grid;
+  width: 60%;
+  height: 70%;
+  background-color: #1d5d36;
+  grid-template-columns: repeat(2, 1fr);
+}
+.square-lightgreen {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: #87bc9c;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.flex-direction-column {
+  flex-direction: column;
+}
+/*  */
+/* Login */
+#label-inputs-position {
+  display: flex;
+  width: 80%;
+  height: 60%;
+  justify-content: space-evenly;
+}
+.label-inputs {
+  height: 32%;
+}
+.labels-margem {
+  display: flex;
+  margin-left: 10%;
+  height: 30%;
+}
+.inputs {
+  display: flex;
+  width: 100%;
+  border-radius: 50px;
+  border: none;
+  background-color: #d9d9d9;
+  height: 55%;
+}
+.buttons {
+  display: flex;
+  width: 40%;
+  height: 10%;
+  border-radius: 100px;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #1a4d2e;
+  color: white;
+}
+.div-other-option {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+/*  */
+
+.label-inputs-register {
+  display: flex;
+  width: 80%;
+  height: 20%;
+}
+#grid-password-crn {
+  display: grid;
+  height: 40%;
+  width: 80%;
+  grid-template-columns: 70% 30%;
+}
