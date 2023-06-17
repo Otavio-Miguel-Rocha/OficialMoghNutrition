@@ -13,8 +13,13 @@
    <a class="opcao">
     Cadastar Paciente
    </a>
-   <a class="opcao">
+   <a class="opcao" (click)="abrirModalConfirmacao()">
     Logout
    </a>
 </div>
+<app-modal
+*ngIf="modalConfirmacao"
+[titulo]="'Logout'"
+[conteudo]="'Você deseja sair?'"
+></app-modal>
 </div>
