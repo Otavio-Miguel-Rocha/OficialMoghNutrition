@@ -10,6 +10,7 @@ import { NavegacaoComponent } from './navegacao/navegacao.component';
 import { AppRountingModule } from './app-routing.module';
 import { ListaPacientesComponent } from './lista-pacientes/lista-pacientes.component';
 import { ModalComponent } from './modal/modal.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ModalComponent } from './modal/modal.component';
   ],
   imports: [
     BrowserModule,
-    AppRountingModule
+    AppRountingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

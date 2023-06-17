@@ -1,7 +1,7 @@
 <section id="section-menu-inicial">
   <div id="grid-login-register">
     <!-- login-square -->
-    <div class="square-lightgreen" *ngIf="!mode">
+    <div class="square-lightgreen" *ngIf="!loginERegisterView">
       <h2>Bem-Vindo</h2>
       <div id="label-inputs-position" class="flex-direction-column">
         <div class="label-inputs flex-direction-column">
@@ -10,6 +10,7 @@
             class="inputs-esquerdo"
             type="text"
             placeholder="Insira o seu CRN aqui..."
+            [(ngModel)]="loginCRN"
           />
         </div>
         <div class="label-inputs flex-direction-column">
@@ -18,32 +19,34 @@
             class="inputs-esquerdo"
             type="password"
             placeholder="Insira sua senha aqui..."
+            [(ngModel)]="loginSenha"
           />
         </div>
       </div>
-      <button class="buttons">Entrar</button>
+      <button class="buttons" (click)="verificacaoLogin()">Entrar</button>
     </div>
     <!--  -->
     <!-- register-button-square -->
-    <div class="div-other-option flex-direction-column" *ngIf="!mode">
-      <button class="button-registrar" (click)="switchModeRegister()">
+    <div class="div-other-option flex-direction-column" *ngIf="!loginERegisterView">
+      <button class="button-registrar" (click)="trocaTelaRegistro()">
         Registrar-se
       </button>
       <h4>Não possui conta?</h4>
     </div>
     <!--  -->
     <!-- login-button-square -->
-    <div class="div-other-option flex-direction-column" *ngIf="mode">
-      <button class="buttons" (click)="switchModeLogin()">Entrar</button>
+    <div class="div-other-option flex-direction-column" *ngIf="loginERegisterView">
+      <button class="buttons" (click)="trocaTelaLogin()">Entrar</button>
       <h4>Já possui conta?</h4>
     </div>
     <!--  -->
     <!-- register-square -->
-    <div class="square-lightgreen" *ngIf="mode">
+    <div class="square-lightgreen" *ngIf="loginERegisterView">
       <h2>Faça seu Cadastro</h2>
       <div class="label-inputs-register flex-direction-column">
         <label class="labels-margem-direito">Nome Completo</label>
         <input
+          [(ngModel)]="nutricionista.nomeCompleto"
           class="inputs-direito"
           type="text"
           placeholder="Insira seu nome completo aqui..."
@@ -52,6 +55,7 @@
       <div class="label-inputs-register flex-direction-column">
         <label class="labels-margem-direito">E-mail</label>
         <input
+          [(ngModel)]="nutricionista.email"
           class="inputs-direito"
           type="text"
           placeholder="Insira seu e-mail aqui..."
@@ -59,19 +63,29 @@
       </div>
       <div id="grid-password-crn">
         <div class="label-inputs flex-direction-column">
-          <label class="labels-margem-direito">Senha</label>
+          <label  class="labels-margem-direito">Senha</label>
           <input
+            [(ngModel)]="nutricionista.senha"
             class="inputs-direito"
-            type="text"
+            type="password"
             placeholder="Crie uma senha aqui..."
           />
         </div>
         <div class="label-inputs flex-direction-column">
           <label class="labels-margem-direito">CRN</label>
-          <input class="inputs-direito" type="text" placeholder="CRN-5/xxxx" />
+          <input 
+          [(ngModel)]="nutricionista.CRN" class="inputs-direito" type="text" placeholder="XX-XXXX" />
         </div>
       </div>
-      <button class="button-registrar">Registrar-se</button>
+      <button class="button-registrar" (click)="abrirModalRegistrar()">Registrar-se</button>
     </div>
   </div>
+  <app-modal 
+  *ngIf="aparecerModal" 
+  (confirmar)="botaoConfirmarModal()"
+  (fechar)="fecharModalRegistrar()"
+  [titulo]="tituloModal"
+  [conteudo]="conteudoModal"
+  [tipoModal]="tipoModal"
+  ></app-modal>
 </section>

@@ -8,6 +8,13 @@
     justify-content: center;
     margin-top: 7%;
 }
+
+.arrowBack {
+    height: 30px;
+    width: 30px;
+    margin-left: 20px;
+    cursor: pointer;
+}
 .parte-superior{
     
     width: 100%;
@@ -16,13 +23,14 @@
     border-radius: 10px;
     border: 2px solid black;
     display: flex;
-    justify-content: center;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
     
 }
 
 #texto-consulta{
-margin-left: 1%;
+margin-right: 20px;
 font-size: larger;
 }
 

@@ -11,6 +11,20 @@
   align-items: center;
 }
 
+.botaoFechar {
+  color: red;
+  font-size: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+}
+
+.divBotaoFechar {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+}
+
 .modal {
   position: absolute;
   background-color: #fff;

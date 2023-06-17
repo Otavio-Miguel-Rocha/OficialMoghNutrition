@@ -1,19 +1,19 @@
-<div id="BemVindo"><p id="border">Bem-vindo: Gustavo!</p></div>
+<div id="BemVindo"><p id="border">Bem-vindo: !</p></div>
 <div id="flex">
    
 <div id="telaMenu">
  
-   <a class="opcao">
+   <a class="opcao" (click)="NovaConsultaRoute()">
     Nova consulta
    </a>
      
-   <a class="opcao">
+   <a class="opcao" (click)="listaPacientesRoute()">
     Listar Pacientes 
    </a>
-   <a class="opcao">
+   <a class="opcao" (click)="CadastrarPacienteRoute()">
     Cadastar Paciente
    </a>
-   <a class="opcao" (click)="abrirModalConfirmacao()">
+   <a class="opcao" (click)="LogoutRoute()">
     Logout
    </a>
 </div>

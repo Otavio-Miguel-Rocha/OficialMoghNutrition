@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-principal',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuPrincipalComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -19,5 +20,22 @@ export class MenuPrincipalComponent implements OnInit {
       this.modalConfirmacao = true;
     }
   //
+
+  NovaConsultaRoute () : void {
+    this.router.navigate(['/Nova-Consulta'])
+  }
+
+  listaPacientesRoute () : void {
+    this.router.navigate(['/Lista-Pacientes'])
+  }
+
+  CadastrarPacienteRoute () : void {
+    this.router.navigate(['/Cadastro-Paciente'])
+  }
+
+  LogoutRoute() : void {
+    this.router.navigate(['/Menu-Inicial'])
+  }
+
 
 }

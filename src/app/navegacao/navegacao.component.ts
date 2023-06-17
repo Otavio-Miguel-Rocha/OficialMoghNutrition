@@ -17,6 +17,11 @@ export class NavegacaoComponent implements OnInit {
 
   constructor(private router: Router) {
     this.logoMOGH = '/assets/img/logoMOGH.png'
+    
+  }
+  
+
+  ngOnInit() {
     this.router.events
       .pipe(filter((event: any) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
@@ -25,10 +30,6 @@ export class NavegacaoComponent implements OnInit {
         this.currentRoute = this.removeForwardTrace(this.currentRoute);
       });
   }
-  
-
-  ngOnInit() {
-  }
 
   removeForwardSlash(nomePagina: string): string {
     return nomePagina.replace(/\//g, '');
@@ -36,6 +37,10 @@ export class NavegacaoComponent implements OnInit {
 
   removeForwardTrace(nomePagina: string): string {
     return nomePagina.replace(/-/g, ' ');
+  }
+
+  logoRouting() :void {
+    this.router.navigate(['/Menu-Principal'])
   }
 
 }
