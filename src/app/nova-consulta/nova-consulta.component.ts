@@ -12,4 +12,6 @@ export class NovaConsultaComponent implements OnInit {
   ngOnInit() {
   }
 
+  
+
 }

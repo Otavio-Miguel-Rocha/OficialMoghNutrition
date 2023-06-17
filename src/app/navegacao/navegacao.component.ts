@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navegacao',
@@ -7,13 +9,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavegacaoComponent implements OnInit {
 
+
   logoMOGH : string;
 
-  constructor() { 
+  name = '';
+  currentRoute : string;
+
+  constructor(private router: Router) {
     this.logoMOGH = '/assets/img/logoMOGH.png'
+    this.router.events
+      .pipe(filter((event: any) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentRoute = event.url;
+        this.currentRoute = this.removeForwardSlash(this.currentRoute);
+        this.currentRoute = this.removeForwardTrace(this.currentRoute);
+      });
   }
 
   ngOnInit() {
+  }
+
+  removeForwardSlash(nomePagina: string): string {
+    return nomePagina.replace(/\//g, '');
+  }
+
+  removeForwardTrace(nomePagina: string): string {
+    return nomePagina.replace(/-/g, ' ');
   }
 
 }
