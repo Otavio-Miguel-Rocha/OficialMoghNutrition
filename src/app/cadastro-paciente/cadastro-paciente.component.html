@@ -23,9 +23,17 @@
         </div>
         <div class="ladoDireito">
           <img [src]="userIcon" class="userIcon">
-          <a class="cadastrarBtn" (click)="cadastrarPaciente()">Cadastrar</a>
+          <a class="cadastrarBtn" (click)="confirmarCadastro()">Cadastrar</a>
         </div>
       </div>
     </div>
   </div>
+  <app-modal 
+  *ngIf="aparecerModal" 
+  (confirmar)="cadastrarPaciente()"
+  (fechar)="fecharModalRegistrar()"
+  [titulo]="tituloModal"
+  [conteudo]="conteudoModal"
+  [tipoModal]="tipoModal"
+  ></app-modal>
 </div>

@@ -37,6 +37,24 @@ export class CadastroPacienteComponent implements OnInit {
     }
   }
 
+  //MODAL CONFIRMAÇÃO OU AVISO
+  aparecerModal:boolean = false;
+  tipoModal:boolean;
+  tituloModal:string;
+  conteudoModal:string;
+
+  confirmarCadastro():void{
+    this.abrirModalConfirmacao("Deseja Cadastrar Paciente?", 
+    "Paciente: " + this.paciente.nomeCompleto +
+    "E-mail: " + this.paciente.email +
+    "Telefone: " + this.paciente.telefone +
+    "Data de Nascimento: " + this.paciente.dataNascimento
+    );
+  }
+  fecharModalRegistrar():void{
+    this.aparecerModal = false;
+  }
+
   paciente : Paciente = {
     nomeCompleto : "",
     email : "",
@@ -52,10 +70,10 @@ export class CadastroPacienteComponent implements OnInit {
   cadastrarPaciente() {
 
     if(this.masculino == true) {
-      this.paciente.sexo = 'masculino';
+      this.paciente.sexo = 'Masculino';
     }
     else if(this.feminino == true) {
-      this.paciente.sexo == 'feminino';
+      this.paciente.sexo == 'Feminino';
     }
     const novoPaciente: Paciente = {
       nomeCompleto: this.paciente.nomeCompleto,
@@ -72,6 +90,17 @@ export class CadastroPacienteComponent implements OnInit {
     this.paciente.sexo = "";
     this.paciente.telefone = "";
     this.paciente.dataNascimento = "";
-  
+  }
+  abrirModalConfirmacao(titulo:string, conteudo:string):void{
+    this.aparecerModal = true;
+    this.tituloModal = titulo;
+    this.conteudoModal = conteudo;
+    this.tipoModal = false;
+  }
+  abrirModalAviso(titulo:string, conteudo:string):void{
+    this.aparecerModal = true;
+    this.tituloModal = titulo;
+    this.conteudoModal = conteudo;
+    this.tipoModal = true;
   }
 }

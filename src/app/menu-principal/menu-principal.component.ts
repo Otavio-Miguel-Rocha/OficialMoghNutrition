@@ -23,7 +23,12 @@ export class MenuPrincipalComponent implements OnInit {
       this.abrirModalAviso("ACESSO NEGADO", "Você deve estar logado para acessar essa página!");
       this.router.navigate(['/Menu-Inicial']);
     }
+    else{
+      this.nomeNutricionistaLogado = validaUsuarioLogado.nomeCompleto;
+    }
   }
+
+  nomeNutricionistaLogado: string;
 
   //MODAL CONFIRMAÇÃO OU AVISO
   aparecerModal:boolean = false;
