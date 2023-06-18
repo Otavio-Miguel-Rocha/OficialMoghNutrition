@@ -17,6 +17,19 @@ interface Paciente {
   mostrarModal:boolean,
 }
 
+interface Consulta {
+  altura: number,
+  peso: number,
+  porcentagemGordura: number,
+  taxaMetabolicaBasal: number,
+  triglicerideos: number,
+  diabetes: string,
+  colesterol: string,
+  autofeedback : string,
+  objetivoConsulta : string,
+  dataConsulta : string
+}
+
 @Component({
   selector: "app-lista-pacientes",
   templateUrl: "./lista-pacientes.component.html",
@@ -30,6 +43,7 @@ export class ListaPacientesComponent implements OnInit {
   arrowBack:string;
 
   listaPacientes: Paciente[] = [];
+  listaConsultas: Consulta[] = [];
 
 
   constructor(private router: Router) {
@@ -48,6 +62,10 @@ export class ListaPacientesComponent implements OnInit {
     if( listaPacientes != null){
       this.listaPacientes = listaPacientes;
       console.log(this.listaPacientes);
+    }
+    let listaConsultas: Consulta[] = JSON.parse(localStorage.getItem('ListaConsultas'))
+    if(listaConsultas != null) {
+      this.listaConsultas = listaConsultas;
     }
   }
 
