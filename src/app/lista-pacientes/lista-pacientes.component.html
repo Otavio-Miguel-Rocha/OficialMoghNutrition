@@ -22,9 +22,9 @@
       </div>
       <div id="pacient-informations">
         <div id="more-informations">
-          <h2>Sexo: {{paciente.sexo}}</h2>
-          <h2>Telefone: {{paciente.telefone}}</h2>
-          <h2>Data de Nascimento: {{paciente.dataNascimento}}</h2>
+          <h2>Sexo: {{pacienteModalSexo}}</h2>
+          <h2>Telefone: {{pacienteModalTelefone}}</h2>
+          <h2>Data de Nascimento: {{pacienteModalDataNascimento}}</h2>
         </div>
         <div id="buttons-pacient-informations">
           <button class="buttons-informations green-button"
@@ -48,7 +48,7 @@
   <div class="center-square-relatorio" *ngIf="modalRelatorio" [class.low-opacity]="modalConfirmacao">
     <div class="boxTitle">
       <a (click)="voltarListaPacientes()"><img [src]="arrowBack" class="arrowBackIcon"></a>
-      <h2 id="tittle-relatorio">Otávio Miguel Rocha</h2>
+      <h2 id="tittle-relatorio">Otavio Miguel Rocha</h2>
     </div>
     <div class="relatorios">
       <div class="relatorio">

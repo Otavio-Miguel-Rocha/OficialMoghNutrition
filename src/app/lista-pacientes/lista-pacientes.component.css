@@ -140,9 +140,10 @@ h2 {
 .center-square-relatorio{
   display: flex;
   width: 80%;
-  height: 45%;
+  height: 100%;
   background-color: #87BC9C;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   border-radius: 10px;
 }
@@ -158,6 +159,7 @@ h2 {
   overflow-x: auto;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 .relatorio{
   display: grid;
@@ -166,7 +168,7 @@ h2 {
   background-color: white;
   width: 80%;
   min-height: 230px;
-  height: 40%;
+  height: 100%;
   padding-left:5%;
   padding-right: 5%;
   border-radius: 10px;

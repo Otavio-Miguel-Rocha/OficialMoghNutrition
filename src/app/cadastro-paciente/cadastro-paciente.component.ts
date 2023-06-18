@@ -68,7 +68,7 @@ export class CadastroPacienteComponent implements OnInit {
   }
 
   cadastrarPaciente() {
-
+    this.aparecerModal = false;
     if(this.masculino == true) {
       this.paciente.sexo = 'Masculino';
     }
@@ -90,6 +90,7 @@ export class CadastroPacienteComponent implements OnInit {
     this.paciente.sexo = "";
     this.paciente.telefone = "";
     this.paciente.dataNascimento = "";
+    this.listaPaciente();
   }
   abrirModalConfirmacao(titulo:string, conteudo:string):void{
     this.aparecerModal = true;
@@ -102,5 +103,8 @@ export class CadastroPacienteComponent implements OnInit {
     this.tituloModal = titulo;
     this.conteudoModal = conteudo;
     this.tipoModal = true;
+  }
+  listaPaciente():void{
+    this.router.navigate(['/Lista-Pacientes'])
   }
 }

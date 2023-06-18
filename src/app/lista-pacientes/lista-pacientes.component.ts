@@ -6,7 +6,8 @@ interface Paciente {
   email: string,
   telefone: string,
   sexo: string,
-  dataNascimento: string
+  dataNascimento: string,
+  mostrarModal:boolean,
 }
 
 @Component({
@@ -43,7 +44,8 @@ export class ListaPacientesComponent implements OnInit {
     email : "",
     telefone : "",
     sexo : "",
-    dataNascimento : ""
+    dataNascimento : "",
+    mostrarModal: false,
   }
 
   //MODAL CONFIRMAÇÃO
@@ -55,7 +57,9 @@ export class ListaPacientesComponent implements OnInit {
 
   //DESCRIÇÃO DO PACIENTE
   modalDescricaoPaciente: boolean = true;
-  
+  pacienteModalSexo:string;
+  pacienteModalTelefone:string;
+  pacienteModalDataNascimento:string;
   openModal(): void {
     this.modalDescricaoPaciente = true;
   }
