@@ -20,8 +20,8 @@ export class MenuPrincipalComponent implements OnInit {
   ngOnInit() {
     const validaUsuarioLogado: Nutricionista = JSON.parse(localStorage.getItem("nutricionistaLogado"));
     if(validaUsuarioLogado == null){
-      this.abrirModalAviso("ACESSO NEGADO", "Você deve estar logado para acessar essa página!");
-      this.router.navigate(['/Menu-Inicial']);
+      // this.abrirModalAviso("ACESSO NEGADO", "Você deve estar logado para acessar essa página!");
+      // this.router.navigate(['/Menu-Inicial']);
     }
   }
 

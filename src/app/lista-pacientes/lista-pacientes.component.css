@@ -1,7 +1,9 @@
+
+
 #section-pacient-list {
   display: flex;
   width: 100vw;
-  height: 89.3vh;
+  height: 100%;
   background-color: #1a4d2e;
   justify-content: center;
   align-items: center;
@@ -9,18 +11,18 @@
 }
 .center-square {
   display: flex;
-  width: 70%;
-  height: 300px;
+  width: 60vw;
+  height: 30%;
   max-height: 80%;
   align-items: center;
   flex-direction: column;
-  margin-top: 100px;
+  margin-top: 5%;
   
 }
 .pacient-square {
   display: grid;
   width: 100%;
-  height: 20%;
+  height: 10vh;
   background-color: #87bc9c;
   border-radius: 15px;
   grid-template-columns: 47% 47% 6%;
@@ -42,11 +44,19 @@
   width: auto;
 }
 
+h1 {
+  font-size: 22px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
 /* MODAL */
 #modal-square {
   display: flex;
   width: 100%;
-  height: 300px;
+  height: 35%;
   border-radius: 15px;
   background-color: white;
   flex-direction: column;
@@ -55,6 +65,7 @@
   display: flex;
   width: 35%;
   height: 20%;
+  margin-top: 10px;
   align-items: center;
   justify-content: center;
   flex-direction: row;
@@ -63,7 +74,7 @@
 #pacient-informations {
   display: grid;
   grid-template-columns: 60% 40%;
-  height: 500px;
+  height: 50%;
   width: 100%;
   justify-content: center;
   flex-direction: column;
@@ -81,7 +92,8 @@
 #buttons-pacient-informations {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 75%;
+  padding: 10px;
 }
 
 /* BUTTONS */
@@ -128,7 +140,7 @@
 .center-square-relatorio{
   display: flex;
   width: 80%;
-  height: 85%;
+  height: 45%;
   background-color: #87BC9C;
   align-items: center;
   flex-direction: column;

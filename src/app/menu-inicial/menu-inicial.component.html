@@ -11,7 +11,8 @@
             type="text"
             placeholder="Insira o seu CRN aqui..."
             [(ngModel)]="loginCRN"
-            mask="99-9999"
+            (ngModelChange)="formatarCRNLogin()"
+            maxlength="7"
           />
         </div>
         <div class="label-inputs flex-direction-column">
@@ -78,7 +79,8 @@
           [(ngModel)]="nutricionista.CRN" 
           class="inputs-direito" 
           type="text"
-          mask="99-9999"
+          (ngModelChange)="formatarCRNRegistro()"
+          maxlength="7"
           placeholder="XX-XXXX" />
         </div>
       </div>

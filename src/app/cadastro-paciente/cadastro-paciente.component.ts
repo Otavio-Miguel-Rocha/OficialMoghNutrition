@@ -6,7 +6,7 @@ interface Paciente {
   email: string,
   telefone: string,
   sexo: string,
-  dataNascimento: string
+  dataNascimento: string,
 }
 
 @Component({
@@ -30,6 +30,11 @@ export class CadastroPacienteComponent implements OnInit {
   }
 
   ngOnInit() {
+    let listaPacientes: Paciente[] = JSON.parse(localStorage.getItem('ListaPacientes'));
+    if( listaPacientes != null){
+      this.listaPacientes = listaPacientes;
+      console.log(this.listaPacientes);
+    }
   }
 
   paciente : Paciente = {
@@ -52,12 +57,21 @@ export class CadastroPacienteComponent implements OnInit {
     else if(this.feminino == true) {
       this.paciente.sexo == 'feminino';
     }
-    console.log(this.listaPacientes)
-    this.listaPacientes.push(this.paciente);  
+    const novoPaciente: Paciente = {
+      nomeCompleto: this.paciente.nomeCompleto,
+      email : this.paciente.email,
+      telefone : this.paciente.telefone,
+      sexo : this.paciente.sexo,
+      dataNascimento : this.paciente.dataNascimento,
+    }
+    this.listaPacientes.push(novoPaciente);  
     localStorage.setItem('ListaPacientes', JSON.stringify(this.listaPacientes)); 
-    
 
-
+    this.paciente.nomeCompleto = "";
+    this.paciente.email = "";
+    this.paciente.sexo = "";
+    this.paciente.telefone = "";
+    this.paciente.dataNascimento = "";
+  
   }
-
 }

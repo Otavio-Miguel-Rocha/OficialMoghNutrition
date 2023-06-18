@@ -52,8 +52,8 @@ export class MenuInicialComponent implements OnInit {
       if(this.nutricionista.CRN == "" || this.nutricionista.nomeCompleto == "" || this.nutricionista.email == "" || this.nutricionista.senha == ""  ) {
         this.abrirModalAviso("Atenção no Cadastro!", "Todos os campos devem ser preenchidos!");
       } else{
-        const cnrFormatado = this.inserirTracoPadrao(this.nutricionista.CRN);
-        if(this.verificarFormatoCRN(cnrFormatado)){
+        console.log(this.verificarFormatoCRN(this.nutricionista.CRN));
+        if(this.verificarFormatoCRN(this.nutricionista.CRN)){
           this.abrirModalConfirmacao("Confirme seus Dados", "Nome: " + this.nutricionista.nomeCompleto  + ' E-mail: ' + this.nutricionista.email + ' CRN: ' + this.nutricionista.CRN ); 
         } else{
           this.abrirModalAviso("Formato de CRN Inválido", "Formato correto: XX-XXXX");
@@ -98,16 +98,17 @@ export class MenuInicialComponent implements OnInit {
   loginCRN:string;
   loginSenha:string;
   verificacaoLogin():void {
-    const cnrFormatado = this.inserirTracoPadrao(this.loginCRN);
-    if(!this.verificarFormatoCRN(cnrFormatado)){
+    if(!this.verificarFormatoCRN(this.loginCRN)){
       this.abrirModalAviso("FORMATO INVÁLIDO", "CRN não está no padrão XX-XXXX")
     }
     else{
       let verificarCRNExistente: boolean = false;
       this.nutricionistasLista.forEach( (nutricionistaFor) => {
-        if(nutricionistaFor.CRN === this.loginCRN) {
+        console.log(nutricionistaFor.CRN);
+        console.log(this.loginCRN);
+        if(nutricionistaFor.CRN == this.loginCRN) {
           verificarCRNExistente = true;
-          if(nutricionistaFor.senha === this.loginSenha) {
+          if(nutricionistaFor.senha == this.loginSenha) {
             localStorage.setItem("nutricionistaLogado", JSON.stringify(nutricionistaFor));
             this.router.navigate(['/Menu-Principal'])
           }else{
@@ -136,14 +137,30 @@ export class MenuInicialComponent implements OnInit {
     this.tipoModal = true;
   }
 
-  inserirTracoPadrao(crn: string):string{
-    console.log(crn);
-    return crn.slice(0, 2) + "-" + crn.slice(2);
-  }
+  // inserirTracoPadrao(crn: string):string{
+  //   console.log(crn);
+  //   return crn.slice(0, 2) + "-" + crn.slice(2);
+  // }
 
   verificarFormatoCRN(crn: string): boolean {
     console.log(crn);
     const formatoCRN = /^\d{2}-\d{4}$/;
+    console.log(formatoCRN);
     return formatoCRN.test(crn);
+  }
+
+  formatarCRNLogin():void{
+    this.loginCRN = this.formatarCRN(this.loginCRN);
+  }
+  formatarCRNRegistro():void{
+    this.nutricionista.CRN = this.formatarCRN(this.nutricionista.CRN);
+  }
+
+  formatarCRN(crn:string):string {
+    console.log(crn);
+    // Remove todos os caracteres que não sejam dígitos
+    const apenasDigitos = crn.replace(/\D/g, '');
+    // Formata o valor adicionando o traço
+    return apenasDigitos.replace(/(\d{2})(\d{0,4})/, '$1-$2'); 
   }
 }

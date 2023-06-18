@@ -11,7 +11,6 @@ import { AppRountingModule } from './app-routing.module';
 import { ListaPacientesComponent } from './lista-pacientes/lista-pacientes.component';
 import { ModalComponent } from './modal/modal.component';
 import { FormsModule } from '@angular/forms';
-import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ import { NgxMaskModule } from 'ngx-mask';
     BrowserModule,
     AppRountingModule,
     FormsModule,
-    NgxMaskModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
