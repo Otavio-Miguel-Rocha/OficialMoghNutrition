@@ -16,7 +16,7 @@
                <p class="textosInputs">*Obrigatório</p>  
             </div>
 
-            <input type="text">
+            <input class="alturaInput" [(ngModel)]="consulta.altura" type="text">
           </div>
 
           <div class="inputs-com-texto">
@@ -25,7 +25,7 @@
               <p class="textosInputs">*Obrigatório</p>  
             </div>
             
-            <input type="text">
+            <input class="pesoInput" [(ngModel)]="consulta.peso" type="text">
           </div>
 
           <div class="inputs-com-texto">
@@ -34,7 +34,7 @@
               <p class="textosInputs">*Obrigatório</p>  
             </div>
             
-            <input type="text">
+            <input class="porcentagemGorduraInput" [(ngModel)]="consulta.porcentagemGordura"  type="text">
           </div>
 
           <div class="inputs-com-texto">
@@ -43,7 +43,7 @@
               <p class="textosInputs">*Obrigatório</p>  
             </div>
 
-            <input type="text">
+            <input class="taxaMetabolicaInput" [(ngModel)]="consulta.taxaMetabolicaBasal" type="text">
           </div>
          
          
@@ -56,7 +56,7 @@
               
             </div>
 
-            <input type="text">
+            <input class="triglicerideosInput" [(ngModel)]="consulta.triglicerideos" type="text">
           </div>
           <div class="inputs-com-texto">
             <div class="texto">
@@ -64,7 +64,7 @@
             
             </div>
 
-            <input type="text">
+            <input class="diabetesInput" [(ngModel)]="consulta.diabetes" type="text">
           </div>
           <div class="inputs-com-texto">
             <div class="texto">
@@ -72,7 +72,7 @@
               
             </div>
 
-            <input type="text">
+            <input class="colesterolInput" [(ngModel)]="consulta.colesterol"  type="text">
           </div>
         </div>
           
@@ -85,7 +85,7 @@
               </div>
   
               <div class="background-textarea">
-                <textarea id="myTextarea"></textarea>
+                <textarea  class="autofeedbackTextarea" [(ngModel)]="consulta.autofeedback"  id="myTextarea"></textarea>
               </div>
             </div>
             
@@ -96,7 +96,7 @@
               </div>
   
               <div class="background-textarea">
-                <textarea id="myTextarea"></textarea>
+                <textarea  class="objetivoConsultaTextarea" [(ngModel)]="consulta.objetivoConsulta" id="myTextarea"></textarea>
               </div>
 
              
@@ -108,7 +108,7 @@
            
             <div class="botoes">
               <button id="cancelar">Cancelar</button>
-              <button id="cadastrar">Cadastrar</button>
+              <button id="cadastrar" (click)="novaConsulta()">Cadastrar</button>
               
             </div>
         </div>

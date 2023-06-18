@@ -17,6 +17,18 @@ interface Paciente {
   mostrarModal:boolean,
 }
 
+interface Consulta {
+  altura: number,
+  peso: number,
+  porcentagemGordura: number,
+  taxaMetabolicaBasal: number,
+  triglicerideos: number,
+  diabetes: string,
+  colesterol: string,
+  autofeedback : string,
+  objetivoConsulta : string
+}
+
 @Component({
   selector: 'app-nova-consulta',
   templateUrl: './nova-consulta.component.html',
@@ -25,6 +37,7 @@ interface Paciente {
 export class NovaConsultaComponent implements OnInit {
   arrowBack : string;
   modalBoolean : boolean;
+  listaConsultas : Consulta[] = [];
 
   
   constructor(private router: Router) { 
@@ -49,6 +62,18 @@ export class NovaConsultaComponent implements OnInit {
     this.router.navigate(['/Lista-Pacientes'])
   }
 
+  consulta : Consulta = {
+    altura : null,
+    peso : null,
+    porcentagemGordura : null,
+    taxaMetabolicaBasal : null,
+    triglicerideos : null,
+    diabetes : null,
+    colesterol : null,
+    autofeedback : null,
+    objetivoConsulta : null
+  }
+
 
   //MODAL CONFIRMAÇÃO OU AVISO
   aparecerModal:boolean = false;
@@ -66,6 +91,34 @@ export class NovaConsultaComponent implements OnInit {
     this.tituloModal = titulo;
     this.conteudoModal = conteudo;
     this.tipoModal = true;
+  }
+
+  novaConsulta() : void {
+    const novaConsulta : Consulta = {
+      altura : this.consulta.altura,
+      peso: this.consulta.peso,
+      porcentagemGordura: this.consulta.porcentagemGordura,
+      taxaMetabolicaBasal: this.consulta.taxaMetabolicaBasal,
+      triglicerideos: this.consulta.triglicerideos,
+      diabetes: this.consulta.diabetes,
+      colesterol: this.consulta.colesterol,
+      autofeedback: this.consulta.autofeedback,
+      objetivoConsulta: this.consulta.objetivoConsulta,
+    }
+    this.listaConsultas.push(novaConsulta);
+    localStorage.setItem('ListaConsultas', JSON.stringify(this.listaConsultas))
+
+    this.consulta = {
+    altura : null,
+    peso : null,
+    porcentagemGordura : null,
+    taxaMetabolicaBasal : null,
+    triglicerideos : null,
+    diabetes : null,
+    colesterol : null,
+    autofeedback : null,
+    objetivoConsulta : null
+    }
   }
 
 }
