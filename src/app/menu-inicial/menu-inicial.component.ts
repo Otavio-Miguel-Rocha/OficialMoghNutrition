@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
-import { forEach } from "@angular/router/src/utils/collection";
 
 interface Nutricionista {
   nomeCompleto : string,
@@ -52,7 +51,6 @@ export class MenuInicialComponent implements OnInit {
       if(this.nutricionista.CRN == "" || this.nutricionista.nomeCompleto == "" || this.nutricionista.email == "" || this.nutricionista.senha == ""  ) {
         this.abrirModalAviso("Atenção no Cadastro!", "Todos os campos devem ser preenchidos!");
       } else{
-        console.log(this.verificarFormatoCRN(this.nutricionista.CRN));
         if(this.verificarFormatoCRN(this.nutricionista.CRN)){
           this.abrirModalConfirmacao("Confirme seus Dados", "Nome: " + this.nutricionista.nomeCompleto  + ' E-mail: ' + this.nutricionista.email + ' CRN: ' + this.nutricionista.CRN ); 
         } else{
@@ -84,7 +82,13 @@ export class MenuInicialComponent implements OnInit {
       }
     }
     if(!verificarCRNExistente){
-      this.nutricionistasLista.push(this.nutricionista);
+      const novoNutricionista: Nutricionista = {
+        nomeCompleto: this.nutricionista.nomeCompleto,
+        email: this.nutricionista.email,
+        senha: this.nutricionista.senha,
+        CRN: this.nutricionista.CRN,
+      }
+      this.nutricionistasLista.push(novoNutricionista);
       localStorage.setItem('NutricionistasLista', JSON.stringify(this.nutricionistasLista));
       this.nutricionista.nomeCompleto = "";
       this.nutricionista.email = "";
@@ -104,8 +108,6 @@ export class MenuInicialComponent implements OnInit {
     else{
       let verificarCRNExistente: boolean = false;
       this.nutricionistasLista.forEach( (nutricionistaFor) => {
-        console.log(nutricionistaFor.CRN);
-        console.log(this.loginCRN);
         if(nutricionistaFor.CRN == this.loginCRN) {
           verificarCRNExistente = true;
           if(nutricionistaFor.senha == this.loginSenha) {
@@ -136,16 +138,8 @@ export class MenuInicialComponent implements OnInit {
     this.conteudoModal = conteudo;
     this.tipoModal = true;
   }
-
-  // inserirTracoPadrao(crn: string):string{
-  //   console.log(crn);
-  //   return crn.slice(0, 2) + "-" + crn.slice(2);
-  // }
-
   verificarFormatoCRN(crn: string): boolean {
-    console.log(crn);
     const formatoCRN = /^\d{2}-\d{4}$/;
-    console.log(formatoCRN);
     return formatoCRN.test(crn);
   }
 
@@ -157,10 +151,7 @@ export class MenuInicialComponent implements OnInit {
   }
 
   formatarCRN(crn:string):string {
-    console.log(crn);
-    // Remove todos os caracteres que não sejam dígitos
     const apenasDigitos = crn.replace(/\D/g, '');
-    // Formata o valor adicionando o traço
     return apenasDigitos.replace(/(\d{2})(\d{0,4})/, '$1-$2'); 
   }
 }
