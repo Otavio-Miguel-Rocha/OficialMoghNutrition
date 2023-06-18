@@ -1,12 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+interface Nutricionista {
+  nomeCompleto : string,
+  email : string,
+  senha : string,
+  CRN : string;
+}
+
 interface Paciente {
   nomeCompleto: string,
   email: string,
   telefone: string,
   sexo: string,
   dataNascimento: string,
+  mostrarModal:boolean,
 }
 
 @Component({
@@ -30,6 +38,11 @@ export class CadastroPacienteComponent implements OnInit {
   }
 
   ngOnInit() {
+    const validaUsuarioLogado: Nutricionista = JSON.parse(localStorage.getItem("nutricionistaLogado"));
+    if(validaUsuarioLogado == null){
+      this.abrirModalAviso("ACESSO NEGADO", "Você deve estar logado para acessar essa página!");
+      this.router.navigate(['/Menu-Inicial']);
+    }
     let listaPacientes: Paciente[] = JSON.parse(localStorage.getItem('ListaPacientes'));
     if( listaPacientes != null){
       this.listaPacientes = listaPacientes;
@@ -60,7 +73,8 @@ export class CadastroPacienteComponent implements OnInit {
     email : "",
     telefone : "",
     sexo : "",
-    dataNascimento : ""
+    dataNascimento : "",
+    mostrarModal: false,
   }
   
   voltarMenuPrincipal() : void {
@@ -81,6 +95,7 @@ export class CadastroPacienteComponent implements OnInit {
       telefone : this.paciente.telefone,
       sexo : this.paciente.sexo,
       dataNascimento : this.paciente.dataNascimento,
+      mostrarModal: false,
     }
     this.listaPacientes.push(novoPaciente);  
     localStorage.setItem('ListaPacientes', JSON.stringify(this.listaPacientes)); 

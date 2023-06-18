@@ -8,27 +8,27 @@
       <div class="div-pacient-square"><h1>Nome: {{paciente.nomeCompleto}}</h1></div>
       <div class="div-pacient-square"><h1>E-mail: {{paciente.email}}</h1></div>
       <div class="div-pacient-square" id="div-pacient-square-icon">
-        <a (click)="openModal()" style="cursor: pointer" *ngIf="!modalDescricaoPaciente"
+        <a (click)="openModal(paciente)" style="cursor: pointer" *ngIf="!paciente.mostrarModal"
           ><img [src]="upArrowIcon" class="arrow-icon"
         /></a>
-        <a (click)="closeModal()" style="cursor: pointer" *ngIf="modalDescricaoPaciente"
+        <a (click)="closeModal(paciente)" style="cursor: pointer" *ngIf="paciente.mostrarModal"
           ><img [src]="downArrowIcon" class="arrow-icon"
         /></a>
       </div>
     </div>
-    <div id="modal-square" *ngIf="modalDescricaoPaciente">
+    <div id="modal-square" *ngIf="paciente.mostrarModal">
       <div id="block-div-title-modal">
         <h1>Informações Gerais</h1>
       </div>
       <div id="pacient-informations">
         <div id="more-informations">
-          <h2>Sexo: {{pacienteModalSexo}}</h2>
-          <h2>Telefone: {{pacienteModalTelefone}}</h2>
-          <h2>Data de Nascimento: {{pacienteModalDataNascimento}}</h2>
+          <h2>Sexo: {{paciente.sexo}}</h2>
+          <h2>Telefone: {{paciente.telefone}}</h2>
+          <h2>Data de Nascimento: {{paciente.dataNascimento}}</h2>
         </div>
         <div id="buttons-pacient-informations">
           <button class="buttons-informations green-button"
-          (click)="abrirNovaConsulta()">
+          (click)="abrirNovaConsulta(paciente)">
             Nova Consulta
           </button>
           <button class="buttons-informations green-button"
@@ -37,7 +37,7 @@
           </button>
           <button 
           class="buttons-informations red-button"
-          (click)="abrirModalConfirmacao()"
+          (click)="abrirModalConfirmacaoRemocao(paciente)"
           >
             Remover Paciente
           </button>
@@ -79,9 +79,12 @@
   </div>
   </div>
   <app-modal 
-  *ngIf="modalConfirmacao" 
-  [titulo]="'Remover Usuário'"
-  [conteudo]="'O paciente será removido permanentemente.'"
+  *ngIf="aparecerModal" 
+  (confirmar)="removerPaciente()"
+  (fechar)="fecharModalRegistrar()"
+  [titulo]="tituloModal"
+  [conteudo]="conteudoModal"
+  [tipoModal]="tipoModal"
   ></app-modal>
 </section>
 </div>
