@@ -45,6 +45,7 @@
       </div>
     </div>
   </div>
+  <div class="containerRelatorio">
   <div class="center-square-relatorio" *ngIf="modalRelatorio" [class.low-opacity]="modalConfirmacao">
     <div class="boxTitle">
       <a (click)="voltarListaPacientes()"><img [src]="arrowBack" class="arrowBackIcon"></a>
@@ -75,6 +76,7 @@
       </div>
     </div>    
     <!-- NGFOR -->
+  </div>
   </div>
   <app-modal 
   *ngIf="modalConfirmacao" 
