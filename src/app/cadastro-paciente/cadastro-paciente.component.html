@@ -8,22 +8,22 @@
       <div class="divCadastro">
         <div class="ladoEsquerdo">
           <p class="inputsName">Nome Completo :</p>
-          <input class="inputsText" type="text">
+          <input class="inputsText" type="text" [(ngModel)]="paciente.nomeCompleto">
           <p class="inputsName">E-mail :</p>
-          <input class="inputsText" type="text">
+          <input class="inputsText" type="text" [(ngModel)]="paciente.email">
           <p class="inputsName">Telefone :</p>
-          <input class="inputsText" type="text">
+          <input class="inputsText" type="text" [(ngModel)]="paciente.telefone">
           <p class="inputsName">Sexo :</p>
-          <input class="inputsCheck" type="checkbox">
+          <input class="inputsCheck" type="checkbox" [(ngModel)]="masculino">
           <label>Masculino</label>
-          <input class="inputsCheck" type="checkbox">
+          <input class="inputsCheck" type="checkbox" [(ngModel)]="feminino">
           <label>Feminino</label>
           <p class="inputsName">Data de Nascimento :</p>
-          <input class="inputDate" type="date">
+          <input class="inputDate" type="date" [(ngModel)]="paciente.dataNascimento">
         </div>
         <div class="ladoDireito">
           <img [src]="userIcon" class="userIcon">
-          <a href="#" class="cadastrarBtn">Cadastrar</a>
+          <a class="cadastrarBtn" (click)="cadastrarPaciente()">Cadastrar</a>
         </div>
       </div>
     </div>

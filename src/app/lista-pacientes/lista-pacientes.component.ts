@@ -1,4 +1,13 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+
+interface Paciente {
+  nomeCompleto: string,
+  email: string,
+  telefone: string,
+  sexo: string,
+  dataNascimento: string
+}
 
 @Component({
   selector: "app-lista-pacientes",
@@ -11,13 +20,31 @@ export class ListaPacientesComponent implements OnInit {
   upArrowIcon: string;
   downArrowIcon: string;
   arrowBack:string;
-  constructor() {
+
+  listaPacientes: Paciente[] = [];
+
+
+  constructor(private router: Router) {
     this.upArrowIcon = "/assets/img/arrowClosedModal.png";
     this.downArrowIcon = "/assets/img/arrowOpenModal.png";
     this.arrowBack = '/assets/img/arrowBack.png';
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    let listaPacientes: Paciente[] = JSON.parse(localStorage.getItem('ListaPacientes'));
+    if( listaPacientes != null){
+      this.listaPacientes = listaPacientes;
+      console.log(this.listaPacientes);
+    }
+  }
+
+  paciente : Paciente = {
+    nomeCompleto : "",
+    email : "",
+    telefone : "",
+    sexo : "",
+    dataNascimento : ""
+  }
 
   //MODAL CONFIRMAÇÃO
     modalConfirmacao:boolean = false;
@@ -47,4 +74,8 @@ export class ListaPacientesComponent implements OnInit {
     this.modalRelatorio = false;
   }
   //
+
+  abrirNovaConsulta () : void {
+    this.router.navigate(['/Nova-Consulta'])
+  }
 }

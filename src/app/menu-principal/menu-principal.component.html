@@ -2,24 +2,23 @@
 <div id="flex">
    
 <div id="telaMenu">
- 
-   <a class="opcao" (click)="NovaConsultaRoute()">
-    Nova consulta
-   </a>
      
    <a class="opcao" (click)="listaPacientesRoute()">
-    Listar Pacientes 
+    Lista de Pacientes 
    </a>
    <a class="opcao" (click)="CadastrarPacienteRoute()">
     Cadastar Paciente
    </a>
-   <a class="opcao" (click)="LogoutRoute()">
+   <a class="opcao" (click)="confirmarLogout()">
     Logout
    </a>
 </div>
-<app-modal
-*ngIf="modalConfirmacao"
-[titulo]="'Logout'"
-[conteudo]="'Você deseja sair?'"
+<app-modal 
+*ngIf="aparecerModal" 
+(confirmar)="botaoConfirmarModal()"
+(fechar)="fecharModalRegistrar()"
+[titulo]="tituloModal"
+[conteudo]="conteudoModal"
+[tipoModal]="tipoModal"
 ></app-modal>
 </div>

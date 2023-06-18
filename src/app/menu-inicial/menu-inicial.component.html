@@ -11,6 +11,7 @@
             type="text"
             placeholder="Insira o seu CRN aqui..."
             [(ngModel)]="loginCRN"
+            mask="99-9999"
           />
         </div>
         <div class="label-inputs flex-direction-column">
@@ -74,7 +75,11 @@
         <div class="label-inputs flex-direction-column">
           <label class="labels-margem-direito">CRN</label>
           <input 
-          [(ngModel)]="nutricionista.CRN" class="inputs-direito" type="text" placeholder="XX-XXXX" />
+          [(ngModel)]="nutricionista.CRN" 
+          class="inputs-direito" 
+          type="text"
+          mask="99-9999"
+          placeholder="XX-XXXX" />
         </div>
       </div>
       <button class="button-registrar" (click)="abrirModalRegistrar()">Registrar-se</button>

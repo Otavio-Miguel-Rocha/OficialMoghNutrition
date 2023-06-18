@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class NovaConsultaComponent implements OnInit {
   arrowBack : string;
+  modalBoolean : boolean;
 
   
   constructor(private router: Router) { 
@@ -15,11 +16,12 @@ export class NovaConsultaComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
+    this.modalBoolean = true;
+    }
 
-  voltaMenuPrincipal() : void {
+  voltaListaPacientes() : void {
     console.log("1")
-    this.router.navigate(['/Menu-Principal'])
+    this.router.navigate(['/Lista-Pacientes'])
   }
 
   

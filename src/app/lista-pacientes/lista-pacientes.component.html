@@ -1,6 +1,8 @@
 <section id="section-pacient-list">
   <!-- ngfor paciente of pacientes -->
-  <div class="center-square" *ngIf="!modalRelatorio" [class.low-opacity]="modalConfirmacao">
+  
+  <div class="center-square" *ngFor="let paciente of listaPacientes">
+    
     <div class="pacient-square">
       <div class="div-pacient-square"><h1>Nome:</h1></div>
       <div class="div-pacient-square"><h1>E-mail:</h1></div>
@@ -24,6 +26,10 @@
           <h2>Data de Nascimento:</h2>
         </div>
         <div id="buttons-pacient-informations">
+          <button class="buttons-informations green-button"
+          (click)="abrirNovaConsulta()">
+            Nova Consulta
+          </button>
           <button class="buttons-informations green-button"
           (click)="abrirRelatorios()">
             Consultar Relatórios
