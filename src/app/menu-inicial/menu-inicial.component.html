@@ -30,16 +30,16 @@
     <!--  -->
     <!-- register-button-square -->
     <div class="div-other-option flex-direction-column" *ngIf="!loginERegisterView">
-      <button class="button-registrar" (click)="trocaTelaRegistro()">
+      <button class="buttons" (click)="trocaTelaRegistro()">
         Registrar-se
       </button>
-      <h4>Não possui conta?</h4>
+      <h4 class="mensagens-indicativas">Não possui conta?</h4>
     </div>
     <!--  -->
     <!-- login-button-square -->
     <div class="div-other-option flex-direction-column" *ngIf="loginERegisterView">
       <button class="buttons" (click)="trocaTelaLogin()">Entrar</button>
-      <h4>Já possui conta?</h4>
+      <h4 class="mensagens-indicativas">Já possui conta?</h4>
     </div>
     <!--  -->
     <!-- register-square -->
@@ -84,7 +84,7 @@
           placeholder="XX-XXXX" />
         </div>
       </div>
-      <button class="button-registrar" (click)="abrirModalRegistrar()">Registrar-se</button>
+      <button class="buttons" (click)="abrirModalRegistrar()">Registrar-se</button>
     </div>
   </div>
   <app-modal 

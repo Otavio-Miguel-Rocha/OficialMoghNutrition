@@ -17,7 +17,6 @@ export class NavegacaoComponent implements OnInit {
 
   constructor(private router: Router) {
     this.logoMOGH = '/assets/img/logoMOGH.png'
-    
   }
   
 
@@ -25,10 +24,15 @@ export class NavegacaoComponent implements OnInit {
     this.router.events
       .pipe(filter((event: any) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        this.currentRoute = event.url;
-        this.currentRoute = this.removeForwardSlash(this.currentRoute);
-        this.currentRoute = this.removeForwardTrace(this.currentRoute);
-      });
+        if(event.url == "/"){
+          this.currentRoute = "Menu Inicial";
+        }
+        else{
+          this.currentRoute = event.url;
+          this.currentRoute = this.removeForwardSlash(this.currentRoute);
+          this.currentRoute = this.removeForwardTrace(this.currentRoute);
+        }
+        });
   }
 
   removeForwardSlash(nomePagina: string): string {

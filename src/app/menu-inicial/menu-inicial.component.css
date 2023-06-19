@@ -26,6 +26,9 @@
 .flex-direction-column {
   flex-direction: column;
 }
+.mensagens-indicativas{
+  color: #87bc9c;
+}
 /*  */
 /* Login */
 #label-inputs-position {
@@ -79,19 +82,7 @@
   cursor: pointer;
   background-color: #1a4d2e;
   color: white;
-}
-
-.button-registrar {
-  display: flex;
-  width: 40%;
-  height: 10%;
-  border-radius: 100px;
-  border: none;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  background-color: #1a4d2e;
-  color: white;
+  font-size: 16px;
 }
 .div-other-option {
   display: flex;
@@ -105,11 +96,11 @@
 .label-inputs-register {
   display: flex;
   width: 80%;
-  height: 20%;
+  height: 25%;
 }
 #grid-password-crn {
   display: grid;
-  height: 40%;
+  height: 20%;
   width: 80%;
   grid-template-columns: 70% 30%;
 }

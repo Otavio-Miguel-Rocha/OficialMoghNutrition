@@ -45,13 +45,13 @@ export class ListaPacientesComponent implements OnInit {
   arrowBack:string;
 
   listaPacientes: Paciente[] = [];
-  listaConsultas: Consulta[];
+  listaConsultas: Consulta[] = [];
 
 
   constructor(private router: Router) {
     this.upArrowIcon = "/assets/img/arrowClosedModal.png";
     this.downArrowIcon = "/assets/img/arrowOpenModal.png";
-    this.arrowBack = '/assets/img/arrowBack.png';
+    this.arrowBack = '/assets/img/arrowBack.png'
   }
 
   ngOnInit() {
@@ -63,7 +63,6 @@ export class ListaPacientesComponent implements OnInit {
     let listaPacientes: Paciente[] = JSON.parse(localStorage.getItem('ListaPacientes'));
     if( listaPacientes != null){
       this.listaPacientes = listaPacientes;
-      console.log(this.listaPacientes);
     }
     let listaConsultas: Consulta[] = JSON.parse(localStorage.getItem('ListaConsultas'))
     if(listaConsultas != null) {
@@ -114,7 +113,7 @@ export class ListaPacientesComponent implements OnInit {
     this.pacienteRelatorio = pacienteRelatorios;
     this.modalRelatorio = true;
   }
-  getConsulta(pacienteRelatorio:Paciente):Consulta[]{
+  getConsulta(pacienteRelatorio:Paciente):any[]{
     let consultas: Consulta[] = [];
     this.listaConsultas.filter ( (consulta) => {
       console.log(consulta);
