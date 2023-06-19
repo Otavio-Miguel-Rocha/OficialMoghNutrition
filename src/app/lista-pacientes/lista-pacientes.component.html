@@ -44,37 +44,39 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="containerRelatorio">
-  <div class="center-square-relatorio" *ngIf="modalRelatorio" [class.low-opacity]="modalConfirmacao">
-    <div class="boxTitle">
-      <a (click)="voltarListaPacientes()"><img [src]="arrowBack" class="arrowBackIcon"></a>
-      <h2 id="tittle-relatorio">Otavio Miguel Rocha</h2>
-    </div>
-    <div class="relatorios">
-      <div class="relatorio" *ngFor="let consulta of listaConsultas">
-        <div class="divs-grid-relatorio">
-          <ul class="list-items-relatorio">
-            <li>Altura: {{consulta.altura}}</li>
-            <li>Peso: {{consulta.peso}}</li>
-            <li>Percentual de Gordura: {{consulta.porcentagemGordura}}</li>
-            <li>Taxa Metabólica Basal: {{consulta.taxaMetabolicaBasal}}</li>
-            <li>Data da Consulta: {{consulta.dataConsulta}}</li>
-          </ul>
+    <div class="containerRelatorio">
+      <div class="center-square-relatorio" *ngIf="modalRelatorio" [class.low-opacity]="modalConfirmacao">
+        <div class="boxTitle">
+          <a (click)="voltarListaPacientes()"><img [src]="arrowBack" class="arrowBackIcon"></a>
+          <h2 id="tittle-relatorio">{{paciente.nomeCompleto}}</h2>
         </div>
-        <div class="divs-grid-relatorio">
-          <ul class="list-items-relatorio" id="custom-altura">
-            <li>Triglicerídeos: {{consulta.triglicerideos}}</li>
-            <li>Diabetes: {{consulta.diabetes}}</li>
-            <li>Colesterol: {{consulta.colesterol}}</li>
-            <li>Autofeedback: {{consulta.autofeedback}}</li>
-            <li>Objetivo Consulta: {{consulta.objetivoConsulta}}</li>
-          </ul>
+        <div class="relatorios">
+          <div class="relatorio" *ngFor="let consulta of listaConsultas">
+            <div *ngIf="consulta.nomePaciente == paciente.nomeCompleto">
+            <div class="divs-grid-relatorio">
+              <ul class="list-items-relatorio">
+                <li>Altura: {{consulta.altura}}</li>
+                <li>Peso: {{consulta.peso}}</li>
+                <li>Percentual de Gordura: {{consulta.porcentagemGordura}}</li>
+                <li>Taxa Metabólica Basal: {{consulta.taxaMetabolicaBasal}}</li>
+                <li>Data da Consulta: {{consulta.dataConsulta}}</li>
+              </ul>
+            </div>
+            <div class="divs-grid-relatorio">
+              <ul class="list-items-relatorio" id="custom-altura">
+                <li>Triglicerídeos: {{consulta.triglicerideos}}</li>
+                <li>Diabetes: {{consulta.diabetes}}</li>
+                <li>Colesterol: {{consulta.colesterol}}</li>
+                <li>Autofeedback: {{consulta.autofeedback}}</li>
+                <li>Objetivo Consulta: {{consulta.objetivoConsulta}}</li>
+              </ul>
+            </div>
+          </div>
         </div>
+        </div>    
+        <!-- NGFOR -->
       </div>
-    </div>    
-    <!-- NGFOR -->
-  </div>
+      </div>
   </div>
   <app-modal 
   *ngIf="aparecerModal" 

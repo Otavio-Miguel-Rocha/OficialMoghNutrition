@@ -27,7 +27,8 @@ interface Consulta {
   colesterol: string,
   autofeedback : string,
   objetivoConsulta : string,
-  dataConsulta : string
+  dataConsulta : string,
+  nomePaciente : string
 }
 
 @Component({

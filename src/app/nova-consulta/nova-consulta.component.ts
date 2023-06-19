@@ -27,7 +27,8 @@ interface Consulta {
   colesterol: string,
   autofeedback : string,
   objetivoConsulta : string,
-  dataConsulta : string
+  dataConsulta : string,
+  nomePaciente : string
 }
 
 @Component({
@@ -73,7 +74,8 @@ export class NovaConsultaComponent implements OnInit {
     colesterol : null,
     autofeedback : null,
     objetivoConsulta : null,
-    dataConsulta : null
+    dataConsulta : null,
+    nomePaciente : null
   }
 
 
@@ -106,12 +108,14 @@ export class NovaConsultaComponent implements OnInit {
       colesterol: this.consulta.colesterol,
       autofeedback: this.consulta.autofeedback,
       objetivoConsulta: this.consulta.objetivoConsulta,
-      dataConsulta: this.consulta.dataConsulta
+      dataConsulta: this.consulta.dataConsulta,
+      nomePaciente: this.pacienteNovaConsulta.nomeCompleto
     }
     this.listaConsultas.push(novaConsulta);
     localStorage.setItem('ListaConsultas', JSON.stringify(this.listaConsultas))
 
     this.consulta = {
+    nomePaciente: null,
     altura : null,
     peso : null,
     porcentagemGordura : null,
@@ -123,6 +127,10 @@ export class NovaConsultaComponent implements OnInit {
     objetivoConsulta : null,
     dataConsulta : null
     }
+
+    this.router.navigate(['/Menu-Principal'])
   }
+
+  
 
 }
