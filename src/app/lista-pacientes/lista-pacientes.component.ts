@@ -15,6 +15,7 @@ interface Paciente {
   sexo: string,
   dataNascimento: string,
   mostrarModal:boolean,
+  relatorios: Consulta[],
 }
 
 interface Consulta {
@@ -28,7 +29,7 @@ interface Consulta {
   autofeedback : string,
   objetivoConsulta : string,
   dataConsulta : string,
-  nomePaciente : string
+  nomePaciente : string,
 }
 
 @Component({
@@ -44,7 +45,7 @@ export class ListaPacientesComponent implements OnInit {
   arrowBack:string;
 
   listaPacientes: Paciente[] = [];
-  listaConsultas: Consulta[] = [];
+  listaConsultas: Consulta[];
 
 
   constructor(private router: Router) {
@@ -77,6 +78,7 @@ export class ListaPacientesComponent implements OnInit {
     sexo : "",
     dataNascimento : "",
     mostrarModal: false,
+    relatorios: [],
   }
 
   //MODAL CONFIRMAÇÃO OU AVISO
@@ -106,11 +108,25 @@ export class ListaPacientesComponent implements OnInit {
 
 
   //RELATÓRIO INDIVIDUAL
+  pacienteRelatorio: Paciente;
   modalRelatorio: boolean = false;
-  abrirRelatorios():void{
+  abrirRelatorios(pacienteRelatorios:Paciente):void{
+    this.pacienteRelatorio = pacienteRelatorios;
     this.modalRelatorio = true;
   }
+  getConsulta(pacienteRelatorio:Paciente):Consulta[]{
+    let consultas: Consulta[] = [];
+    this.listaConsultas.filter ( (consulta) => {
+      console.log(consulta);
+      if(consulta.nomePaciente == pacienteRelatorio.nomeCompleto){
+        consultas.push(consulta);
+      }
+    });
+    return consultas;
+  }
+
   voltarListaPacientes():void{
+    this.pacienteRelatorio = null;
     this.modalRelatorio = false;
   }
   //

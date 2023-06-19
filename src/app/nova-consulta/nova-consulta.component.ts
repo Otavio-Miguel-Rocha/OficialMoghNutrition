@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -15,6 +16,7 @@ interface Paciente {
   sexo: string,
   dataNascimento: string,
   mostrarModal:boolean,
+  relatorios: Consulta[],
 }
 
 interface Consulta {
@@ -47,7 +49,7 @@ export class NovaConsultaComponent implements OnInit {
   }
 
   pacienteNovaConsulta: Paciente;
-
+  listaPacientes: Paciente[];
   ngOnInit() {
     const validaUsuarioLogado: Nutricionista = JSON.parse(localStorage.getItem("nutricionistaLogado"));
     if(validaUsuarioLogado == null){
@@ -58,7 +60,17 @@ export class NovaConsultaComponent implements OnInit {
       this.pacienteNovaConsulta = JSON.parse(localStorage.getItem("PacienteNovaConsulta"));
     }
 
+    let listaPacientes: Paciente[] = JSON.parse(localStorage.getItem('ListaPacientes'));
+    if( listaPacientes != null){
+      this.listaPacientes = listaPacientes;
+      console.log(this.listaPacientes);
     }
+
+    let listaConsulta: Consulta[] = JSON.parse(localStorage.getItem('ListaConsultas'));
+    if( listaConsulta != null){
+      this.listaConsultas = listaConsulta;
+    }
+  }
 
   voltaListaPacientes() : void {
     this.router.navigate(['/Lista-Pacientes'])
@@ -109,13 +121,13 @@ export class NovaConsultaComponent implements OnInit {
       autofeedback: this.consulta.autofeedback,
       objetivoConsulta: this.consulta.objetivoConsulta,
       dataConsulta: this.consulta.dataConsulta,
-      nomePaciente: this.pacienteNovaConsulta.nomeCompleto
+      nomePaciente: this.pacienteNovaConsulta.nomeCompleto,
     }
+    this.pacienteNovaConsulta.relatorios.push(novaConsulta);
     this.listaConsultas.push(novaConsulta);
     localStorage.setItem('ListaConsultas', JSON.stringify(this.listaConsultas))
 
     this.consulta = {
-    nomePaciente: null,
     altura : null,
     peso : null,
     porcentagemGordura : null,
@@ -125,7 +137,8 @@ export class NovaConsultaComponent implements OnInit {
     colesterol : null,
     autofeedback : null,
     objetivoConsulta : null,
-    dataConsulta : null
+    dataConsulta : null,
+    nomePaciente : null
     }
 
     this.router.navigate(['/Menu-Principal'])

@@ -15,6 +15,20 @@ interface Paciente {
   sexo: string,
   dataNascimento: string,
   mostrarModal:boolean,
+  relatorios: Consulta[],
+}
+interface Consulta {
+  altura: number,
+  peso: number,
+  porcentagemGordura: number,
+  taxaMetabolicaBasal: number,
+  triglicerideos: number,
+  diabetes: string,
+  colesterol: string,
+  autofeedback : string,
+  objetivoConsulta : string,
+  dataConsulta : string,
+  nomePaciente : string
 }
 
 @Component({
@@ -75,6 +89,7 @@ export class CadastroPacienteComponent implements OnInit {
     sexo : "",
     dataNascimento : "",
     mostrarModal: false,
+    relatorios: [],
   }
   
   voltarMenuPrincipal() : void {
@@ -96,6 +111,7 @@ export class CadastroPacienteComponent implements OnInit {
       sexo : this.paciente.sexo,
       dataNascimento : this.paciente.dataNascimento,
       mostrarModal: false,
+      relatorios: [],
     }
     this.listaPacientes.push(novoPaciente);  
     localStorage.setItem('ListaPacientes', JSON.stringify(this.listaPacientes)); 

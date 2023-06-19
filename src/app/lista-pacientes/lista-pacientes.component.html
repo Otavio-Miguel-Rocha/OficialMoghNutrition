@@ -32,7 +32,7 @@
             Nova Consulta
           </button>
           <button class="buttons-informations green-button"
-          (click)="abrirRelatorios()">
+          (click)="abrirRelatorios(paciente)">
             Consultar Relatórios
           </button>
           <button 
@@ -48,11 +48,11 @@
       <div class="center-square-relatorio" *ngIf="modalRelatorio" [class.low-opacity]="modalConfirmacao">
         <div class="boxTitle">
           <a (click)="voltarListaPacientes()"><img [src]="arrowBack" class="arrowBackIcon"></a>
-          <h2 id="tittle-relatorio">{{paciente.nomeCompleto}}</h2>
+          <h2 id="tittle-relatorio">{{pacienteRelatorio.nomeCompleto}}</h2>
         </div>
         <div class="relatorios">
-          <div class="relatorio" *ngFor="let consulta of listaConsultas">
-            <div *ngIf="consulta.nomePaciente == paciente.nomeCompleto">
+          <div class="relatorio" *ngFor="let consulta of getConsulta(pacienteRelatorio)">
+            
             <div class="divs-grid-relatorio">
               <ul class="list-items-relatorio">
                 <li>Altura: {{consulta.altura}}</li>
@@ -71,7 +71,7 @@
                 <li>Objetivo Consulta: {{consulta.objetivoConsulta}}</li>
               </ul>
             </div>
-          </div>
+  
         </div>
         </div>    
         <!-- NGFOR -->
