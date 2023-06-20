@@ -30,6 +30,8 @@ interface Consulta {
   objetivoConsulta : string,
   dataConsulta : string,
   nomePaciente : string,
+  imc: string,
+
 }
 
 @Component({
