@@ -46,6 +46,38 @@ export class CadastroPacienteComponent implements OnInit {
   masculino: boolean = false;
   feminino: boolean = false;
 
+  disableMasculino:boolean=false;
+  disableFeminino:boolean=false;
+
+  //Lógica para o checkbox do cadastro
+  clickDisable (value:string){
+    if(value=="masculino"){
+      console.log(this.masculino)
+      this.disableMasculino = true;
+      this.disableFeminino = false;
+      if(this.masculino==true){
+        this.masculino=false;
+        this.feminino=false;
+      }else{
+        this.masculino=true;
+        this.feminino=false;
+      }
+      
+    }else if(value=="feminino"){
+      console.log(this.feminino)
+      this.disableMasculino = false;
+      this.disableFeminino = true;
+      if(this.feminino==true){
+        this.masculino=false;
+        this.feminino=false;
+      }else{
+        this.masculino=false;
+        this.feminino=true;
+      }
+  }
+  } 
+
+
   constructor(private router: Router) { 
     this.userIcon = '/assets/img/userImg.png';
     this.arrowBack = '/assets/img/arrowBack.png';
@@ -97,13 +129,18 @@ export class CadastroPacienteComponent implements OnInit {
   }
 
   cadastrarPaciente() {
+  
+    console.log(this.masculino);
+    console.log(this.feminino);
+
     this.aparecerModal = false;
     if(this.masculino == true) {
       this.paciente.sexo = 'Masculino';
+    }else if(this.feminino == true) {
+      this.paciente.sexo = 'Feminino';
     }
-    else if(this.feminino == true) {
-      this.paciente.sexo == 'Feminino';
-    }
+    console.log(this.paciente.sexo);
+
     const novoPaciente: Paciente = {
       nomeCompleto: this.paciente.nomeCompleto,
       email : this.paciente.email,
@@ -113,16 +150,29 @@ export class CadastroPacienteComponent implements OnInit {
       mostrarModal: false,
       relatorios: [],
     }
-    this.listaPacientes.push(novoPaciente);  
-    localStorage.setItem('ListaPacientes', JSON.stringify(this.listaPacientes)); 
+    
+    
+    if( this.paciente.nomeCompleto!=''
+    && this.paciente.dataNascimento!=''
+    ){
+      this.listaPacientes.push(novoPaciente);  
+      localStorage.setItem('ListaPacientes', JSON.stringify(this.listaPacientes)); 
+  
+      this.paciente.nomeCompleto = "";
+      this.paciente.email = "";
+      this.paciente.sexo = "";
+      this.paciente.telefone = "";
+      this.paciente.dataNascimento = "";
+      this.listaPaciente();
+     }else{
 
-    this.paciente.nomeCompleto = "";
-    this.paciente.email = "";
-    this.paciente.sexo = "";
-    this.paciente.telefone = "";
-    this.paciente.dataNascimento = "";
-    this.listaPaciente();
+      // Implementar o MODAL
+      console.log('não foi')
+     }
   }
+
+ 
+
   abrirModalConfirmacao(titulo:string, conteudo:string):void{
     this.aparecerModal = true;
     this.tituloModal = titulo;

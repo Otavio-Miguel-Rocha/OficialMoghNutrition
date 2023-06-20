@@ -14,9 +14,9 @@
           <p class="inputsName">Telefone :</p>
           <input class="inputsText" type="text" [(ngModel)]="paciente.telefone">
           <p class="inputsName">Sexo :</p>
-          <input class="inputsCheck" type="checkbox" [(ngModel)]="masculino">
+          <input class="inputsCheck" type="checkbox" [checked]="disableMasculino" (click)="clickDisable('masculino')" >
           <label>Masculino</label>
-          <input class="inputsCheck" type="checkbox" [(ngModel)]="feminino">
+          <input class="inputsCheck" type="checkbox" [checked]="disableFeminino" (click)="clickDisable('feminino')">
           <label>Feminino</label>
           <p class="inputsName">Data de Nascimento :</p>
           <input class="inputDate" type="date" [(ngModel)]="paciente.dataNascimento">
