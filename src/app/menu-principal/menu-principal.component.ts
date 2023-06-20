@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 interface Nutricionista {
@@ -14,6 +14,9 @@ interface Nutricionista {
   styleUrls: ['./menu-principal.component.css']
 })
 export class MenuPrincipalComponent implements OnInit {
+
+  @Output()
+  informarLogOut = new EventEmitter();
 
   constructor(private router: Router) { }
 

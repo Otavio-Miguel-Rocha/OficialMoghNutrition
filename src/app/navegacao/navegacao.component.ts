@@ -2,6 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
+interface Nutricionista{
+  CRN: string,
+  email: string,
+  nomeCompleto: string,
+  senha: string,
+}
+
 @Component({
   selector: 'app-navegacao',
   templateUrl: './navegacao.component.html',
@@ -35,6 +42,8 @@ export class NavegacaoComponent implements OnInit {
         });
   }
 
+  usuarioLogado: Nutricionista = null;
+
   removeForwardSlash(nomePagina: string): string {
     return nomePagina.replace(/\//g, '');
   }
@@ -43,7 +52,8 @@ export class NavegacaoComponent implements OnInit {
     return nomePagina.replace(/-/g, ' ');
   }
 
-  logoRouting() :void {
+  logoRouting():void {
+    console.log(this.router);
     this.router.navigate(['/Menu-Principal'])
   }
 
