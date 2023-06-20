@@ -9,6 +9,19 @@
   align-items: center;
   flex-direction: column;
 }
+
+.modalVerificacao {
+  width: 70%;
+  height: 50vh;
+  background-color:#Ffff;
+  display: flex;
+  justify-content: center;
+}
+
+.modalTitle {
+  font-size: 30px; 
+}
+
 .center-square {
   display: flex;
   width: 60vw;

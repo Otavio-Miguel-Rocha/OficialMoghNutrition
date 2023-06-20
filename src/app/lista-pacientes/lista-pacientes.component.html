@@ -1,5 +1,9 @@
 <div class="mainContainer">
+
 <section id="section-pacient-list">
+  <div class="modalVerificacao" *ngIf="!verificaListaPacientes()">
+    <h1 class="modalTitle">teste</h1>
+  </div>
   <!-- ngfor paciente of pacientes -->
   
   <div class="center-square" *ngFor="let paciente of listaPacientes">

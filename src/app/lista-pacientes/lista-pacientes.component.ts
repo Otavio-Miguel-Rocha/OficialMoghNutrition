@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { V } from "@angular/core/src/render3";
 import { Router } from "@angular/router";
 
 interface Nutricionista {
@@ -155,5 +156,15 @@ export class ListaPacientesComponent implements OnInit {
     this.tituloModal = titulo;
     this.conteudoModal = conteudo;
     this.tipoModal = true;
+  }
+
+  verificaListaPacientes() : boolean {
+    if(this.listaPacientes.length == 0) {
+      console.log("false")
+      return false;
+    } else {
+      console.log("true")
+      return true;
+    }
   }
 }
