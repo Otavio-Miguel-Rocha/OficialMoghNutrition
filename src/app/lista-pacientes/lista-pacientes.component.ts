@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { V } from "@angular/core/src/render3";
 import { Router } from "@angular/router";
 
 interface Nutricionista {
@@ -67,10 +66,6 @@ export class ListaPacientesComponent implements OnInit {
     if( listaPacientes != null){
       this.listaPacientes = listaPacientes;
     }
-    let listaConsultas: Consulta[] = JSON.parse(localStorage.getItem('ListaConsultas'))
-    if(listaConsultas != null) {
-      this.listaConsultas = listaConsultas;
-    }
   }
 
   paciente : Paciente = {
@@ -96,23 +91,17 @@ export class ListaPacientesComponent implements OnInit {
   //RELATÓRIO INDIVIDUAL
   pacienteRelatorio: Paciente;
   modalRelatorio: boolean = false;
+  modalAvisoListaVaziaRelatorio:boolean = false;
   abrirRelatorios(pacienteRelatorios:Paciente):void{
     this.pacienteRelatorio = pacienteRelatorios;
+    if( this.pacienteRelatorio.relatorios.length == 0 ){
+      this.modalAvisoListaVaziaRelatorio = true;
+    } else{
+      this.modalAvisoListaVaziaRelatorio = false;
+    }
     this.modalRelatorio = true;
   }
-  getConsulta(pacienteRelatorio:Paciente):Consulta[]{
-    let consultas: Consulta[] = [];
-    this.listaConsultas.filter ( (consulta) => {
-      console.log(consulta);
-      if(consulta.nomePaciente == pacienteRelatorio.nomeCompleto){
-        consultas.push(consulta);
-      }
-    });
-    return consultas;
-  }
-
-  voltarListaPacientes():void{
-    this.pacienteRelatorio = null;
+  voltarListaPacientes():void{    
     this.modalRelatorio = false;
   }
   //
@@ -146,6 +135,23 @@ export class ListaPacientesComponent implements OnInit {
     this.router.navigate(['/Nova-Consulta'])
   }
 
+  aparecerModalInformacao: boolean = false;
+  tipoDadoInformacao:string;
+  textoModalInformacao:string;
+  abrirModalInformacaoAutoFeedback(informacao:string):void{
+    this.tipoDadoInformacao = "Auto Feedback";
+    this.textoModalInformacao = informacao;
+    this.aparecerModalInformacao = true;
+  }
+  abrirModalInformacaoOjetivo(informacao:string):void{
+    this.tipoDadoInformacao = "Objetivo do Paciente";
+    this.textoModalInformacao = informacao;
+    this.aparecerModalInformacao = true;
+  }
+  fecharModalInformacao(): void{
+    this.aparecerModalInformacao = false;
+  }
+
   ngForPacientes() : Paciente[] {
     let listaVazia : Paciente[] = [];
     if(this.modalRelatorio == true) {
@@ -162,16 +168,6 @@ export class ListaPacientesComponent implements OnInit {
       return false;
     } else {
       return true;
-    }
-  }
-
-  ngForPacientes() : Paciente[] {
-    let listaVazia : Paciente[] = [];
-    if(this.modalRelatorio == true) {
-      return listaVazia;
-    }
-    else if(this.modalRelatorio == false) {
-      return this.listaPacientes;
     }
   }
 }

@@ -139,6 +139,7 @@ label {
     border-radius: 10px;
     border: 2px solid #000;
     margin-bottom: 25%;
+    cursor: pointer;
 }
 
 .arrowBackIcon {

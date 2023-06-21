@@ -16,7 +16,8 @@
                <p class="textosInputs">*Obrigatório</p>  
             </div>
 
-            <input class="alturaInput" [(ngModel)]="consulta.altura" type="text">
+            <input class="alturaInput" [(ngModel)]="consulta.altura" 
+            type="text" maxlength="3" placeholder="CM">
           </div>
 
           <div class="inputs-com-texto">
@@ -25,7 +26,8 @@
               <p class="textosInputs">*Obrigatório</p>  
             </div>
             
-            <input class="pesoInput" [(ngModel)]="consulta.peso" type="text">
+            <input class="pesoInput" [(ngModel)]="consulta.peso" type="text" 
+            maxlength="5" placeholder="KG">
           </div>
 
           <div class="inputs-com-texto">
@@ -34,7 +36,8 @@
               <p class="textosInputs">*Obrigatório</p>  
             </div>
             
-            <input class="porcentagemGorduraInput" [(ngModel)]="consulta.porcentagemGordura"  type="text">
+            <input class="porcentagemGorduraInput" [(ngModel)]="consulta.porcentagemGordura"  type="text" 
+            maxlength="3" placeholder="%">
           </div>
 
           <div class="inputs-com-texto">
@@ -43,7 +46,8 @@
               <p class="textosInputs">*Obrigatório</p>  
             </div>
 
-            <input class="taxaMetabolicaInput" [(ngModel)]="consulta.taxaMetabolicaBasal" type="text">
+            <input class="taxaMetabolicaInput" [(ngModel)]="consulta.taxaMetabolicaBasal" type="text"
+            maxlength="5" placeholder="KCAL">
           </div>
          
          
@@ -56,7 +60,8 @@
               
             </div>
 
-            <input class="triglicerideosInput" [(ngModel)]="consulta.triglicerideos" type="text">
+            <input class="triglicerideosInput" [(ngModel)]="consulta.triglicerideos" type="text"
+            maxlength="4" placeholder="mg / dL">
           </div>
           <div class="inputs-com-texto">
             <div class="texto">
@@ -64,7 +69,8 @@
             
             </div>
 
-            <input class="diabetesInput" [(ngModel)]="consulta.diabetes" type="text">
+            <input class="diabetesInput" [(ngModel)]="consulta.diabetes" type="text"
+            maxlength="3" placeholder="mg / dL">
           </div>
           <div class="inputs-com-texto">
             <div class="texto">
@@ -72,7 +78,8 @@
               
             </div>
 
-            <input class="colesterolInput" [(ngModel)]="consulta.colesterol"  type="text">
+            <input class="colesterolInput" [(ngModel)]="consulta.colesterol"  type="text"
+            maxlength="4" placeholder="mg / dL">
           </div>
         </div>
           
@@ -107,8 +114,8 @@
             </div>
            
             <div class="botoes">
-              <button id="cancelar">Cancelar</button>
-              <button id="cadastrar" (click)="novaConsulta()">Cadastrar</button>
+              <button class="buttons-cadastro" id="cancelar" (click)="cancelarCadastro()">Cancelar</button>
+              <button class="buttons-cadastro" id="cadastrar" (click)="abrirModalConfirmacaoNovaConsulta()">Cadastrar</button>
               
             </div>
         </div>
@@ -116,5 +123,25 @@
       </div>
     </div>
   </div>
+  <app-modal *ngIf="modalConfirmacaoNovaConsulta">
+      <ng-container title>
+        <h2>{{tituloConfirmacao}}</h2>
+      </ng-container>
+      <ng-container body>
+        <p>{{pacienteNovaConsulta.nomeCompleto}}</p>
+      </ng-container>
+      <ng-container buttons>
+        <button class="cancel-button" (click)="fecharModalConfirmacaoNovaConsulta()">Cancelar</button>
+        <button class="confirm-button" (click)="novaConsulta()">Confirmar</button>
+      </ng-container> 
+  </app-modal>
+  <app-modal *ngIf="modalAvisoNovaConsulta">
+    <ng-container close>
+      <p style="cursor: pointer;" (click)="fecharModalConfirmacaoNovaConsulta()">&#10060;</p>
+    </ng-container>
+    <ng-container title>
+      <h2>{{tituloErro}}</h2>
+    </ng-container>
+  </app-modal>
 </div>
 

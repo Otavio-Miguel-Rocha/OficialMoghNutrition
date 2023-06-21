@@ -1,4 +1,4 @@
-import { JsonPipe } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -20,11 +20,11 @@ interface Paciente {
 }
 
 interface Consulta {
-  altura: number,
-  peso: number,
-  porcentagemGordura: number,
-  taxaMetabolicaBasal: number,
-  triglicerideos: number,
+  altura: string,
+  peso: string,
+  porcentagemGordura: string,
+  taxaMetabolicaBasal: string,
+  triglicerideos: string,
   diabetes: string,
   colesterol: string,
   autofeedback : string,
@@ -43,7 +43,6 @@ interface Consulta {
 export class NovaConsultaComponent implements OnInit {
   arrowBack : string;
   modalBoolean : boolean;
-  listaConsultas : Consulta[] = [];
 
   
   constructor(private router: Router) { 
@@ -55,7 +54,6 @@ export class NovaConsultaComponent implements OnInit {
   ngOnInit() {
     const validaUsuarioLogado: Nutricionista = JSON.parse(localStorage.getItem("nutricionistaLogado"));
     if(validaUsuarioLogado == null){
-      this.abrirModalAviso("ACESSO NEGADO", "Você deve estar logado para acessar essa página!");
       this.router.navigate(['/Menu-Inicial']);
     }
     else{
@@ -68,10 +66,6 @@ export class NovaConsultaComponent implements OnInit {
       console.log(this.listaPacientes);
     }
 
-    let listaConsulta: Consulta[] = JSON.parse(localStorage.getItem('ListaConsultas'));
-    if( listaConsulta != null){
-      this.listaConsultas = listaConsulta;
-    }
   }
 
   voltaListaPacientes() : void {
@@ -93,26 +87,40 @@ export class NovaConsultaComponent implements OnInit {
     imc: null
   }
 
+  cancelarCadastro():void{
+    this.voltaListaPacientes();
+  }
+
 
   //MODAL CONFIRMAÇÃO OU AVISO
-  aparecerModal:boolean = false;
-  tipoModal:boolean;
-  tituloModal:string;
-  conteudoModal:string;
-  abrirModalConfirmacao(titulo:string, conteudo:string):void{
-    this.aparecerModal = true;
-    this.tituloModal = titulo;
-    this.conteudoModal = conteudo;
-    this.tipoModal = false;
+  modalConfirmacaoNovaConsulta:boolean = false;
+  tituloConfirmacao:string;
+
+  //MODAL AVISO
+  modalAvisoNovaConsulta:boolean = false;
+  tituloErro:string;
+  mensagemErro:string;
+  abrirModalConfirmacaoNovaConsulta():void{
+    console.log(this.consulta);
+    if(this.consulta.altura == null || this.consulta.peso == null || this.consulta.dataConsulta == null ||
+    this.consulta.porcentagemGordura == null   || this.consulta.peso == null
+    ){
+      this.tituloErro = "Preencha todos os campos obrigatórios!";
+      this.modalAvisoNovaConsulta = true;
+    }
+    else{
+      this.tituloConfirmacao = "Deseja Registrar a Consulta?";
+      this.modalConfirmacaoNovaConsulta = true;
+    }
   }
-  abrirModalAviso(titulo:string, conteudo:string):void{
-    this.aparecerModal = true;
-    this.tituloModal = titulo;
-    this.conteudoModal = conteudo;
-    this.tipoModal = true;
-  }
+  fecharModalConfirmacaoNovaConsulta():void{
+    this.modalConfirmacaoNovaConsulta = false;
+    this.modalAvisoNovaConsulta = false;
+
+  } 
 
   novaConsulta() : void {
+    this.modalConfirmacaoNovaConsulta = false;
     const novaConsulta : Consulta = {
       altura : this.consulta.altura,
       peso: this.consulta.peso,
@@ -125,31 +133,32 @@ export class NovaConsultaComponent implements OnInit {
       objetivoConsulta: this.consulta.objetivoConsulta,
       dataConsulta: this.consulta.dataConsulta,
       nomePaciente: this.pacienteNovaConsulta.nomeCompleto,
-      imc: ((this.consulta.peso/Math.pow(this.consulta.altura,2))*10000).toFixed(2)
+      imc: ((parseFloat(this.consulta.peso)/Math.pow(parseFloat(this.consulta.altura),2))*10000).toFixed(2)
     }
-    this.pacienteNovaConsulta.relatorios.push(novaConsulta);
-    this.listaConsultas.push(novaConsulta);
-    localStorage.setItem('ListaConsultas', JSON.stringify(this.listaConsultas))
-    console.log(novaConsulta.imc);
-    
+    // CORRIGIR INCREMENTAR CONSULTA
+    this.listaPacientes.forEach( (paciente) => {
+      if( paciente === this.pacienteNovaConsulta){
+        paciente.relatorios.push(novaConsulta)
+      }
+    });
+    console.log(this.listaPacientes);
+    localStorage.setItem("ListaPacientes", JSON.stringify(this.listaPacientes));
+    localStorage.removeItem("PacienteNovaConsulta");
     this.consulta = {
-    altura : null,
-    peso : null,
-    porcentagemGordura : null,
-    taxaMetabolicaBasal : null,
-    triglicerideos : null,
-    diabetes : null,
-    colesterol : null,
-    autofeedback : null,
-    objetivoConsulta : null,
-    dataConsulta : null,
-    nomePaciente : null,
-    imc: null
+      altura : null,
+      peso : null,
+      porcentagemGordura : null,
+      taxaMetabolicaBasal : null,
+      triglicerideos : null,
+      diabetes : null,
+      colesterol : null,
+      autofeedback : null,
+      objetivoConsulta : null,
+      dataConsulta : null,
+      nomePaciente : null,
+      imc: null
     }
-
-    this.router.navigate(['/Menu-Principal'])
+    this.router.navigate(['/Lista-Pacientes'])
   }
-
-  
 
 }

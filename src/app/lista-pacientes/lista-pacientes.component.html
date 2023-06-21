@@ -3,14 +3,14 @@
   <!-- ngfor paciente of pacientes -->
   <div class="modalVerificacao" *ngIf="!verificaListaPacientes()">
     <h1 class="modalTitle">Nenhum paciente cadastrado!</h1>
-    <h2 class="modalSubtitle">Por favor, cadastre algum paciente antes!</h2>
+    <h2 class="modalSubtitle">Clique abaixo para cadastrar um paciente!</h2>
     <div class="divBtns">
       <!-- <a class="backCadastrar">Cadastrar um paciente</a> -->
       <a class="backCadastrar" routerLink="/Cadastro-Paciente">Cadastro Paciente</a>
     </div>
   </div>  
 
-  <div class="center-square" *ngFor="let paciente of listaPacientes">
+  <div class="center-square" *ngFor="let paciente of ngForPacientes()">
     
     <div class="pacient-square">
       <div class="div-pacient-square"><h1>Nome: {{paciente.nomeCompleto}}</h1></div>
@@ -52,47 +52,71 @@
         </div>
       </div>
     </div>
-    <div class="containerRelatorio">
-      <div class="center-square-relatorio" *ngIf="modalRelatorio" [class.low-opacity]="modalConfirmacao">
+    </div>
+      <div class="center-square-relatorio" *ngIf="modalRelatorio">
         <div class="boxTitle">
           <a (click)="voltarListaPacientes()"><img [src]="arrowBack" class="arrowBackIcon"></a>
-          <h2 id="tittle-relatorio">{{pacienteRelatorio.nomeCompleto}}</h2>
+          <h2 id="tittle-relatorio">Relatórios de {{pacienteRelatorio.nomeCompleto}}</h2>
         </div>
-        <div class="relatorios">
-          <div class="relatorio" *ngFor="let consulta of getConsulta(pacienteRelatorio)">
-            
+        <div class="relatorios" *ngFor="let consulta of pacienteRelatorio.relatorios">
+          <div class="relatorio">
             <div class="divs-grid-relatorio">
               <ul class="list-items-relatorio">
-                <li>Altura: {{consulta.altura}}</li>
-                <li>Peso: {{consulta.peso}}</li>
-                <li>Percentual de Gordura: {{consulta.porcentagemGordura}}</li>
-                <li>Taxa Metabólica Basal: {{consulta.taxaMetabolicaBasal}}</li>
+                <li>Altura: {{consulta.altura}} cm</li>
+                <li>Peso: {{consulta.peso}} KG</li>
+                <li>Percentual de Gordura: {{consulta.porcentagemGordura}} %</li>
+                <li>Taxa Metabólica Basal: {{consulta.taxaMetabolicaBasal}} Kcal</li>
                 <li>Data da Consulta: {{consulta.dataConsulta}}</li>
               </ul>
             </div>
             <div class="divs-grid-relatorio">
               <ul class="list-items-relatorio" id="custom-altura">
-                <li>Triglicerídeos: {{consulta.triglicerideos}}</li>
-                <li>Diabetes: {{consulta.diabetes}}</li>
-                <li>Colesterol: {{consulta.colesterol}}</li>
-                <li>Autofeedback: {{consulta.autofeedback}}</li>
-                <li>Objetivo Consulta: {{consulta.objetivoConsulta}}</li>
+                <li>Triglicerídeos: {{consulta.triglicerideos}} mg / dL</li>
+                <li>Diabetes: {{consulta.diabetes}} mg / dL</li>
+                <li>Colesterol: {{consulta.colesterol}} mg / dL </li>
+                <li>IMC: {{consulta.imc}}</li>
               </ul>
+              <div class="div-buttons-relatorios">
+                <button class="buttons-relatorios" (click)="abrirModalInformacaoAutoFeedback(consulta.autofeedback)">Auto Feedback</button>
+                <button class="buttons-relatorios" (click)="abrirModalInformacaoOjetivo(consulta.objetivoConsulta)">Objetivo do Paciente</button>
+              </div>
             </div>
           </div>
         </div>
+        <div class="modalVerificacao" *ngIf="modalAvisoListaVaziaRelatorio">
+          <h1 class="modalTitle">Nenhum relatório registrado!</h1>
+          <h2 class="modalSubtitle">Clique abaixo para cadastrar uma Nova Consulta!</h2>
+          <div class="divBtns">
+            <!-- <a class="backCadastrar">Cadastrar um paciente</a> -->
+            <a class="backCadastrar" (click)="abrirNovaConsulta(pacienteRelatorio)">Nova Consulta</a>
+          </div>
         </div>    
         <!-- NGFOR -->
-      </div>
-      </div>
-  </div>
-  <app-modal 
-  *ngIf="aparecerModal" 
-  (confirmar)="removerPaciente()"
-  (fechar)="fecharModalRegistrar()"
-  [titulo]="tituloModal"
-  [conteudo]="conteudoModal"
-  [tipoModal]="tipoModal"
-  ></app-modal>
+    </div>
+    <app-modal *ngIf="aparecerModalConfirmarRemocao">
+      <ng-container title>
+        <h2>{{tituloConfirmacao}}</h2>
+      </ng-container>
+      <ng-container body>
+      <p>{{mensagemConfirmacao}}</p>
+      </ng-container>
+      <ng-container buttons>
+        <button class="cancel-button" (click)="fecharModalRemocao()">Cancelar</button>
+        <button class="confirm-button" (click)="removerPaciente(paciente)">Confirmar</button>
+      </ng-container>
+    </app-modal>
+
+  <!-- MODAL AVISO -->
+    <app-modal *ngIf="aparecerModalInformacao">
+      <ng-container close>
+        <p style="cursor: pointer;" (click)="fecharModalInformacao()">&#10060;</p>
+      </ng-container>
+      <ng-container title>
+        <h2>{{tipoDadoInformacao}}</h2>
+      </ng-container>
+      <ng-container body>
+       <p>{{textoModalInformacao}}</p>
+     </ng-container>
+    </app-modal>
 </section>
 </div>

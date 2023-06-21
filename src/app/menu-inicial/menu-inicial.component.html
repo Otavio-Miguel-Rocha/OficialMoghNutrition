@@ -6,23 +6,13 @@
       <div id="label-inputs-position" class="flex-direction-column">
         <div class="label-inputs flex-direction-column">
           <label class="labels-margem-esquerdo">CRN</label>
-          <input
-            class="inputs-esquerdo"
-            type="text"
-            placeholder="Insira o seu CRN aqui..."
-            [(ngModel)]="loginCRN"
-            (ngModelChange)="formatarCRNLogin()"
-            maxlength="7"
-          />
+          <input class="inputs-esquerdo" type="text" placeholder="Insira o seu CRN aqui..." [(ngModel)]="loginCRN"
+            (ngModelChange)="formatarCRNLogin()" maxlength="7" />
         </div>
         <div class="label-inputs flex-direction-column">
           <label class="labels-margem-esquerdo">Senha</label>
-          <input
-            class="inputs-esquerdo"
-            type="password"
-            placeholder="Insira sua senha aqui..."
-            [(ngModel)]="loginSenha"
-          />
+          <input class="inputs-esquerdo" type="password" placeholder="Insira sua senha aqui..."
+            [(ngModel)]="loginSenha" />
         </div>
       </div>
       <button class="buttons" (click)="verificacaoLogin()">Entrar</button>
@@ -47,41 +37,24 @@
       <h2>Faça seu Cadastro</h2>
       <div class="label-inputs-register flex-direction-column">
         <label class="labels-margem-direito">Nome Completo</label>
-        <input
-          [(ngModel)]="nutricionista.nomeCompleto"
-          class="inputs-direito"
-          type="text"
-          placeholder="Insira seu nome completo aqui..."
-        />
+        <input [(ngModel)]="nutricionista.nomeCompleto" class="inputs-direito" type="text"
+          placeholder="Insira seu nome completo aqui..." required/>
       </div>
       <div class="label-inputs-register flex-direction-column">
         <label class="labels-margem-direito">E-mail</label>
-        <input
-          [(ngModel)]="nutricionista.email"
-          class="inputs-direito"
-          type="text"
-          placeholder="Insira seu e-mail aqui..."
-        />
+        <input [(ngModel)]="nutricionista.email" class="inputs-direito" type="email"
+          placeholder="Insira seu e-mail aqui..." required/>
       </div>
       <div id="grid-password-crn">
         <div class="label-inputs flex-direction-column password-crn">
-          <label  class="labels-margem-direito">Senha</label>
-          <input
-            [(ngModel)]="nutricionista.senha"
-            class="inputs-direito"
-            type="password"
-            placeholder="Crie uma senha aqui..."
-          />
+          <label class="labels-margem-direito">Senha</label>
+          <input [(ngModel)]="nutricionista.senha" class="inputs-direito" type="password"
+            placeholder="Crie uma senha aqui..." required/>
         </div>
         <div class="label-inputs flex-direction-column password-crn">
           <label class="labels-margem-direito">CRN</label>
-          <input 
-          [(ngModel)]="nutricionista.CRN" 
-          class="inputs-direito" 
-          type="text"
-          (ngModelChange)="formatarCRNRegistro()"
-          maxlength="7"
-          placeholder="XX-XXXX" />
+          <input [(ngModel)]="nutricionista.CRN" class="inputs-direito" type="text"
+            (ngModelChange)="formatarCRNRegistro()" maxlength="7" placeholder="XX-XXXX" required/>
         </div>
       </div>
       <button class="buttons register-button" (click)="abrirModalRegistrar()">Registrar-se</button>
@@ -92,8 +65,8 @@
       <h2>{{tituloConfirmacao}}</h2>
     </ng-container>
     <ng-container body *ngFor="let dado of dados">
-     <p>{{dado}}</p>
-   </ng-container>
+      <p>{{dado}}</p>
+    </ng-container>
     <ng-container buttons>
       <button class="cancel-button" (click)="fecharModalConfirmRegister()">Cancelar</button>
       <button class="confirm-button" (click)="confirmarRegister()">Confirmar</button>
@@ -109,7 +82,7 @@
       <h2>{{tituloErro}}</h2>
     </ng-container>
     <ng-container body>
-     <p>{{erro}}</p>
-   </ng-container>
+      <p>{{erro}}</p>
+    </ng-container>
   </app-modal>
 </section>

@@ -10,11 +10,11 @@
           <p class="inputsName">Nome Completo :</p>
           <input class="inputsText" type="text" [(ngModel)]="paciente.nomeCompleto">
           <p class="inputsName">E-mail :</p>
-          <input class="inputsText" type="text" [(ngModel)]="paciente.email">
+          <input class="inputsText" type="email" [(ngModel)]="paciente.email">
           <p class="inputsName">Telefone :</p>
-          <input class="inputsText" type="text" [(ngModel)]="paciente.telefone">
+          <input class="inputsText" type="number" [(ngModel)]="paciente.telefone">
           <p class="inputsName">Sexo :</p>
-          <input class="inputsCheck" type="checkbox" [checked]="disableMasculino" (click)="clickDisable('masculino')" >
+          <input class="inputsCheck" type="checkbox" [checked]="disableMasculino" (click)="clickDisable('masculino')">
           <label>Masculino</label>
           <input class="inputsCheck" type="checkbox" [checked]="disableFeminino" (click)="clickDisable('feminino')">
           <label>Feminino</label>
@@ -23,7 +23,7 @@
         </div>
         <div class="ladoDireito">
           <img [src]="userIcon" class="userIcon">
-          <a class="cadastrarBtn" (click)="confirmarCadastro()">Cadastrar</a>
+          <button class="cadastrarBtn" (click)="confirmarCadastro()">Cadastrar</button>
         </div>
       </div>
     </div>
@@ -34,7 +34,7 @@
     </ng-container>
     <ng-container body *ngFor="let dado of dados">
     <p>{{dado}}</p>
-  </ng-container>
+    </ng-container>
     <ng-container buttons>
       <button class="cancel-button" (click)="fecharModalConfirmRegister()">Cancelar</button>
       <button class="confirm-button" (click)="cadastrarPaciente()">Confirmar</button>

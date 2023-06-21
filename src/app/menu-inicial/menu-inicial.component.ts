@@ -95,7 +95,8 @@ export class MenuInicialComponent implements OnInit {
 
   //CONFIRMAR
   confirmarRegister():void{
-    this.aparecerModalAvisoRegister = false;
+    this.aparecerModalConfirmarRegister = false;
+    this.dados = [];
     let verificarCRNExistente:boolean = false;
     if( this.nutricionistasLista.length > 0 ){
       if( this.nutricionistasLista.find( (nutricionista) => nutricionista.CRN == this.nutricionista.CRN) != null){
@@ -120,6 +121,7 @@ export class MenuInicialComponent implements OnInit {
       this.erro = "Já existe outro nutricionista cadastrado com o CRN " + this.nutricionista.CRN;
       this.aparecerModalAvisoRegister = true;
     }
+    this.loginERegisterView = false;
   }
   // LOGIN
   loginCRN:string;

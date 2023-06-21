@@ -7,7 +7,7 @@ import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 })
 export class ModalComponent implements OnInit {
   
-  
+
   @Input()
   tipoModal:boolean;
   
