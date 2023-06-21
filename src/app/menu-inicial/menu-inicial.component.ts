@@ -37,9 +37,15 @@ export class MenuInicialComponent implements OnInit {
 
   trocaTelaLogin(): void {
     this.loginERegisterView = false;
+    this.nutricionista.email="";
+    this.nutricionista.nomeCompleto="";
+    this.nutricionista.senha="";
+    this.nutricionista.CRN="";
   }
   trocaTelaRegistro(): void {
     this.loginERegisterView = true;
+    this.loginCRN="";
+    this.loginSenha="";
   }
 
     //MODAL CONFIRMAÇÃO
