@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { V } from "@angular/core/src/render3";
 import { Router } from "@angular/router";
 
 interface Nutricionista {
@@ -45,6 +46,8 @@ export class ListaPacientesComponent implements OnInit {
   upArrowIcon: string;
   downArrowIcon: string;
   arrowBack:string;
+
+  modalBoolean : boolean;
 
   listaPacientes: Paciente[] = [];
   listaConsultas: Consulta[] = [];
@@ -141,6 +144,25 @@ export class ListaPacientesComponent implements OnInit {
   abrirNovaConsulta (paciente:Paciente) : void {
     localStorage.setItem("PacienteNovaConsulta", JSON.stringify(paciente));
     this.router.navigate(['/Nova-Consulta'])
+  }
+
+  ngForPacientes() : Paciente[] {
+    let listaVazia : Paciente[] = [];
+    if(this.modalRelatorio == true) {
+      return listaVazia;
+    }
+    else if(this.modalRelatorio == false) {
+      return this.listaPacientes;
+    }
+  }
+
+  verificaListaPacientes() : boolean {
+    if(this.listaPacientes.length == 0) {
+      console.log("false")
+      return false;
+    } else {
+      return true;
+    }
   }
 
   ngForPacientes() : Paciente[] {
