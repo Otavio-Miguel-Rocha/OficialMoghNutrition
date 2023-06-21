@@ -6,6 +6,32 @@ interface Nutricionista {
   email : string,
   senha : string,
   CRN : string;
+  listaPacientes : Paciente[];
+}
+
+interface Paciente {
+  nomeCompleto: string,
+  email: string,
+  telefone: string,
+  sexo: string,
+  dataNascimento: string,
+  mostrarModal:boolean,
+  relatorios: Consulta[],
+}
+
+interface Consulta {
+  altura: string,
+  peso: string,
+  porcentagemGordura: string,
+  taxaMetabolicaBasal: string,
+  triglicerideos: string,
+  diabetes: string,
+  colesterol: string,
+  autofeedback : string,
+  objetivoConsulta : string,
+  dataConsulta : string,
+  nomePaciente : string,
+  imc: string,
 }
 
 
@@ -89,7 +115,8 @@ export class MenuInicialComponent implements OnInit {
     nomeCompleto: "",
     email: "",
     senha: "",
-    CRN:""
+    CRN:"",
+    listaPacientes : []
   }
 
 
@@ -109,6 +136,7 @@ export class MenuInicialComponent implements OnInit {
         email: this.nutricionista.email,
         senha: this.nutricionista.senha,
         CRN: this.nutricionista.CRN,
+        listaPacientes: []
       }
       this.nutricionistasLista.push(novoNutricionista);
       localStorage.setItem('NutricionistasLista', JSON.stringify(this.nutricionistasLista));

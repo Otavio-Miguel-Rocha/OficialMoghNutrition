@@ -5,7 +5,8 @@ interface Nutricionista {
   nomeCompleto : string,
   email : string,
   senha : string,
-  CRN : string;
+  CRN : string,
+  listaPacientes: Paciente[];
 }
 
 interface Paciente {
@@ -48,7 +49,6 @@ export class ListaPacientesComponent implements OnInit {
 
   modalBoolean : boolean;
 
-  listaPacientes: Paciente[] = [];
   listaConsultas: Consulta[] = [];
 
   constructor(private router: Router) {
@@ -56,18 +56,21 @@ export class ListaPacientesComponent implements OnInit {
     this.downArrowIcon = "/assets/img/arrowOpenModal.png";
     this.arrowBack = '/assets/img/arrowBack.png'
   }
-
+  listaNutricionistas:Nutricionista[];
   ngOnInit() {
     const validaUsuarioLogado: Nutricionista = JSON.parse(localStorage.getItem("nutricionistaLogado"));
     if(validaUsuarioLogado == null){
       this.router.navigate(['/Menu-Inicial']);
+    } else{
+      this.nutricionistaLogado = validaUsuarioLogado;
     }
-    let listaPacientes: Paciente[] = JSON.parse(localStorage.getItem('ListaPacientes'));
-    if( listaPacientes != null){
-      this.listaPacientes = listaPacientes;
+    let listaNutricionistas: Nutricionista[] = JSON.parse(localStorage.getItem("NutricionistasLista"));
+    if( listaNutricionistas != null ) {
+      this.listaNutricionistas = listaNutricionistas;
     }
   }
 
+  nutricionistaLogado: Nutricionista;
   paciente : Paciente = {
     nomeCompleto : "",
     email : "",
@@ -124,8 +127,14 @@ export class ListaPacientesComponent implements OnInit {
   //REMOVER PACIENTE
   removerPaciente():void{
     this.aparecerModalConfirmarRemocao = false;
-    this.listaPacientes.splice(this.listaPacientes.indexOf(this.pacienteRemocao),1);
-    localStorage.setItem("ListaPacientes", JSON.stringify(this.listaPacientes));
+    this.listaNutricionistas.forEach( (nutricionista) => {
+      if( nutricionista.CRN == this.nutricionistaLogado.CRN ){
+        nutricionista.listaPacientes.splice(this.nutricionistaLogado.listaPacientes.indexOf(this.pacienteRemocao),1);
+        this.nutricionistaLogado.listaPacientes.splice(this.nutricionistaLogado.listaPacientes.indexOf(this.pacienteRemocao),1);
+      }
+    });
+    localStorage.setItem("NutricionistasLista", JSON.stringify(this.listaNutricionistas));
+    localStorage.setItem("nutricionistaLogado", JSON.stringify(this.nutricionistaLogado));
   }
 
   //
@@ -158,13 +167,12 @@ export class ListaPacientesComponent implements OnInit {
       return listaVazia;
     }
     else if(this.modalRelatorio == false) {
-      return this.listaPacientes;
+      return this.nutricionistaLogado.listaPacientes;
     }
   }
 
   verificaListaPacientes() : boolean {
-    if(this.listaPacientes.length == 0) {
-      console.log("false")
+    if(this.nutricionistaLogado.listaPacientes.length == 0) {
       return false;
     } else {
       return true;

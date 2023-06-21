@@ -5,7 +5,33 @@ interface Nutricionista {
   nomeCompleto : string,
   email : string,
   senha : string,
-  CRN : string;
+  CRN : string,
+  listaPacientes : Paciente[]
+}
+
+interface Paciente {
+  nomeCompleto: string,
+  email: string,
+  telefone: string,
+  sexo: string,
+  dataNascimento: string,
+  mostrarModal:boolean,
+  relatorios: Consulta[],
+}
+
+interface Consulta {
+  altura: string,
+  peso: string,
+  porcentagemGordura: string,
+  taxaMetabolicaBasal: string,
+  triglicerideos: string,
+  diabetes: string,
+  colesterol: string,
+  autofeedback : string,
+  objetivoConsulta : string,
+  dataConsulta : string,
+  nomePaciente : string,
+  imc: string,
 }
 
 @Component({

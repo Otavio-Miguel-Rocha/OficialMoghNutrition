@@ -6,7 +6,8 @@ interface Nutricionista {
   nomeCompleto : string,
   email : string,
   senha : string,
-  CRN : string;
+  CRN : string,
+  listaPacientes: Paciente[];
 }
 
 interface Paciente {
@@ -48,24 +49,22 @@ export class NovaConsultaComponent implements OnInit {
   constructor(private router: Router) { 
     this.arrowBack = '/assets/img/arrowBack.png'
   }
-
+  nutricionistaLogado: Nutricionista;
+  listaNutricionistas: Nutricionista[] = [];
   pacienteNovaConsulta: Paciente;
-  listaPacientes: Paciente[];
   ngOnInit() {
     const validaUsuarioLogado: Nutricionista = JSON.parse(localStorage.getItem("nutricionistaLogado"));
     if(validaUsuarioLogado == null){
       this.router.navigate(['/Menu-Inicial']);
     }
     else{
+      this.nutricionistaLogado = validaUsuarioLogado;
       this.pacienteNovaConsulta = JSON.parse(localStorage.getItem("PacienteNovaConsulta"));
     }
-
-    let listaPacientes: Paciente[] = JSON.parse(localStorage.getItem('ListaPacientes'));
-    if( listaPacientes != null){
-      this.listaPacientes = listaPacientes;
-      console.log(this.listaPacientes);
+    let listaNutricionistas: Nutricionista[] = JSON.parse(localStorage.getItem("NutricionistasLista"));
+    if( listaNutricionistas != null ) {
+      this.listaNutricionistas = listaNutricionistas;
     }
-
   }
 
   voltaListaPacientes() : void {
@@ -135,16 +134,21 @@ export class NovaConsultaComponent implements OnInit {
       nomePaciente: this.pacienteNovaConsulta.nomeCompleto,
       imc: ((parseFloat(this.consulta.peso)/Math.pow(parseFloat(this.consulta.altura),2))*10000).toFixed(2)
     }
-    // CORRIGIR INCREMENTAR CONSULTA
-    this.listaPacientes.forEach( (paciente) => {
-      if( paciente.nomeCompleto === this.pacienteNovaConsulta.nomeCompleto){
-        console.log('entrou');
-        paciente.relatorios.push(novaConsulta);
-        console.log(paciente.relatorios);
+    // 
+    this.listaNutricionistas.forEach ( (nutricionista) => {
+      if( nutricionista.CRN == this.nutricionistaLogado.CRN ){
+        nutricionista.listaPacientes.forEach( (paciente) => {
+          if( paciente.nomeCompleto === this.pacienteNovaConsulta.nomeCompleto){
+            console.log(nutricionista);
+            paciente.relatorios.push(novaConsulta);
+            console.log(nutricionista);
+            this.nutricionistaLogado = nutricionista;
+          }
+        });
       }
     });
-    console.log(this.listaPacientes);
-    localStorage.setItem("ListaPacientes", JSON.stringify(this.listaPacientes));
+    localStorage.setItem("NutricionistasLista", JSON.stringify(this.listaNutricionistas));
+    localStorage.setItem("nutricionistaLogado", JSON.stringify(this.nutricionistaLogado));
     localStorage.removeItem("PacienteNovaConsulta");
     this.consulta = {
       altura : null,
