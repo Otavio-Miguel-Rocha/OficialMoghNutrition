@@ -30,6 +30,8 @@ interface Consulta {
   objetivoConsulta : string,
   dataConsulta : string,
   nomePaciente : string,
+  imc: string,
+
 }
 
 @Component({
@@ -45,9 +47,7 @@ export class ListaPacientesComponent implements OnInit {
   arrowBack:string;
 
   listaPacientes: Paciente[] = [];
-  listaConsultas: Consulta[] = [];
-  pacienteRemocao: Paciente;
-
+  listaConsultas: Consulta[];
 
   constructor(private router: Router) {
     this.upArrowIcon = "/assets/img/arrowClosedModal.png";
@@ -81,7 +81,6 @@ export class ListaPacientesComponent implements OnInit {
   }
 
 
-  //modal paciente
   openModal(paciente:Paciente): void {
     paciente.mostrarModal = true;
   }
@@ -98,7 +97,7 @@ export class ListaPacientesComponent implements OnInit {
     this.pacienteRelatorio = pacienteRelatorios;
     this.modalRelatorio = true;
   }
-  getConsulta(pacienteRelatorio:Paciente):any[]{
+  getConsulta(pacienteRelatorio:Paciente):Consulta[]{
     let consultas: Consulta[] = [];
     this.listaConsultas.filter ( (consulta) => {
       console.log(consulta);
@@ -120,7 +119,7 @@ export class ListaPacientesComponent implements OnInit {
   aparecerModalConfirmarRemocao:boolean = false;
   tituloConfirmacao:string;
   mensagemConfirmacao:string;
-  
+  pacienteRemocao:Paciente;
   abrirModalConfirmacaoRemocao(paciente:Paciente):void{
     this.pacienteRemocao = paciente;
     this.tituloConfirmacao = "Remover " + this.pacienteRemocao.nomeCompleto + "?";

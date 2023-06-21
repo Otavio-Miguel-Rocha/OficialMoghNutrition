@@ -12,8 +12,7 @@
 .center-square {
   display: flex;
   width: 60vw;
-  height: 30%;
-  max-height: 80%;
+  height: 100%;
   align-items: center;
   flex-direction: column;
   margin-top: 5%;
@@ -127,7 +126,7 @@ h2 {
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
-  width: 98%;
+  width: 98.1%;
   border-radius: 10px;
   padding: 10px;
   background-color: #fff;
@@ -137,14 +136,10 @@ h2 {
   width: 30px;
   cursor: pointer;
 }
-
 .center-square-relatorio{
-  position: absolute;
-  top: 10%;
-  left: 5%;
   display: flex;
-  height: 85%;
-  width: 90%;
+  width: 80%;
+  max-height: 100%;
   background-color: #87BC9C;
   align-items: center;
   justify-content: center;
@@ -159,11 +154,10 @@ h2 {
   display: flex;
   width: 81%;
   height: 100%;
-  overflow-x: hidden;
-  overflow-x: auto;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
 }
 .relatorio{
   display: grid;
@@ -172,7 +166,7 @@ h2 {
   background-color: white;
   width: 80%;
   min-height: 230px;
-  height: 40%;
+  height: 100%;
   padding-left:5%;
   padding-right: 5%;
   border-radius: 10px;
