@@ -47,7 +47,7 @@ export class ListaPacientesComponent implements OnInit {
   arrowBack:string;
 
   listaPacientes: Paciente[] = [];
-  listaConsultas: Consulta[];
+  listaConsultas: Consulta[] = [];
 
   constructor(private router: Router) {
     this.upArrowIcon = "/assets/img/arrowClosedModal.png";
@@ -141,5 +141,15 @@ export class ListaPacientesComponent implements OnInit {
   abrirNovaConsulta (paciente:Paciente) : void {
     localStorage.setItem("PacienteNovaConsulta", JSON.stringify(paciente));
     this.router.navigate(['/Nova-Consulta'])
+  }
+
+  ngForPacientes() : Paciente[] {
+    let listaVazia : Paciente[] = [];
+    if(this.modalRelatorio == true) {
+      return listaVazia;
+    }
+    else if(this.modalRelatorio == false) {
+      return this.listaPacientes;
+    }
   }
 }
