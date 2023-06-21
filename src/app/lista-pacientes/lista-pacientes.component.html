@@ -2,11 +2,16 @@
 
 <section id="section-pacient-list">
   <div class="modalVerificacao" *ngIf="!verificaListaPacientes()">
-    <h1 class="modalTitle">teste</h1>
+    <h1 class="modalTitle">Nenhum paciente cadastrado!</h1>
+    <h2 class="modalSubtitle">Por favor, cadastre algum paciente antes!</h2>
+    <div class="divBtns">
+      <!-- <a class="backCadastrar">Cadastrar um paciente</a> -->
+      <a class="backCadastrar" routerLink="/Cadastro-Paciente">Cadastro Paciente</a>
+    </div>
   </div>
   <!-- ngfor paciente of pacientes -->
   
-  <div class="center-square" *ngFor="let paciente of listaPacientes">
+  <div class="center-square" *ngFor="let paciente of ngForPacientes()">
     
     <div class="pacient-square">
       <div class="div-pacient-square"><h1>Nome: {{paciente.nomeCompleto}}</h1></div>
@@ -48,6 +53,7 @@
         </div>
       </div>
     </div>
+  </div>
     <div class="containerRelatorio">
       <div class="center-square-relatorio" *ngIf="modalRelatorio" [class.low-opacity]="modalConfirmacao">
         <div class="boxTitle">
@@ -81,7 +87,6 @@
         <!-- NGFOR -->
       </div>
       </div>
-  </div>
   <app-modal 
   *ngIf="aparecerModal" 
   (confirmar)="removerPaciente()"

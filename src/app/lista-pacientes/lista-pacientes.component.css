@@ -11,15 +11,43 @@
 }
 
 .modalVerificacao {
-  width: 70%;
+  width: 50%;
   height: 50vh;
   background-color:#Ffff;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  margin-top: 10%;
 }
 
 .modalTitle {
-  font-size: 30px; 
+  font-size: 34px; 
+}
+
+.modalSubtitle {
+  font-size: 22px; 
+}
+
+.divBtns {
+  margin-top: 30px;
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  border: none;
+  color: #fff;
+  font-weight: 500;
+}
+
+.backCadastrar {
+  margin-top: 10px;
+  padding: 10px 35px;
+  border-radius: 10px;
+  background-color: #1a4d2e;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
 }
 
 .center-square {
@@ -120,6 +148,7 @@ h2 {
   align-items: center;
   cursor: pointer;
   margin-top: 2%;
+  border: 1px solid #000;
 }
 .green-button {
   background-color: #1a4d2e;
@@ -130,8 +159,8 @@ h2 {
   color: white;
 }
 .buttons-informations:hover {
-  border-bottom: 4px solid black;
-  border-right: 4px solid black;
+  transform: scale(1.05);
+  transition: all .2s ease-in-out;
 }
 
 /* MODAL RELATORIOS */

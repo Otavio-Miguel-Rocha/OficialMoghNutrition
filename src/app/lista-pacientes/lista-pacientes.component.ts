@@ -45,6 +45,8 @@ export class ListaPacientesComponent implements OnInit {
   downArrowIcon: string;
   arrowBack:string;
 
+  modalBoolean : boolean;
+
   listaPacientes: Paciente[] = [];
   listaConsultas: Consulta[];
 
@@ -163,8 +165,17 @@ export class ListaPacientesComponent implements OnInit {
       console.log("false")
       return false;
     } else {
-      console.log("true")
       return true;
+    }
+  }
+
+  ngForPacientes() : Paciente[] {
+    let listaVazia : Paciente[] = [];
+    if(this.modalRelatorio == true) {
+      return listaVazia;
+    }
+    else if(this.modalRelatorio == false) {
+      return this.listaPacientes;
     }
   }
 }
