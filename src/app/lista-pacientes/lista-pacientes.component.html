@@ -1,93 +1,89 @@
 <div class="mainContainer">
-<section id="section-pacient-list">
-  <!-- ngfor paciente of pacientes -->
-  
-  <div class="center-square" *ngFor="let paciente of listaPacientes">
+  <section id="section-pacient-list">
+    <!-- ngfor paciente of pacientes -->
     
-    <div class="pacient-square">
-      <div class="div-pacient-square"><h1>Nome: {{paciente.nomeCompleto}}</h1></div>
-      <div class="div-pacient-square"><h1>E-mail: {{paciente.email}}</h1></div>
-      <div class="div-pacient-square" id="div-pacient-square-icon">
-        <a (click)="openModal(paciente)" style="cursor: pointer" *ngIf="!paciente.mostrarModal"
-          ><img [src]="upArrowIcon" class="arrow-icon"
-        /></a>
-        <a (click)="closeModal(paciente)" style="cursor: pointer" *ngIf="paciente.mostrarModal"
-          ><img [src]="downArrowIcon" class="arrow-icon"
-        /></a>
+    <div class="center-square" *ngFor="let paciente of ngForPacientes()">
+      
+      <div class="pacient-square">
+        <div class="div-pacient-square"><h1>Nome: {{paciente.nomeCompleto}}</h1></div>
+        <div class="div-pacient-square"><h1>E-mail: {{paciente.email}}</h1></div>
+        <div class="div-pacient-square" id="div-pacient-square-icon">
+          <a (click)="openModal(paciente)" style="cursor: pointer" *ngIf="!paciente.mostrarModal"
+            ><img [src]="upArrowIcon" class="arrow-icon"
+          /></a>
+          <a (click)="closeModal(paciente)" style="cursor: pointer" *ngIf="paciente.mostrarModal"
+            ><img [src]="downArrowIcon" class="arrow-icon"
+          /></a>
+        </div>
+      </div>
+      <div id="modal-square" *ngIf="paciente.mostrarModal">
+        <div id="block-div-title-modal">
+          <h1>Informações Gerais</h1>
+        </div>
+        <div id="pacient-informations">
+          <div id="more-informations">
+            <h2>Sexo: {{paciente.sexo}}</h2>
+            <h2>Telefone: {{paciente.telefone}}</h2>
+            <h2>Data de Nascimento: {{paciente.dataNascimento}}</h2>
+          </div>
+          <div id="buttons-pacient-informations">
+            <button class="buttons-informations green-button"
+            (click)="abrirNovaConsulta(paciente)">
+              Nova Consulta
+            </button>
+            <button class="buttons-informations green-button"
+            (click)="abrirRelatorios(paciente)">
+              Consultar Relatórios
+            </button>
+            <button 
+            class="buttons-informations red-button"
+            (click)="abrirModalConfirmacaoRemocao(paciente)"
+            >
+              Remover Paciente
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-    <div id="modal-square" *ngIf="paciente.mostrarModal">
-      <div id="block-div-title-modal">
-        <h1>Informações Gerais</h1>
+    <div class="center-square-relatorio" *ngIf="modalRelatorio" [class.low-opacity]="modalConfirmacao">
+      <div class="boxTitle">
+        <a (click)="voltarListaPacientes()"><img [src]="arrowBack" class="arrowBackIcon"></a>
+        <h2 id="tittle-relatorio">{{pacienteRelatorio.nomeCompleto}}</h2>
       </div>
-      <div id="pacient-informations">
-        <div id="more-informations">
-          <h2>Sexo: {{paciente.sexo}}</h2>
-          <h2>Telefone: {{paciente.telefone}}</h2>
-          <h2>Data de Nascimento: {{paciente.dataNascimento}}</h2>
+      <div class="relatorios" *ngFor="let consulta of getConsulta(pacienteRelatorio)">
+        <div class="relatorio">
+          <div class="divs-grid-relatorio">
+            <ul class="list-items-relatorio">
+              <li>Altura: {{consulta.altura}}</li>
+              <li>Peso: {{consulta.peso}}</li>
+              <li>Percentual de Gordura: {{consulta.porcentagemGordura}}</li>
+              <li>Taxa Metabólica Basal: {{consulta.taxaMetabolicaBasal}}</li>
+              <li>Data da Consulta: {{consulta.dataConsulta}}</li>
+            </ul>
+          </div>
+          <div class="divs-grid-relatorio">
+            <ul class="list-items-relatorio" id="custom-altura">
+              <li>Triglicerídeos: {{consulta.triglicerideos}}</li>
+              <li>Diabetes: {{consulta.diabetes}}</li>
+              <li>Colesterol: {{consulta.colesterol}}</li>
+              <li>IMC: {{consulta.imc}}</li>
+            </ul>
+            <div class="div-buttons-relatorios">
+              <button class="buttons-relatorios">Auto Feedback</button>
+              <button class="buttons-relatorios">Objetivo do Paciente</button>
+            </div>
+          </div>
         </div>
-        <div id="buttons-pacient-informations">
-          <button class="buttons-informations green-button"
-          (click)="abrirNovaConsulta(paciente)">
-            Nova Consulta
-          </button>
-          <button class="buttons-informations green-button"
-          (click)="abrirRelatorios(paciente)">
-            Consultar Relatórios
-          </button>
-          <button 
-          class="buttons-informations red-button"
-          (click)="abrirModalConfirmacaoRemocao(paciente)"
-          >
-            Remover Paciente
-          </button>
-        </div>
-      </div>
+      </div>    
+      <!-- NGFOR -->
     </div>
-    <div class="containerRelatorio">
-      <div class="center-square-relatorio" *ngIf="modalRelatorio" [class.low-opacity]="modalConfirmacao">
-        <div class="boxTitle">
-          <a (click)="voltarListaPacientes()"><img [src]="arrowBack" class="arrowBackIcon"></a>
-          <h2 id="tittle-relatorio">{{pacienteRelatorio.nomeCompleto}}</h2>
-        </div>
-        <div class="relatorios">
-          <div class="relatorio" *ngFor="let consulta of getConsulta(pacienteRelatorio)">
-            
-            <div class="divs-grid-relatorio">
-              <ul class="list-items-relatorio">
-                <li>Altura: {{consulta.altura}}</li>
-                <li>Peso: {{consulta.peso}}</li>
-                <li>Percentual de Gordura: {{consulta.porcentagemGordura}}</li>
-                <li>Taxa Metabólica Basal: {{consulta.taxaMetabolicaBasal}}</li>
-                <li>Data da Consulta: {{consulta.dataConsulta}}</li>
-                
-              </ul>
-            </div>
-            <div class="divs-grid-relatorio">
-              <ul class="list-items-relatorio" id="custom-altura">
-                <li>Triglicerídeos: {{consulta.triglicerideos}}</li>
-                <li>Diabetes: {{consulta.diabetes}}</li>
-                <li>Colesterol: {{consulta.colesterol}}</li>
-                <li>IMC: {{consulta.imc}}</li>
-                <li>Autofeedback: {{consulta.autofeedback}}</li>
-                <li>Objetivo Consulta: {{consulta.objetivoConsulta}}</li>
-                
-              </ul>
-            </div>
-  
-        </div>
-        </div>    
-        <!-- NGFOR -->
-      </div>
-      </div>
+    <app-modal 
+    *ngIf="aparecerModal" 
+    (confirmar)="removerPaciente()"
+    (fechar)="fecharModalRegistrar()"
+    [titulo]="tituloModal"
+    [conteudo]="conteudoModal"
+    [tipoModal]="tipoModal"
+    ></app-modal>
+  </section>
   </div>
-  <app-modal 
-  *ngIf="aparecerModal" 
-  (confirmar)="removerPaciente()"
-  (fechar)="fecharModalRegistrar()"
-  [titulo]="tituloModal"
-  [conteudo]="conteudoModal"
-  [tipoModal]="tipoModal"
-  ></app-modal>
-</section>
-</div>

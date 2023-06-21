@@ -47,7 +47,7 @@ export class ListaPacientesComponent implements OnInit {
   arrowBack:string;
 
   listaPacientes: Paciente[] = [];
-  listaConsultas: Consulta[];
+  listaConsultas: Consulta[] = [];
 
 
   constructor(private router: Router) {
@@ -116,6 +116,7 @@ export class ListaPacientesComponent implements OnInit {
     this.pacienteRelatorio = pacienteRelatorios;
     this.modalRelatorio = true;
   }
+
   getConsulta(pacienteRelatorio:Paciente):Consulta[]{
     let consultas: Consulta[] = [];
     this.listaConsultas.filter ( (consulta) => {
@@ -157,5 +158,15 @@ export class ListaPacientesComponent implements OnInit {
     this.tituloModal = titulo;
     this.conteudoModal = conteudo;
     this.tipoModal = true;
+  }
+
+  ngForPacientes() : Paciente[] {
+    let listaVazia : Paciente[] = [];
+    if(this.modalRelatorio == true) {
+      return listaVazia;
+    }
+    else if(this.modalRelatorio == false) {
+      return this.listaPacientes;
+    }
   }
 }
