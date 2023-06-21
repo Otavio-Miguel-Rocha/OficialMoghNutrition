@@ -64,7 +64,7 @@
         />
       </div>
       <div id="grid-password-crn">
-        <div class="label-inputs flex-direction-column">
+        <div class="label-inputs flex-direction-column password-crn">
           <label  class="labels-margem-direito">Senha</label>
           <input
             [(ngModel)]="nutricionista.senha"
@@ -73,7 +73,7 @@
             placeholder="Crie uma senha aqui..."
           />
         </div>
-        <div class="label-inputs flex-direction-column">
+        <div class="label-inputs flex-direction-column password-crn">
           <label class="labels-margem-direito">CRN</label>
           <input 
           [(ngModel)]="nutricionista.CRN" 
@@ -84,15 +84,32 @@
           placeholder="XX-XXXX" />
         </div>
       </div>
-      <button class="buttons" (click)="abrirModalRegistrar()">Registrar-se</button>
+      <button class="buttons register-button" (click)="abrirModalRegistrar()">Registrar-se</button>
     </div>
   </div>
-  <app-modal 
-  *ngIf="aparecerModal" 
-  (confirmar)="botaoConfirmarModal()"
-  (fechar)="fecharModalRegistrar()"
-  [titulo]="tituloModal"
-  [conteudo]="conteudoModal"
-  [tipoModal]="tipoModal"
-  ></app-modal>
+  <app-modal *ngIf="aparecerModalConfirmarRegister">
+    <ng-container title>
+      <h2>{{tituloConfirmacao}}</h2>
+    </ng-container>
+    <ng-container body *ngFor="let dado of dados">
+     <p>{{dado}}</p>
+   </ng-container>
+    <ng-container buttons>
+      <button class="cancel-button" (click)="fecharModalConfirmRegister()">Cancelar</button>
+      <button class="confirm-button" (click)="confirmarRegister()">Confirmar</button>
+    </ng-container>
+  </app-modal>
+
+  <!-- MODAL AVISO -->
+  <app-modal *ngIf="aparecerModalAvisoRegister">
+    <ng-container close>
+      <p style="cursor: pointer;" (click)="fecharModalAvisoRegister()">&#10060;</p>
+    </ng-container>
+    <ng-container title>
+      <h2>{{tituloErro}}</h2>
+    </ng-container>
+    <ng-container body>
+     <p>{{erro}}</p>
+   </ng-container>
+  </app-modal>
 </section>

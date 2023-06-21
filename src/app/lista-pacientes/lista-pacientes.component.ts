@@ -46,6 +46,7 @@ export class ListaPacientesComponent implements OnInit {
 
   listaPacientes: Paciente[] = [];
   listaConsultas: Consulta[] = [];
+  pacienteRemocao: Paciente;
 
 
   constructor(private router: Router) {
@@ -57,7 +58,6 @@ export class ListaPacientesComponent implements OnInit {
   ngOnInit() {
     const validaUsuarioLogado: Nutricionista = JSON.parse(localStorage.getItem("nutricionistaLogado"));
     if(validaUsuarioLogado == null){
-      this.abrirModalAviso("ACESSO NEGADO", "Você deve estar logado para acessar essa página!");
       this.router.navigate(['/Menu-Inicial']);
     }
     let listaPacientes: Paciente[] = JSON.parse(localStorage.getItem('ListaPacientes'));
@@ -80,23 +80,8 @@ export class ListaPacientesComponent implements OnInit {
     relatorios: [],
   }
 
-  //MODAL CONFIRMAÇÃO OU AVISO
-  aparecerModal:boolean = false;
-  tipoModal:boolean;
-  tituloModal:string;
-  conteudoModal:string;
-  pacienteRemocao:Paciente;
-  abrirModalConfirmacaoRemocao(paciente:Paciente):void{
-    this.pacienteRemocao = paciente;
-    this.abrirModalConfirmacao(
-      "Remover " + paciente.nomeCompleto + "?",
-      "A ação não poderá ser revertida!")
-  }
-  fecharModalRegistrar():void{
-    this.aparecerModal = false;
-  }
 
-
+  //modal paciente
   openModal(paciente:Paciente): void {
     paciente.mostrarModal = true;
   }
@@ -130,9 +115,24 @@ export class ListaPacientesComponent implements OnInit {
   }
   //
 
+
+  //MODAL CONFIRMAÇÃO
+  aparecerModalConfirmarRemocao:boolean = false;
+  tituloConfirmacao:string;
+  mensagemConfirmacao:string;
+  
+  abrirModalConfirmacaoRemocao(paciente:Paciente):void{
+    this.pacienteRemocao = paciente;
+    this.tituloConfirmacao = "Remover " + this.pacienteRemocao.nomeCompleto + "?";
+    this.mensagemConfirmacao = "A ação não poderá ser revertida!";
+    this.aparecerModalConfirmarRemocao = true;
+  }
+  fecharModalRemocao():void{
+    this.aparecerModalConfirmarRemocao = false;
+  }
   //REMOVER PACIENTE
   removerPaciente():void{
-    this.aparecerModal = false;
+    this.aparecerModalConfirmarRemocao = false;
     this.listaPacientes.splice(this.listaPacientes.indexOf(this.pacienteRemocao),1);
     localStorage.setItem("ListaPacientes", JSON.stringify(this.listaPacientes));
   }
@@ -142,17 +142,5 @@ export class ListaPacientesComponent implements OnInit {
   abrirNovaConsulta (paciente:Paciente) : void {
     localStorage.setItem("PacienteNovaConsulta", JSON.stringify(paciente));
     this.router.navigate(['/Nova-Consulta'])
-  }
-  abrirModalConfirmacao(titulo:string, conteudo:string):void{
-    this.aparecerModal = true;
-    this.tituloModal = titulo;
-    this.conteudoModal = conteudo;
-    this.tipoModal = false;
-  }
-  abrirModalAviso(titulo:string, conteudo:string):void{
-    this.aparecerModal = true;
-    this.tituloModal = titulo;
-    this.conteudoModal = conteudo;
-    this.tipoModal = true;
   }
 }

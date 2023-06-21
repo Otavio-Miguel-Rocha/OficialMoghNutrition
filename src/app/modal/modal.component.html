@@ -1,13 +1,15 @@
 <div class="modal-overlay">
   <div class="modal">
-    <div class="divBotaoFechar">
-    <p class="botaoFechar" *ngIf="tipoModal" (click)="botaoFechar()">X</p>
+    <div class="logo-position">
+      <img [src]="logoMOGH" class="logo-mogh-icon">
+      <ng-content class="botaoFechar"(click)="botaoFechar()" select="[close]"></ng-content>
     </div>
-    <h2>{{titulo}}</h2>
-    <p>{{conteudo}}</p>
-    <div class="modal-buttons" *ngIf="!tipoModal">
-      <button class="cancel-button" (click)="botaoFechar()">Cancelar</button>
-      <button class="confirm-button" (click)="botaoConfirmar()">Confirmar</button>
+    <ng-content select="[title]"></ng-content>
+    <div class="div-body">
+      <ng-content select="[body]"></ng-content>
+    </div>
+    <div class="modal-buttons">
+      <ng-content select="[buttons]"></ng-content>
     </div>
   </div>
 </div>

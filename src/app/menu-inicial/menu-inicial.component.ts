@@ -42,25 +42,40 @@ export class MenuInicialComponent implements OnInit {
     this.loginERegisterView = true;
   }
 
-  //MODAL CONFIRMAÇÃO OU AVISO
-    aparecerModal:boolean = false;
-    tipoModal:boolean;
-    tituloModal:string;
-    conteudoModal:string;
+    //MODAL CONFIRMAÇÃO
+    aparecerModalConfirmarRegister:boolean = false;
+    tituloConfirmacao:string;
+    dados:string[] = [];
+
+    //MODAL AVISO
+    aparecerModalAvisoRegister:boolean = false;
+    tituloErro:string;
+    erro:string;
     abrirModalRegistrar():void{
       if(this.nutricionista.CRN == "" || this.nutricionista.nomeCompleto == "" || this.nutricionista.email == "" || this.nutricionista.senha == ""  ) {
-        this.abrirModalAviso("Atenção no Cadastro!", "Todos os campos devem ser preenchidos!");
+        this.tituloErro = "Atenção no Cadastro!";
+        this.erro = "Todos os campos devem ser preenchidos!";
+        this.aparecerModalAvisoRegister = true;
       } else{
         if(this.verificarFormatoCRN(this.nutricionista.CRN)){
-          this.abrirModalConfirmacao("Confirme seus Dados", "Nome: " + this.nutricionista.nomeCompleto  + ' E-mail: ' + this.nutricionista.email + ' CRN: ' + this.nutricionista.CRN ); 
+          this.tituloConfirmacao = "Confirme seus Dados";
+          this.dados.push("Nome: " + this.nutricionista.nomeCompleto);
+          this.dados.push("E-mail: " + this.nutricionista.email);
+          this.dados.push("CRN: " + this.nutricionista.CRN);
+          this.aparecerModalConfirmarRegister = true;
         } else{
-          this.abrirModalAviso("Formato de CRN Inválido", "Formato correto: XX-XXXX");
+          this.verificarFormatoCRNModal();
         }
       }
-      this.aparecerModal = true;
     }
-    fecharModalRegistrar():void{
-      this.aparecerModal = false;
+
+
+    fecharModalConfirmRegister():void{
+      this.aparecerModalConfirmarRegister = false;
+      this.dados = [];
+    }
+    fecharModalAvisoRegister():void{
+      this.aparecerModalAvisoRegister = false;
     }
   //
 
@@ -73,8 +88,8 @@ export class MenuInicialComponent implements OnInit {
 
 
   //CONFIRMAR
-  botaoConfirmarModal():void{
-    this.aparecerModal = false;
+  confirmarRegister():void{
+    this.aparecerModalAvisoRegister = false;
     let verificarCRNExistente:boolean = false;
     if( this.nutricionistasLista.length > 0 ){
       if( this.nutricionistasLista.find( (nutricionista) => nutricionista.CRN == this.nutricionista.CRN) != null){
@@ -95,7 +110,9 @@ export class MenuInicialComponent implements OnInit {
       this.nutricionista.senha = "";
       this.nutricionista.CRN = "";
     } else{
-      this.abrirModalAviso("ATENÇÃO", "Já existe outro nutricionista cadastrado com o CRN " + this.nutricionista.CRN);
+      this.tituloErro = "ATENÇÃO";
+      this.erro = "Já existe outro nutricionista cadastrado com o CRN " + this.nutricionista.CRN;
+      this.aparecerModalAvisoRegister = true;
     }
   }
   // LOGIN
@@ -103,7 +120,7 @@ export class MenuInicialComponent implements OnInit {
   loginSenha:string;
   verificacaoLogin():void {
     if(!this.verificarFormatoCRN(this.loginCRN)){
-      this.abrirModalAviso("FORMATO INVÁLIDO", "CRN não está no padrão XX-XXXX")
+      this.verificarFormatoCRNModal();
     }
     else{
       let verificarCRNExistente: boolean = false;
@@ -114,30 +131,31 @@ export class MenuInicialComponent implements OnInit {
             localStorage.setItem("nutricionistaLogado", JSON.stringify(nutricionistaFor));
             this.router.navigate(['/Menu-Principal'])
           }else{
-            this.abrirModalAviso("Senha Incorreta", "Por favor insira novamente");
+            this.tituloErro = "Senha Incorreta";
+            this.erro = "Por favor insira novamente";
+            this.aparecerModalAvisoRegister = true;
           }
         }
     });
     if(!verificarCRNExistente){
-      this.abrirModalAviso("CRN Inválido","O CRN pode não existir ou estar incorreto.");
+      this.tituloErro = "CRN Inválido";
+      this.erro = "O CRN pode não existir ou estar incorreto.";
+      this.aparecerModalAvisoRegister = true;
     }
     this.loginCRN = "";
     this.loginSenha = "";
   }
   }
 
-  abrirModalConfirmacao(titulo:string, conteudo:string):void{
-    this.aparecerModal = true;
-    this.tituloModal = titulo;
-    this.conteudoModal = conteudo;
-    this.tipoModal = false;
+  verificarFormatoCRNModal():void{
+    this.tituloErro = "Formato de CRN Inválido";
+    this.erro = "Formato correto: XX-XXXX";
+    this.aparecerModalAvisoRegister = true;
   }
-  abrirModalAviso(titulo:string, conteudo:string):void{
-    this.aparecerModal = true;
-    this.tituloModal = titulo;
-    this.conteudoModal = conteudo;
-    this.tipoModal = true;
-  }
+
+
+
+
   verificarFormatoCRN(crn: string): boolean {
     const formatoCRN = /^\d{2}-\d{4}$/;
     return formatoCRN.test(crn);

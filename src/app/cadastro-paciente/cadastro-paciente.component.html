@@ -28,12 +28,16 @@
       </div>
     </div>
   </div>
-  <app-modal 
-  *ngIf="aparecerModal" 
-  (confirmar)="cadastrarPaciente()"
-  (fechar)="fecharModalRegistrar()"
-  [titulo]="tituloModal"
-  [conteudo]="conteudoModal"
-  [tipoModal]="tipoModal"
-  ></app-modal>
+  <app-modal *ngIf="aparecerModalConfirmarCadastroPaciente">
+    <ng-container title>
+      <h2>{{tituloConfirmacao}}</h2>
+    </ng-container>
+    <ng-container body *ngFor="let dado of dados">
+    <p>{{dado}}</p>
+  </ng-container>
+    <ng-container buttons>
+      <button class="cancel-button" (click)="fecharModalConfirmRegister()">Cancelar</button>
+      <button class="confirm-button" (click)="cadastrarPaciente()">Confirmar</button>
+    </ng-container>
+  </app-modal>
 </div>

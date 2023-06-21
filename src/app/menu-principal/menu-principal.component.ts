@@ -23,7 +23,6 @@ export class MenuPrincipalComponent implements OnInit {
   ngOnInit() {
     const validaUsuarioLogado: Nutricionista = JSON.parse(localStorage.getItem("nutricionistaLogado"));
     if(validaUsuarioLogado == null){
-      this.abrirModalAviso("ACESSO NEGADO", "Você deve estar logado para acessar essa página!");
       this.router.navigate(['/Menu-Inicial']);
     }
     else{
@@ -34,49 +33,24 @@ export class MenuPrincipalComponent implements OnInit {
   nomeNutricionistaLogado: string;
 
   //MODAL CONFIRMAÇÃO OU AVISO
-  aparecerModal:boolean = false;
-  tipoModal:boolean;
-  tituloModal:string;
-  conteudoModal:string;
+  aparecerModalLogOut:boolean = false;
 
   confirmarLogout():void{
-    this.abrirModalConfirmacao("LOGOUT", "Deseja Mesmo Sair?");
+    this.aparecerModalLogOut = true;
   }
-  fecharModalRegistrar():void{
-    this.aparecerModal = false;
+  fecharModalLogOut():void{
+    this.aparecerModalLogOut = false;
   }
 
   //
-
   listaPacientesRoute () : void {
     this.router.navigate(['/Lista-Pacientes'])
   }
-
   CadastrarPacienteRoute () : void {
     this.router.navigate(['/Cadastro-Paciente'])
   }
-
-
-  botaoConfirmarModal():void{
+  logOutRoute() : void {
     localStorage.removeItem("nutricionistaLogado");
-    this.LogoutRoute();
-  }
-  LogoutRoute() : void {
     this.router.navigate(['/Menu-Inicial'])
   }
-
-  abrirModalConfirmacao(titulo:string, conteudo:string):void{
-    this.aparecerModal = true;
-    this.tituloModal = titulo;
-    this.conteudoModal = conteudo;
-    this.tipoModal = false;
-  }
-  abrirModalAviso(titulo:string, conteudo:string):void{
-    this.aparecerModal = true;
-    this.tituloModal = titulo;
-    this.conteudoModal = conteudo;
-    this.tipoModal = true;
-  }
-
-
 }

@@ -1,4 +1,4 @@
-<div id="BemVindo"><p id="border">Bem-vindo: {{nomeNutricionistaLogado}}!</p></div>
+<div id="BemVindo"><p id="border">Bem-vindo: {{nomeNutricionistaLogado}}</p></div>
 <div id="flex">
    
 <div id="telaMenu">
@@ -13,12 +13,16 @@
     Logout
    </a>
 </div>
-<app-modal 
-*ngIf="aparecerModal" 
-(confirmar)="botaoConfirmarModal()"
-(fechar)="fecharModalRegistrar()"
-[titulo]="tituloModal"
-[conteudo]="conteudoModal"
-[tipoModal]="tipoModal"
-></app-modal>
 </div>
+<app-modal *ngIf="aparecerModalLogOut">
+   <ng-container title>
+     <h2>Deseja Realmente Sair?</h2>
+   </ng-container>
+   <ng-container body>
+    <p>{{nomeNutricionistaLogado}}</p>
+  </ng-container>
+   <ng-container buttons>
+     <button class="cancel-button" (click)="fecharModalLogOut()">Cancelar</button>
+     <button class="confirm-button" (click)="logOutRoute()">Confirmar</button>
+   </ng-container>
+ </app-modal>

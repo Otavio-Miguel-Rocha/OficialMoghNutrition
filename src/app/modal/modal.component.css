@@ -11,61 +11,39 @@
   align-items: center;
 }
 
-.botaoFechar {
-  color: red;
-  font-size: 25px;
-  font-weight: bold;
-  cursor: pointer;
-  position: absolute;
-}
-
-.divBotaoFechar {
-  display: flex;
-  width: 100%;
-  justify-content: end;
-}
-
 .modal {
   position: absolute;
   background-color: #fff;
   width: 400px;
-  height: 250px;
+  height: 200px;
   padding: 20px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   text-align: center;
 }
-
-.modal h2 {
-  margin-top: 0;
+.logo-position{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.logo-mogh-icon{
+  width: 70px;
+  height: auto;
+}
+.div-body{
+  display: flex;
+  height: 30%;
+  width: 80%;
+  margin-top: 3%;
+  align-items: center;
+  flex-direction: column;
+  text-align: left;
 }
 
 .modal-buttons {
   margin-top: 20px;
 }
 
-.cancel-button {
-  background-color: #a10000;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  margin-right: 10px;
-}
-
-.confirm-button {
-  background-color: #1a4d2e;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-}
-
-.cancel-button:hover,
-.confirm-button:hover {
-  cursor: pointer;
-  opacity: 0.8;
-}

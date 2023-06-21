@@ -54,7 +54,6 @@ export class CadastroPacienteComponent implements OnInit {
   ngOnInit() {
     const validaUsuarioLogado: Nutricionista = JSON.parse(localStorage.getItem("nutricionistaLogado"));
     if(validaUsuarioLogado == null){
-      this.abrirModalAviso("ACESSO NEGADO", "Você deve estar logado para acessar essa página!");
       this.router.navigate(['/Menu-Inicial']);
     }
     let listaPacientes: Paciente[] = JSON.parse(localStorage.getItem('ListaPacientes'));
@@ -64,22 +63,22 @@ export class CadastroPacienteComponent implements OnInit {
     }
   }
 
-  //MODAL CONFIRMAÇÃO OU AVISO
-  aparecerModal:boolean = false;
-  tipoModal:boolean;
-  tituloModal:string;
-  conteudoModal:string;
+  //MODAL CONFIRMAÇÃO
+  aparecerModalConfirmarCadastroPaciente:boolean = false;
+  tituloConfirmacao:string;
+  dados:string[] = [];
 
   confirmarCadastro():void{
-    this.abrirModalConfirmacao("Deseja Cadastrar Paciente?", 
-    "Paciente: " + this.paciente.nomeCompleto +
-    "E-mail: " + this.paciente.email +
-    "Telefone: " + this.paciente.telefone +
-    "Data de Nascimento: " + this.paciente.dataNascimento
-    );
+    this.tituloConfirmacao = "Deseja Cadastrar Paciente?";
+    this.dados.push("Paciente: " + this.paciente.nomeCompleto);
+    this.dados.push("E-mail: " + this.paciente.email);
+    this.dados.push("Telefone: " + this.paciente.telefone);
+    this.dados.push("Data de Nascimento: " + this.paciente.dataNascimento);
+    this.aparecerModalConfirmarCadastroPaciente = true;
   }
-  fecharModalRegistrar():void{
-    this.aparecerModal = false;
+  fecharModalConfirmRegister():void{
+    this.dados = [];
+    this.aparecerModalConfirmarCadastroPaciente = false;
   }
 
   paciente : Paciente = {
@@ -97,7 +96,8 @@ export class CadastroPacienteComponent implements OnInit {
   }
 
   cadastrarPaciente() {
-    this.aparecerModal = false;
+    this.aparecerModalConfirmarCadastroPaciente = false;
+    this.dados = [];
     if(this.masculino == true) {
       this.paciente.sexo = 'Masculino';
     }
@@ -122,18 +122,6 @@ export class CadastroPacienteComponent implements OnInit {
     this.paciente.telefone = "";
     this.paciente.dataNascimento = "";
     this.listaPaciente();
-  }
-  abrirModalConfirmacao(titulo:string, conteudo:string):void{
-    this.aparecerModal = true;
-    this.tituloModal = titulo;
-    this.conteudoModal = conteudo;
-    this.tipoModal = false;
-  }
-  abrirModalAviso(titulo:string, conteudo:string):void{
-    this.aparecerModal = true;
-    this.tituloModal = titulo;
-    this.conteudoModal = conteudo;
-    this.tipoModal = true;
   }
   listaPaciente():void{
     this.router.navigate(['/Lista-Pacientes'])
