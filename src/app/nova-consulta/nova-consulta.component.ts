@@ -137,8 +137,10 @@ export class NovaConsultaComponent implements OnInit {
     }
     // CORRIGIR INCREMENTAR CONSULTA
     this.listaPacientes.forEach( (paciente) => {
-      if( paciente === this.pacienteNovaConsulta){
-        paciente.relatorios.push(novaConsulta)
+      if( paciente.nomeCompleto === this.pacienteNovaConsulta.nomeCompleto){
+        console.log('entrou');
+        paciente.relatorios.push(novaConsulta);
+        console.log(paciente.relatorios);
       }
     });
     console.log(this.listaPacientes);
