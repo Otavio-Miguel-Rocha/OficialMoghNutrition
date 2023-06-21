@@ -226,3 +226,11 @@ textarea#myTextarea {
     cursor: pointer;
     opacity: 0.8;
 }
+#div-data-consulta{
+    width: 30%;
+    height: 4vh;
+    display: flex;
+    flex-direction: row;
+    align-items: s;
+    justify-content: space-between;
+}

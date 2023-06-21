@@ -17,7 +17,7 @@
             </div>
 
             <input class="alturaInput" [(ngModel)]="consulta.altura" 
-            type="text" maxlength="3" placeholder="CM">
+            type="number" maxlength="3" placeholder="CM" >
           </div>
 
           <div class="inputs-com-texto">
@@ -26,8 +26,8 @@
               <p class="textosInputs">*Obrigatório</p>  
             </div>
             
-            <input class="pesoInput" [(ngModel)]="consulta.peso" type="text" 
-            maxlength="5" placeholder="KG">
+            <input class="pesoInput" [(ngModel)]="consulta.peso" type="number" 
+            maxlength="5" placeholder="KG" >
           </div>
 
           <div class="inputs-com-texto">
@@ -36,7 +36,7 @@
               <p class="textosInputs">*Obrigatório</p>  
             </div>
             
-            <input class="porcentagemGorduraInput" [(ngModel)]="consulta.porcentagemGordura"  type="text" 
+            <input class="porcentagemGorduraInput" [(ngModel)]="consulta.porcentagemGordura"  type="number" 
             maxlength="3" placeholder="%">
           </div>
 
@@ -46,7 +46,7 @@
               <p class="textosInputs">*Obrigatório</p>  
             </div>
 
-            <input class="taxaMetabolicaInput" [(ngModel)]="consulta.taxaMetabolicaBasal" type="text"
+            <input class="taxaMetabolicaInput" [(ngModel)]="consulta.taxaMetabolicaBasal" type="number"
             maxlength="5" placeholder="KCAL">
           </div>
          
@@ -60,7 +60,7 @@
               
             </div>
 
-            <input class="triglicerideosInput" [(ngModel)]="consulta.triglicerideos" type="text"
+            <input class="triglicerideosInput" [(ngModel)]="consulta.triglicerideos" type="number"
             maxlength="4" placeholder="mg / dL">
           </div>
           <div class="inputs-com-texto">
@@ -69,7 +69,7 @@
             
             </div>
 
-            <input class="diabetesInput" [(ngModel)]="consulta.diabetes" type="text"
+            <input class="diabetesInput" [(ngModel)]="consulta.diabetes" type="number"
             maxlength="3" placeholder="mg / dL">
           </div>
           <div class="inputs-com-texto">
@@ -78,7 +78,7 @@
               
             </div>
 
-            <input class="colesterolInput" [(ngModel)]="consulta.colesterol"  type="text"
+            <input class="colesterolInput" [(ngModel)]="consulta.colesterol"  type="number"
             maxlength="4" placeholder="mg / dL">
           </div>
         </div>
@@ -109,8 +109,13 @@
              
             </div>
             <div class="div-date">
-              <p id="texto-principal" style="margin-top: 15px;">Data da consulta</p>
-              <input [(ngModel)]="consulta.dataConsulta" type="date" class="dataInput">
+              <div id="div-data-consulta">
+                <p id="texto-principal">Data da consulta</p>
+              <p class="textosInputs">*Obrigatório</p>
+              
+              </div>
+              
+              <input [(ngModel)]="consulta.dataConsulta" type="date" class="dataInput" >
             </div>
            
             <div class="botoes">
