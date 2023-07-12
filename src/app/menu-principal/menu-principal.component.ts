@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
+// Implementação da interface Nutricionista
 interface Nutricionista {
   nomeCompleto : string,
   email : string,
@@ -8,7 +9,7 @@ interface Nutricionista {
   CRN : string,
   listaPacientes : Paciente[]
 }
-
+// Implementação da interface Paciente
 interface Paciente {
   nomeCompleto: string,
   email: string,
@@ -18,7 +19,7 @@ interface Paciente {
   mostrarModal:boolean,
   relatorios: Consulta[],
 }
-
+// Implementação da interface Consulta
 interface Consulta {
   altura: string,
   peso: string,
@@ -47,7 +48,9 @@ export class MenuPrincipalComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+    // Recebendo o usuário logado salvo no local  Storage
     const validaUsuarioLogado: Nutricionista = JSON.parse(localStorage.getItem("nutricionistaLogado"));
+    // Caso o valor recebido seja nulo será rediricionado para o menu principal
     if(validaUsuarioLogado == null){
       this.router.navigate(['/Menu-Inicial']);
     }
@@ -68,7 +71,7 @@ export class MenuPrincipalComponent implements OnInit {
     this.aparecerModalLogOut = false;
   }
 
-  //
+  // Rotas linkadas com as opções no HTML
   listaPacientesRoute () : void {
     this.router.navigate(['/Lista-Pacientes'])
   }

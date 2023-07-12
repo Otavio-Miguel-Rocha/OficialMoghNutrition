@@ -1,6 +1,12 @@
-<div id="BemVindo"><p id="border">Bem-vindo: {{nomeNutricionistaLogado}}</p></div>
+<!-- Div que contém a mensagem de boas vindas ao nutricionista logado -->
+<div id="BemVindo">
+  <p id="border">Bem-vindo: {{nomeNutricionistaLogado}}</p>
+</div>
+
+<!-- Div para centralizar a tela de Menu -->
 <div id="flex">
    
+ <!-- Tela de Menu, com três funções: lista de pacientes, cadastrar Paciente e logout -->
 <div id="telaMenu">
      
    <a class="opcao" (click)="listaPacientesRoute()">
@@ -14,6 +20,8 @@
    </a>
 </div>
 </div>
+
+<!-- Implementação do Modal  -->
 <app-modal *ngIf="aparecerModalLogOut">
    <ng-container title>
      <h2>Deseja Realmente Sair?</h2>

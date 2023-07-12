@@ -53,6 +53,7 @@ export class NovaConsultaComponent implements OnInit {
   listaNutricionistas: Nutricionista[] = [];
   pacienteNovaConsulta: Paciente;
   ngOnInit() {
+    // Pega os valores do local Storage
     const validaUsuarioLogado: Nutricionista = JSON.parse(localStorage.getItem("nutricionistaLogado"));
     if(validaUsuarioLogado == null){
       this.router.navigate(['/Menu-Inicial']);
@@ -66,11 +67,11 @@ export class NovaConsultaComponent implements OnInit {
       this.listaNutricionistas = listaNutricionistas;
     }
   }
-
+//Define a rota para Lista-Pacientes
   voltaListaPacientes() : void {
     this.router.navigate(['/Lista-Pacientes'])
   }
-
+// Define a variável consulta
   consulta : Consulta = {
     altura : null,
     peso : null,
@@ -85,7 +86,7 @@ export class NovaConsultaComponent implements OnInit {
     nomePaciente : null,
     imc: null
   }
-
+// Caso o cadastro seja cancelado volta para a tela Lista-Pacientes
   cancelarCadastro():void{
     this.voltaListaPacientes();
   }
@@ -117,7 +118,7 @@ export class NovaConsultaComponent implements OnInit {
     this.modalAvisoNovaConsulta = false;
 
   } 
-
+// Cadastra a nova consulta definindo os atributos das mesmas
   novaConsulta() : void {
     this.modalConfirmacaoNovaConsulta = false;
     const novaConsulta : Consulta = {
@@ -134,7 +135,7 @@ export class NovaConsultaComponent implements OnInit {
       nomePaciente: this.pacienteNovaConsulta.nomeCompleto,
       imc: ((parseFloat(this.consulta.peso)/Math.pow(parseFloat(this.consulta.altura),2))*10000).toFixed(2)
     }
-    // 
+    // Adiciona a consulta para o determinado paciente do nutricionista logado
     this.listaNutricionistas.forEach ( (nutricionista) => {
       if( nutricionista.CRN == this.nutricionistaLogado.CRN ){
         nutricionista.listaPacientes.forEach( (paciente) => {
@@ -147,9 +148,13 @@ export class NovaConsultaComponent implements OnInit {
         });
       }
     });
+
+    // Seta os valores modificados no local Storage
     localStorage.setItem("NutricionistasLista", JSON.stringify(this.listaNutricionistas));
     localStorage.setItem("nutricionistaLogado", JSON.stringify(this.nutricionistaLogado));
     localStorage.removeItem("PacienteNovaConsulta");
+
+    // Atribui os valores da consulta como nulo, para que assim caso for cadastrar uma nova consulta, não apareça os dados antigos
     this.consulta = {
       altura : null,
       peso : null,
@@ -164,6 +169,7 @@ export class NovaConsultaComponent implements OnInit {
       nomePaciente : null,
       imc: null
     }
+    // Redireciona para a rota Lista-Pacientes
     this.router.navigate(['/Lista-Pacientes'])
   }
 

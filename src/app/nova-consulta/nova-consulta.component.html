@@ -1,16 +1,21 @@
+<!-- Div para alinhar todo o conteúdo do componente -->
 <div class="conteiner">
-
+<!-- Div que estiliza o background -->
   <div class="fundo-da-novaConsulta">
+    <!-- Div que possui a estilização da parte superior da nova-consulta -->
     <div class="parte-superior">
       <img [src]="arrowBack" class="arrowBack" (click)="voltaListaPacientes()">
       <p id="texto-consulta">{{pacienteNovaConsulta.nomeCompleto}}</p>
     </div>
+    <!--Div para alinhar -->
     <div class="container-do-cadastro">
-
+        <!-- div para alinhar -->
       <div class="cadastro-da-novaConsulta">
-
+        <!-- Div que contém e organiza os inputs superiores -->
         <div class="container-inputs-superior">
+          <!-- Div que contém e organiza os inputs -->
           <div class="inputs-com-texto">
+            <!-- Estiliza os textos -->
             <div class="texto">
                <p id="texto-principal">Altura</p>
                <p class="textosInputs">*Obrigatório</p>  
@@ -128,6 +133,8 @@
       </div>
     </div>
   </div>
+
+  <!-- Implementação do modal -->
   <app-modal *ngIf="modalConfirmacaoNovaConsulta">
       <ng-container title>
         <h2>{{tituloConfirmacao}}</h2>

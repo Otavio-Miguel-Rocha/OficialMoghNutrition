@@ -28,6 +28,7 @@ export class NavegacaoComponent implements OnInit {
   
 
   ngOnInit() {
+    //  Função para filtrar apenas da instancia NavigationEnd
     this.router.events
       .pipe(filter((event: any) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
@@ -35,6 +36,7 @@ export class NavegacaoComponent implements OnInit {
           this.currentRoute = "Menu Inicial";
         }
         else{
+          // Customizar
           this.currentRoute = event.url;
           this.currentRoute = this.removeForwardSlash(this.currentRoute);
           this.currentRoute = this.removeForwardTrace(this.currentRoute);
@@ -44,14 +46,16 @@ export class NavegacaoComponent implements OnInit {
 
   usuarioLogado: Nutricionista = null;
 
+  // Função para remover '/'
   removeForwardSlash(nomePagina: string): string {
     return nomePagina.replace(/\//g, '');
   }
-
+// Função para remover '-'
   removeForwardTrace(nomePagina: string): string {
     return nomePagina.replace(/-/g, ' ');
   }
 
+  // Adiciona a rota para o Menu-Principal quando a logo na nav for clicada
   logoRouting():void {
     console.log(this.router);
     this.router.navigate(['/Menu-Principal'])

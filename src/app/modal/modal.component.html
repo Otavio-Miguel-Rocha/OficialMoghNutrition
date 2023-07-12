@@ -1,13 +1,20 @@
+<!-- Div que possui o desfoque da tela para que o modal tenha o foco principal -->
 <div class="modal-overlay">
+
+  <!-- Div que contém o background do modal -->
   <div class="modal">
+    <!-- Div para posicionar a logo na superior esquerdo do modal e o botão de fechar -->
     <div class="logo-position">
       <img [src]="logoMOGH" class="logo-mogh-icon">
       <ng-content class="botaoFechar"(click)="botaoFechar()" select="[close]"></ng-content>
     </div>
+    <!-- Recebe os valores, como: título, corpo do modal e o botão -->
     <ng-content select="[title]"></ng-content>
+    <!-- Div para posicionar o corpo modal -->
     <div class="div-body">
       <ng-content select="[body]"></ng-content>
     </div>
+    <!-- Div para posicionar o/os botão/botões -->
     <div class="modal-buttons">
       <ng-content select="[buttons]"></ng-content>
     </div>

@@ -7,16 +7,18 @@ import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 })
 export class ModalComponent implements OnInit {
   
-
+// Recebe um valor boolean
   @Input()
   tipoModal:boolean;
-  
+  // Exporta um evento de confirmar
   @Output() 
   confirmar = new EventEmitter();
-  
+  //  Exporta um evento de fechar
   @Output() 
   fechar = new EventEmitter();
   
+
+  // Funções de confirmar e fechar
   botaoConfirmar(): void {
     this.confirmar.emit();
   }
