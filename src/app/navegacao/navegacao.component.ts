@@ -1,13 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
-
-interface Nutricionista{
-  CRN: string,
-  email: string,
-  nomeCompleto: string,
-  senha: string,
-}
+import { Nutricionista } from 'src/app/interfaces/nutricionista';
 
 @Component({
   selector: 'app-navegacao',

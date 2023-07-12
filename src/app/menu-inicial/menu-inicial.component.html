@@ -1,6 +1,6 @@
 <section id="section-menu-inicial">
   <div id="grid-login-register">
-    <!-- login-square -->
+    <!-- login box -->
     <div class="square-lightgreen" *ngIf="!loginERegisterView">
       <h2>Bem-Vindo</h2>
       <div id="label-inputs-position" class="flex-direction-column">
@@ -17,22 +17,22 @@
       </div>
       <button class="buttons" (click)="verificacaoLogin()">Entrar</button>
     </div>
-    <!--  -->
-    <!-- register-button-square -->
+
+    <!-- redireção para ao registro -->
     <div class="div-other-option flex-direction-column" *ngIf="!loginERegisterView">
       <button class="buttons" (click)="trocaTelaRegistro()">
         Registrar-se
       </button>
       <h4 class="mensagens-indicativas">Não possui conta?</h4>
     </div>
-    <!--  -->
-    <!-- login-button-square -->
+
+    <!-- redireção para o login -->
     <div class="div-other-option flex-direction-column" *ngIf="loginERegisterView">
       <button class="buttons" (click)="trocaTelaLogin()">Entrar</button>
       <h4 class="mensagens-indicativas">Já possui conta?</h4>
     </div>
-    <!--  -->
-    <!-- register-square -->
+
+    <!-- caixa de registro -->
     <div class="square-lightgreen" *ngIf="loginERegisterView">
       <h2>Faça seu Cadastro</h2>
       <div class="label-inputs-register flex-direction-column">
@@ -73,7 +73,7 @@
     </ng-container>
   </app-modal>
 
-  <!-- MODAL AVISO -->
+  <!-- Modal aviso -->
   <app-modal *ngIf="aparecerModalAvisoRegister">
     <ng-container close>
       <p style="cursor: pointer;" (click)="fecharModalAvisoRegister()">&#10060;</p>

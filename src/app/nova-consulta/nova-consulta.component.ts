@@ -1,40 +1,9 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-interface Nutricionista {
-  nomeCompleto : string,
-  email : string,
-  senha : string,
-  CRN : string,
-  listaPacientes: Paciente[];
-}
-
-interface Paciente {
-  nomeCompleto: string,
-  email: string,
-  telefone: string,
-  sexo: string,
-  dataNascimento: string,
-  mostrarModal:boolean,
-  relatorios: Consulta[],
-}
-
-interface Consulta {
-  altura: string,
-  peso: string,
-  porcentagemGordura: string,
-  taxaMetabolicaBasal: string,
-  triglicerideos: string,
-  diabetes: string,
-  colesterol: string,
-  autofeedback : string,
-  objetivoConsulta : string,
-  dataConsulta : string,
-  nomePaciente : string,
-  imc: string,
-
-}
+import { Nutricionista } from 'src/app/interfaces/nutricionista';
+import { Consulta } from 'src/app/interfaces/consulta';
+import { Paciente } from 'src/app/interfaces/paciente'
 
 @Component({
   selector: 'app-nova-consulta',
@@ -132,7 +101,7 @@ export class NovaConsultaComponent implements OnInit {
       objetivoConsulta: this.consulta.objetivoConsulta,
       dataConsulta: this.consulta.dataConsulta,
       nomePaciente: this.pacienteNovaConsulta.nomeCompleto,
-      imc: ((parseFloat(this.consulta.peso)/Math.pow(parseFloat(this.consulta.altura),2))*10000).toFixed(2)
+      imc: (((this.consulta.peso)/Math.pow((this.consulta.altura),2))*10000).toFixed(2)
     }
     // 
     this.listaNutricionistas.forEach ( (nutricionista) => {

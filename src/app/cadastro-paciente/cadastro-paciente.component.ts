@@ -1,36 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Nutricionista } from 'src/app/interfaces/nutricionista';
+import { Consulta } from 'src/app/interfaces/consulta';
+import { Paciente } from 'src/app/interfaces/paciente'
 
-interface Nutricionista {
-  nomeCompleto : string,
-  email : string,
-  senha : string,
-  CRN : string,
-  listaPacientes : Paciente[]
-}
-
-interface Paciente {
-  nomeCompleto: string,
-  email: string,
-  telefone: string,
-  sexo: string,
-  dataNascimento: string,
-  mostrarModal:boolean,
-  relatorios: Consulta[],
-}
-interface Consulta {
-  altura: number,
-  peso: number,
-  porcentagemGordura: number,
-  taxaMetabolicaBasal: number,
-  triglicerideos: number,
-  diabetes: string,
-  colesterol: string,
-  autofeedback : string,
-  objetivoConsulta : string,
-  dataConsulta : string,
-  nomePaciente : string
-}
 
 @Component({
   selector: 'app-cadastro-paciente',
@@ -81,12 +54,13 @@ export class CadastroPacienteComponent implements OnInit {
   }
   } 
 
-
+  // Construtor que atribui as imagens a variaveis
   constructor(private router: Router) { 
     this.userIcon = '/assets/img/userImg.png';
     this.arrowBack = '/assets/img/arrowBack.png';
   }
 
+  // NgOnInit utilizado para validação de usuário
   ngOnInit() {
     const validaUsuarioLogado: Nutricionista = JSON.parse(localStorage.getItem("nutricionistaLogado"));
     if(validaUsuarioLogado == null){
@@ -105,7 +79,7 @@ export class CadastroPacienteComponent implements OnInit {
     }
   }
 
-  //MODAL CONFIRMAÇÃO
+  //Modal confirmação
   aparecerModalConfirmarCadastroPaciente:boolean = false;
   tituloConfirmacao:string;
   dados:string[] = [];
@@ -136,6 +110,8 @@ export class CadastroPacienteComponent implements OnInit {
     this.aparecerModalAvisoCadastro = false;
   }
 
+
+  // Criação de objeto para atribuições de valores NgModel
   paciente : Paciente = {
     nomeCompleto : "",
     email : "",
@@ -146,10 +122,13 @@ export class CadastroPacienteComponent implements OnInit {
     relatorios: [],
   }
   
+  // Função de navegação entre as rotas
   voltarMenuPrincipal() : void {
     this.router.navigate(['/Menu-Principal'])
   }
 
+
+  // Função para criação de paciente e atribuição do mesmo ao localStorage
   cadastrarPaciente() {
     this.aparecerModalConfirmarCadastroPaciente = false;
     this.dados = [];
@@ -177,9 +156,6 @@ export class CadastroPacienteComponent implements OnInit {
       });
       localStorage.setItem("nutricionistaLogado", JSON.stringify(this.nutricionistaLogado))
       localStorage.setItem('NutricionistasLista', JSON.stringify(this.nutricionistasLista));
-      
-      // this.listaPacientes.push(novoPaciente);  
-      // localStorage.setItem('ListaPacientes', JSON.stringify(this.listaPacientes)); 
   
       this.paciente.nomeCompleto = "";
       this.paciente.email = "";
@@ -188,6 +164,8 @@ export class CadastroPacienteComponent implements OnInit {
       this.paciente.dataNascimento = "";
       this.listaPaciente();  
   }
+
+  // Função de navegação entre as rotas
   listaPaciente():void{
     this.router.navigate(['/Lista-Pacientes'])
   }

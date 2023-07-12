@@ -1,38 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-
-interface Nutricionista {
-  nomeCompleto : string,
-  email : string,
-  senha : string,
-  CRN : string,
-  listaPacientes : Paciente[]
-}
-
-interface Paciente {
-  nomeCompleto: string,
-  email: string,
-  telefone: string,
-  sexo: string,
-  dataNascimento: string,
-  mostrarModal:boolean,
-  relatorios: Consulta[],
-}
-
-interface Consulta {
-  altura: string,
-  peso: string,
-  porcentagemGordura: string,
-  taxaMetabolicaBasal: string,
-  triglicerideos: string,
-  diabetes: string,
-  colesterol: string,
-  autofeedback : string,
-  objetivoConsulta : string,
-  dataConsulta : string,
-  nomePaciente : string,
-  imc: string,
-}
+import { Nutricionista } from 'src/app/interfaces/nutricionista';
+import { Consulta } from 'src/app/interfaces/consulta';
+import { Paciente } from 'src/app/interfaces/paciente'
 
 @Component({
   selector: 'app-menu-principal',

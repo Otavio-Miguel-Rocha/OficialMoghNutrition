@@ -1,11 +1,16 @@
+<!-- Div geral da página -->
 <div class="divPrincipal">
+  <!-- Div da caixa de cadastro -->
   <div class="divBoxCadastroPaciente">
+    <!-- Div de retorno da caixa de cadastro -->
     <div class="boxTitle">
       <img [src]="arrowBack" class="arrowBackIcon" (click)="voltarMenuPrincipal()">
       <h1 class="title">Novo Paciente</h1>
     </div>
+    <!-- Div de conteúdo principal da caixa de cadastro -->
     <div class="divSubBox">
       <div class="divCadastro">
+        <!-- Div onde serão inseridos os dados do paciente -->
         <div class="ladoEsquerdo">
           <p class="inputsName">Nome Completo :</p>
           <input class="inputsText" type="text" [(ngModel)]="paciente.nomeCompleto">
@@ -21,6 +26,7 @@
           <p class="inputsName">Data de Nascimento :</p>
           <input class="inputDate" type="date" [(ngModel)]="paciente.dataNascimento">
         </div>
+        <!-- Div onde será realizada a finalização do cadastro -->
         <div class="ladoDireito">
           <img [src]="userIcon" class="userIcon">
           <button class="cadastrarBtn" (click)="confirmarCadastro()">Cadastrar</button>
@@ -28,6 +34,7 @@
       </div>
     </div>
   </div>
+  <!-- Component modal de confirmação -->
   <app-modal *ngIf="aparecerModalConfirmarCadastroPaciente">
     <ng-container title>
       <h2>{{tituloConfirmacao}}</h2>
@@ -41,7 +48,7 @@
     </ng-container>
   </app-modal>
 
-    <!-- MODAL AVISO -->
+    <!-- Component modal de aviso -->
     <app-modal *ngIf="aparecerModalAvisoCadastro">
       <ng-container close>
         <p style="cursor: pointer;" (click)="fecharModalConfirmRegister()">&#10060;</p>

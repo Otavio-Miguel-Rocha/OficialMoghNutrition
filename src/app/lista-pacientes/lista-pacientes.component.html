@@ -1,17 +1,16 @@
 <div class="mainContainer">
 <section id="section-pacient-list">
-  <!-- ngfor paciente of pacientes -->
+  <!-- Div modal verficacao de pacientes -->
   <div class="modalVerificacao" *ngIf="!verificaListaPacientes()">
     <h1 class="modalTitle">Nenhum paciente cadastrado!</h1>
     <h2 class="modalSubtitle">Clique abaixo para cadastrar um paciente!</h2>
     <div class="divBtns">
-      <!-- <a class="backCadastrar">Cadastrar um paciente</a> -->
       <a class="backCadastrar" routerLink="/Cadastro-Paciente">Cadastro Paciente</a>
     </div>
   </div>  
 
+  <!-- Div de informações básicas de paciente  -->
   <div class="center-square" *ngFor="let paciente of ngForPacientes()">
-    
     <div class="pacient-square">
       <div class="div-pacient-square"><h1>Nome: {{paciente.nomeCompleto}}</h1></div>
       <div class="div-pacient-square"><h1>E-mail: {{paciente.email}}</h1></div>
@@ -53,11 +52,13 @@
       </div>
     </div>
     </div>
+    <!-- Div relatorio do paciente -->
       <div class="center-square-relatorio" *ngIf="modalRelatorio">
         <div class="boxTitle">
           <a (click)="voltarListaPacientes()"><img [src]="arrowBack" class="arrowBackIcon"></a>
           <h2 id="tittle-relatorio">Relatórios de {{pacienteRelatorio.nomeCompleto}}</h2>
         </div>
+        <!-- Div com ngFor para repertir as consultas dentro do relatório do paciente -->
         <div class="relatorios" *ngFor="let consulta of pacienteRelatorio.relatorios">
           <div class="relatorio">
             <div class="divs-grid-relatorio">
@@ -83,16 +84,16 @@
             </div>
           </div>
         </div>
+        <!-- Modal caso não haja nenhum relatório cadastrado -->
         <div class="modalVerificacao" *ngIf="modalAvisoListaVaziaRelatorio">
           <h1 class="modalTitle">Nenhum relatório registrado!</h1>
           <h2 class="modalSubtitle">Clique abaixo para cadastrar uma Nova Consulta!</h2>
           <div class="divBtns">
-            <!-- <a class="backCadastrar">Cadastrar um paciente</a> -->
             <a class="backCadastrar" (click)="abrirNovaConsulta(pacienteRelatorio)">Nova Consulta</a>
           </div>
         </div>    
-        <!-- NGFOR -->
     </div>
+    <!-- Modal de confirmação -->
     <app-modal *ngIf="aparecerModalConfirmarRemocao">
       <ng-container title>
         <h2>{{tituloConfirmacao}}</h2>
@@ -106,7 +107,7 @@
       </ng-container>
     </app-modal>
 
-  <!-- MODAL AVISO -->
+  <!-- Modal aviso -->
     <app-modal *ngIf="aparecerModalInformacao">
       <ng-container close>
         <p style="cursor: pointer;" (click)="fecharModalInformacao()">&#10060;</p>

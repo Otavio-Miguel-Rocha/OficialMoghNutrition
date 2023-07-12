@@ -1,39 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-
-interface Nutricionista {
-  nomeCompleto : string,
-  email : string,
-  senha : string,
-  CRN : string,
-  listaPacientes: Paciente[];
-}
-
-interface Paciente {
-  nomeCompleto: string,
-  email: string,
-  telefone: string,
-  sexo: string,
-  dataNascimento: string,
-  mostrarModal:boolean,
-  relatorios: Consulta[],
-}
-
-interface Consulta {
-  altura: number,
-  peso: number,
-  porcentagemGordura: number,
-  taxaMetabolicaBasal: number,
-  triglicerideos: number,
-  diabetes: string,
-  colesterol: string,
-  autofeedback : string,
-  objetivoConsulta : string,
-  dataConsulta : string,
-  nomePaciente : string,
-  imc: string,
-
-}
+import { Nutricionista } from 'src/app/interfaces/nutricionista';
+import { Consulta } from 'src/app/interfaces/consulta';
+import { Paciente } from 'src/app/interfaces/paciente'
 
 @Component({
   selector: "app-lista-pacientes",
@@ -42,7 +11,7 @@ interface Consulta {
 })
 export class ListaPacientesComponent implements OnInit {
 
-  //IMAGENS
+  //Imagens
   upArrowIcon: string;
   downArrowIcon: string;
   arrowBack:string;
@@ -51,12 +20,14 @@ export class ListaPacientesComponent implements OnInit {
 
   listaConsultas: Consulta[] = [];
 
+  //Atribuindo as imagens a variaveis
   constructor(private router: Router) {
     this.upArrowIcon = "/assets/img/arrowClosedModal.png";
     this.downArrowIcon = "/assets/img/arrowOpenModal.png";
     this.arrowBack = '/assets/img/arrowBack.png'
   }
   listaNutricionistas:Nutricionista[];
+  //Verificação de usuário
   ngOnInit() {
     const validaUsuarioLogado: Nutricionista = JSON.parse(localStorage.getItem("nutricionistaLogado"));
     if(validaUsuarioLogado == null){
@@ -69,7 +40,7 @@ export class ListaPacientesComponent implements OnInit {
       this.listaNutricionistas = listaNutricionistas;
     }
   }
-
+  //Objeto de nutricionista logado para futuras verificações ao mesmo
   nutricionistaLogado: Nutricionista;
   paciente : Paciente = {
     nomeCompleto : "",
@@ -82,16 +53,16 @@ export class ListaPacientesComponent implements OnInit {
   }
 
 
+  // Lógica modais
   openModal(paciente:Paciente): void {
     paciente.mostrarModal = true;
   }
   closeModal(paciente:Paciente): void {
     paciente.mostrarModal = false;
   }
-  //
 
 
-  //RELATÓRIO INDIVIDUAL
+  //Relatório individual
   pacienteRelatorio: Paciente;
   modalRelatorio: boolean = false;
   modalAvisoListaVaziaRelatorio:boolean = false;
@@ -110,7 +81,7 @@ export class ListaPacientesComponent implements OnInit {
   //
 
 
-  //MODAL CONFIRMAÇÃO
+  //Modal Confirmação
   aparecerModalConfirmarRemocao:boolean = false;
   tituloConfirmacao:string;
   mensagemConfirmacao:string;
@@ -124,7 +95,8 @@ export class ListaPacientesComponent implements OnInit {
   fecharModalRemocao():void{
     this.aparecerModalConfirmarRemocao = false;
   }
-  //REMOVER PACIENTE
+
+  //Remover paciente
   removerPaciente():void{
     this.aparecerModalConfirmarRemocao = false;
     this.listaNutricionistas.forEach( (nutricionista) => {
@@ -137,8 +109,7 @@ export class ListaPacientesComponent implements OnInit {
     localStorage.setItem("nutricionistaLogado", JSON.stringify(this.nutricionistaLogado));
   }
 
-  //
-
+  //Lógica de rotas
   abrirNovaConsulta (paciente:Paciente) : void {
     localStorage.setItem("PacienteNovaConsulta", JSON.stringify(paciente));
     this.router.navigate(['/Nova-Consulta'])
@@ -147,6 +118,7 @@ export class ListaPacientesComponent implements OnInit {
   aparecerModalInformacao: boolean = false;
   tipoDadoInformacao:string;
   textoModalInformacao:string;
+  //Modais de informação e confirmação
   abrirModalInformacaoAutoFeedback(informacao:string):void{
     this.tipoDadoInformacao = "Auto Feedback";
     this.textoModalInformacao = informacao;
@@ -161,6 +133,7 @@ export class ListaPacientesComponent implements OnInit {
     this.aparecerModalInformacao = false;
   }
 
+  //Lógica ngFor com ngIf
   ngForPacientes() : Paciente[] {
     let listaVazia : Paciente[] = [];
     if(this.modalRelatorio == true) {
@@ -171,6 +144,7 @@ export class ListaPacientesComponent implements OnInit {
     }
   }
 
+  //Lógica de verificação da lista de pacientes
   verificaListaPacientes() : boolean {
     if(this.nutricionistaLogado.listaPacientes.length == 0) {
       return false;

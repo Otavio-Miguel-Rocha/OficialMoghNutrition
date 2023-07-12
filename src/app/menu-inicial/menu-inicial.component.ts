@@ -1,39 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
-
-interface Nutricionista {
-  nomeCompleto : string,
-  email : string,
-  senha : string,
-  CRN : string;
-  listaPacientes : Paciente[];
-}
-
-interface Paciente {
-  nomeCompleto: string,
-  email: string,
-  telefone: string,
-  sexo: string,
-  dataNascimento: string,
-  mostrarModal:boolean,
-  relatorios: Consulta[],
-}
-
-interface Consulta {
-  altura: string,
-  peso: string,
-  porcentagemGordura: string,
-  taxaMetabolicaBasal: string,
-  triglicerideos: string,
-  diabetes: string,
-  colesterol: string,
-  autofeedback : string,
-  objetivoConsulta : string,
-  dataConsulta : string,
-  nomePaciente : string,
-  imc: string,
-}
-
+import { Nutricionista } from 'src/app/interfaces/nutricionista';
+import { Consulta } from 'src/app/interfaces/consulta';
+import { Paciente } from 'src/app/interfaces/paciente'
 
 @Component({
   selector: "app-menu-inicial",
@@ -51,6 +20,7 @@ export class MenuInicialComponent implements OnInit {
   senha: string;
   CRN: string;
 
+  //Verificação da lista no localStorage
   ngOnInit() {
     let listaNutricionistas = JSON.parse(localStorage.getItem("NutricionistasLista"));
     if( listaNutricionistas != null ){
@@ -58,7 +28,7 @@ export class MenuInicialComponent implements OnInit {
     }
   }
 
-  //LOGIN E REGISTER
+  //Login e registro
   loginERegisterView: boolean = false;
 
   trocaTelaLogin(): void {
@@ -74,12 +44,12 @@ export class MenuInicialComponent implements OnInit {
     this.loginSenha="";
   }
 
-    //MODAL CONFIRMAÇÃO
+    //Modal confirmação
     aparecerModalConfirmarRegister:boolean = false;
     tituloConfirmacao:string;
     dados:string[] = [];
 
-    //MODAL AVISO
+    //Modal aviso
     aparecerModalAvisoRegister:boolean = false;
     tituloErro:string;
     erro:string;
@@ -120,7 +90,7 @@ export class MenuInicialComponent implements OnInit {
   }
 
 
-  //CONFIRMAR
+  //Confirmar Cadastro
   confirmarRegister():void{
     this.aparecerModalConfirmarRegister = false;
     this.dados = [];
@@ -151,7 +121,7 @@ export class MenuInicialComponent implements OnInit {
     }
     this.loginERegisterView = false;
   }
-  // LOGIN
+  // Verificação e redireção do login
   loginCRN:string;
   loginSenha:string;
   verificacaoLogin():void {
@@ -167,15 +137,15 @@ export class MenuInicialComponent implements OnInit {
             localStorage.setItem("nutricionistaLogado", JSON.stringify(nutricionistaFor));
             this.router.navigate(['/Menu-Principal'])
           }else{
-            this.tituloErro = "Senha Incorreta";
+            this.tituloErro = "CRN ou Senha Incorretos";
             this.erro = "Por favor insira novamente";
             this.aparecerModalAvisoRegister = true;
           }
         }
     });
     if(!verificarCRNExistente){
-      this.tituloErro = "CRN Inválido";
-      this.erro = "O CRN pode não existir ou estar incorreto.";
+      this.tituloErro = "CRN ou Senha Incorretos";
+      this.erro = "Por favor insira novamente";
       this.aparecerModalAvisoRegister = true;
     }
     this.loginCRN = "";
@@ -183,27 +153,24 @@ export class MenuInicialComponent implements OnInit {
   }
   }
 
+  //Verificação de formato da CRN
   verificarFormatoCRNModal():void{
     this.tituloErro = "Formato de CRN Inválido";
     this.erro = "Formato correto: XX-XXXX";
     this.aparecerModalAvisoRegister = true;
   }
-
-
-
-
   verificarFormatoCRN(crn: string): boolean {
     const formatoCRN = /^\d{2}-\d{4}$/;
     return formatoCRN.test(crn);
   }
 
+  //Formatador de CRN no Login e no Registro
   formatarCRNLogin():void{
     this.loginCRN = this.formatarCRN(this.loginCRN);
   }
   formatarCRNRegistro():void{
     this.nutricionista.CRN = this.formatarCRN(this.nutricionista.CRN);
   }
-
   formatarCRN(crn:string):string {
     const apenasDigitos = crn.replace(/\D/g, '');
     return apenasDigitos.replace(/(\d{2})(\d{0,4})/, '$1-$2'); 
