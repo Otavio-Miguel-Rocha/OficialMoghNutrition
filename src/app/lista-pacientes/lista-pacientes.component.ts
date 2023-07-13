@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { Nutricionista } from 'src/app/interfaces/nutricionista';
 import { Consulta } from 'src/app/interfaces/consulta';
 import { Paciente } from 'src/app/interfaces/paciente'
+import { NutricionistaService } from "src/services/user.service";
 
 @Component({
   selector: "app-lista-pacientes",
@@ -21,7 +22,10 @@ export class ListaPacientesComponent implements OnInit {
   listaConsultas: Consulta[] = [];
 
   //Atribuindo as imagens a variaveis
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private nutricionistaService: NutricionistaService
+    ) {
     this.upArrowIcon = "/assets/img/arrowClosedModal.png";
     this.downArrowIcon = "/assets/img/arrowOpenModal.png";
     this.arrowBack = '/assets/img/arrowBack.png'
@@ -29,12 +33,9 @@ export class ListaPacientesComponent implements OnInit {
   listaNutricionistas:Nutricionista[];
   //Verificação de usuário
   ngOnInit() {
-    const validaUsuarioLogado: Nutricionista = JSON.parse(localStorage.getItem("nutricionistaLogado"));
-    if(validaUsuarioLogado == null){
-      this.router.navigate(['/Menu-Inicial']);
-    } else{
-      this.nutricionistaLogado = validaUsuarioLogado;
-    }
+
+    this.nutricionistaLogado = this.nutricionistaService.getLoggedUser();
+
     let listaNutricionistas: Nutricionista[] = JSON.parse(localStorage.getItem("NutricionistasLista"));
     if( listaNutricionistas != null ) {
       this.listaNutricionistas = listaNutricionistas;
@@ -106,7 +107,7 @@ export class ListaPacientesComponent implements OnInit {
       }
     });
     localStorage.setItem("NutricionistasLista", JSON.stringify(this.listaNutricionistas));
-    localStorage.setItem("nutricionistaLogado", JSON.stringify(this.nutricionistaLogado));
+    this.nutricionistaService.setNutricionistaLogado(this.nutricionistaLogado);
   }
 
   //Lógica de rotas

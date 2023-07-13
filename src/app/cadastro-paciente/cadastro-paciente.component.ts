@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Nutricionista } from 'src/app/interfaces/nutricionista';
-import { Consulta } from 'src/app/interfaces/consulta';
 import { Paciente } from 'src/app/interfaces/paciente'
+import { NutricionistaService } from 'src/services/user.service';
 
 
 @Component({
@@ -26,48 +26,21 @@ export class CadastroPacienteComponent implements OnInit {
   nutricionistaLogado:Nutricionista;
   nutricionistasLista: Nutricionista[] = [];
 
-  //Lógica para o checkbox do cadastro
-  clickDisable (value:string){
-    if(value=="masculino"){
-      console.log(this.masculino)
-      this.disableMasculino = true;
-      this.disableFeminino = false;
-      if(this.masculino==true){
-        this.masculino=false;
-        this.feminino=false;
-      }else{
-        this.masculino=true;
-        this.feminino=false;
-      }
-      
-    }else if(value=="feminino"){
-      console.log(this.feminino)
-      this.disableMasculino = false;
-      this.disableFeminino = true;
-      if(this.feminino==true){
-        this.masculino=false;
-        this.feminino=false;
-      }else{
-        this.masculino=false;
-        this.feminino=true;
-      }
-  }
-  } 
+
 
   // Construtor que atribui as imagens a variaveis
-  constructor(private router: Router) { 
+  constructor(
+    private router: Router,
+    private nutricionistaService: NutricionistaService) { 
     this.userIcon = '/assets/img/userImg.png';
     this.arrowBack = '/assets/img/arrowBack.png';
   }
 
   // NgOnInit utilizado para validação de usuário
   ngOnInit() {
-    const validaUsuarioLogado: Nutricionista = JSON.parse(localStorage.getItem("nutricionistaLogado"));
-    if(validaUsuarioLogado == null){
-      this.router.navigate(['/Menu-Inicial']);
-    } else {
-      this.nutricionistaLogado = validaUsuarioLogado;
-    }
+
+      this.nutricionistaLogado = this.nutricionistaService.getLoggedUser();
+
     let listaPacientes: Paciente[] = JSON.parse(localStorage.getItem('ListaPacientes'));
     if( listaPacientes != null){
       this.listaPacientes = listaPacientes;
@@ -127,6 +100,34 @@ export class CadastroPacienteComponent implements OnInit {
     this.router.navigate(['/Menu-Principal'])
   }
 
+    //Lógica para o checkbox do cadastro
+    clickDisable (value:string){
+      if(value=="masculino"){
+        console.log(this.masculino)
+        this.disableMasculino = true;
+        this.disableFeminino = false;
+        if(this.masculino==true){
+          this.masculino=false;
+          this.feminino=false;
+        }else{
+          this.masculino=true;
+          this.feminino=false;
+        }
+        
+      }else if(value=="feminino"){
+        console.log(this.feminino)
+        this.disableMasculino = false;
+        this.disableFeminino = true;
+        if(this.feminino==true){
+          this.masculino=false;
+          this.feminino=false;
+        }else{
+          this.masculino=false;
+          this.feminino=true;
+        }
+    }
+    } 
+
 
   // Função para criação de paciente e atribuição do mesmo ao localStorage
   cadastrarPaciente() {
@@ -154,7 +155,7 @@ export class CadastroPacienteComponent implements OnInit {
           this.nutricionistaLogado.listaPacientes.push(novoPaciente);
         }
       });
-      localStorage.setItem("nutricionistaLogado", JSON.stringify(this.nutricionistaLogado))
+      this.nutricionistaService.setNutricionistaLogado(this.nutricionistaLogado);
       localStorage.setItem('NutricionistasLista', JSON.stringify(this.nutricionistasLista));
   
       this.paciente.nomeCompleto = "";

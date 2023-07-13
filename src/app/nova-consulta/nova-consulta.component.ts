@@ -22,14 +22,7 @@ export class NovaConsultaComponent implements OnInit {
   listaNutricionistas: Nutricionista[] = [];
   pacienteNovaConsulta: Paciente;
   ngOnInit() {
-    const validaUsuarioLogado: Nutricionista = JSON.parse(localStorage.getItem("nutricionistaLogado"));
-    if(validaUsuarioLogado == null){
-      this.router.navigate(['/Menu-Inicial']);
-    }
-    else{
-      this.nutricionistaLogado = validaUsuarioLogado;
-      this.pacienteNovaConsulta = JSON.parse(localStorage.getItem("PacienteNovaConsulta"));
-    }
+    this.pacienteNovaConsulta = JSON.parse(localStorage.getItem("PacienteNovaConsulta"));
     let listaNutricionistas: Nutricionista[] = JSON.parse(localStorage.getItem("NutricionistasLista"));
     if( listaNutricionistas != null ) {
       this.listaNutricionistas = listaNutricionistas;

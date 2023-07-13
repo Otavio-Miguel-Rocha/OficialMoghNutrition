@@ -3,6 +3,7 @@ import { Router, RouterLink } from "@angular/router";
 import { Nutricionista } from 'src/app/interfaces/nutricionista';
 import { Consulta } from 'src/app/interfaces/consulta';
 import { Paciente } from 'src/app/interfaces/paciente'
+import { NutricionistaService } from "src/services/user.service";
 
 @Component({
   selector: "app-menu-inicial",
@@ -11,7 +12,10 @@ import { Paciente } from 'src/app/interfaces/paciente'
 })
 export class MenuInicialComponent implements OnInit {
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private nutricionistaService: NutricionistaService
+    ) {}
 
   nutricionistasLista : Nutricionista[] = [];
 
@@ -22,6 +26,9 @@ export class MenuInicialComponent implements OnInit {
 
   //Verificação da lista no localStorage
   ngOnInit() {
+    if(this.nutricionistaService.getLoggedUser()){
+      this.router.navigate(['/Menu-Principal']);
+    }
     let listaNutricionistas = JSON.parse(localStorage.getItem("NutricionistasLista"));
     if( listaNutricionistas != null ){
       this.nutricionistasLista = listaNutricionistas;
@@ -134,7 +141,7 @@ export class MenuInicialComponent implements OnInit {
         if(nutricionistaFor.CRN == this.loginCRN) {
           verificarCRNExistente = true;
           if(nutricionistaFor.senha == this.loginSenha) {
-            localStorage.setItem("nutricionistaLogado", JSON.stringify(nutricionistaFor));
+            this.nutricionistaService.setNutricionistaLogado(nutricionistaFor);
             this.router.navigate(['/Menu-Principal'])
           }else{
             this.tituloErro = "CRN ou Senha Incorretos";
