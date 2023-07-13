@@ -109,7 +109,7 @@ export class MenuInicialComponent implements OnInit {
         listaPacientes: []
       }
       this.nutricionistasLista.push(novoNutricionista);
-      localStorage.setItem('NutricionistasLista', JSON.stringify(this.nutricionistasLista));
+      localStorage.setItem('NutricionistasLista', JSON.stringify(this.embaralhamentoLista(JSON.stringify(this.nutricionistasLista))));
       this.nutricionista.nomeCompleto = "";
       this.nutricionista.email = "";
       this.nutricionista.senha = "";
@@ -121,6 +121,23 @@ export class MenuInicialComponent implements OnInit {
     }
     this.loginERegisterView = false;
   }
+
+  embaralhamentoLista(nutricionistasListaString: string): String {
+    const arrayCaracteres = nutricionistasListaString.split('');
+
+  // Embaralha a array de caracteres usando o algoritmo de Fisher-Yates
+  for (let i = arrayCaracteres.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arrayCaracteres[i], arrayCaracteres[j]] = [arrayCaracteres[j], arrayCaracteres[i]];
+  }
+
+  // Junta os caracteres embaralhados de volta em uma string
+  const stringEmbaralhada = arrayCaracteres.join('');
+    
+  return stringEmbaralhada;
+  }
+
+
   // Verificação e redireção do login
   loginCRN:string;
   loginSenha:string;

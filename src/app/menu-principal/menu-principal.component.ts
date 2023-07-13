@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Nutricionista } from 'src/app/interfaces/nutricionista';
 import { Consulta } from 'src/app/interfaces/consulta';
-import { Paciente } from 'src/app/interfaces/paciente'
+import { Paciente } from 'src/app/interfaces/paciente';
 
 @Component({
   selector: 'app-menu-principal',
