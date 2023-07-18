@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Nutricionista } from 'src/app/interfaces/nutricionista';
 import { Consulta } from 'src/app/interfaces/consulta';
 import { Paciente } from 'src/app/interfaces/paciente';
+import { NutricionistaService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-menu-principal',
@@ -14,16 +15,13 @@ export class MenuPrincipalComponent implements OnInit {
   @Output()
   informarLogOut = new EventEmitter();
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private nutricionistaService: NutricionistaService
+    ) { }
 
   ngOnInit() {
-    const validaUsuarioLogado: Nutricionista = JSON.parse(localStorage.getItem("nutricionistaLogado"));
-    if(validaUsuarioLogado == null){
-      this.router.navigate(['/Menu-Inicial']);
-    }
-    else{
-      this.nomeNutricionistaLogado = validaUsuarioLogado.nomeCompleto;
-    }
+    this.nomeNutricionistaLogado = this.nutricionistaService.getLoggedUser().nomeCompleto;
   }
 
   nomeNutricionistaLogado: string;
@@ -46,7 +44,7 @@ export class MenuPrincipalComponent implements OnInit {
     this.router.navigate(['/Cadastro-Paciente'])
   }
   logOutRoute() : void {
-    localStorage.removeItem("nutricionistaLogado");
+    this.nutricionistaService.removeNutricionistaLogado();
     this.router.navigate(['/Menu-Inicial'])
   }
 }

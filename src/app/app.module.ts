@@ -11,6 +11,8 @@ import { AppRountingModule } from './app-routing.module';
 import { ListaPacientesComponent } from './lista-pacientes/lista-pacientes.component';
 import { ModalComponent } from './modal/modal.component';
 import { FormsModule } from '@angular/forms';
+import { NutricionistaService } from 'src/services/user.service';
+import { AuthGuardService } from 'src/services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,10 @@ import { FormsModule } from '@angular/forms';
     AppRountingModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [
+    AuthGuardService,
+    NutricionistaService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
