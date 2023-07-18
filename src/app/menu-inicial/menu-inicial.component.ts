@@ -4,6 +4,8 @@ import { Nutricionista } from 'src/app/interfaces/nutricionista';
 import { Consulta } from 'src/app/interfaces/consulta';
 import { Paciente } from 'src/app/interfaces/paciente'
 import { NutricionistaService } from "src/services/user.service";
+import { CriptografiaService } from "../../services/criptografia.service";
+import { LocalStorageService } from "../../services/LocalStorage.service";
 
 @Component({
   selector: "app-menu-inicial",
@@ -14,10 +16,12 @@ export class MenuInicialComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private nutricionistaService: NutricionistaService
-    ) {}
+    private nutricionistaService: NutricionistaService,
+    private criptografiaService: CriptografiaService,
+    private LocalStorageService: LocalStorageService
+  ) { }
 
-  nutricionistasLista : Nutricionista[] = [];
+  nutricionistasLista: Nutricionista[] = [];
 
   nomeCompleto: string;
   email: string;
@@ -26,13 +30,10 @@ export class MenuInicialComponent implements OnInit {
 
   //Verificação da lista no localStorage
   ngOnInit() {
-    if(this.nutricionistaService.getLoggedUser()){
+    if (this.LocalStorageService.getLocalStorageNutricionistaLogado()) {
       this.router.navigate(['/Menu-Principal']);
     }
-    let listaNutricionistas = JSON.parse(localStorage.getItem("NutricionistasLista"));
-    if( listaNutricionistas != null ){
-      this.nutricionistasLista = listaNutricionistas;
-    }
+    this.nutricionistasLista = this.criptografiaService.decryptData(localStorage.getItem("NutricionistasLista"));
   }
 
   //Login e registro
@@ -40,74 +41,74 @@ export class MenuInicialComponent implements OnInit {
 
   trocaTelaLogin(): void {
     this.loginERegisterView = false;
-    this.nutricionista.email="";
-    this.nutricionista.nomeCompleto="";
-    this.nutricionista.senha="";
-    this.nutricionista.CRN="";
+    this.nutricionista.email = "";
+    this.nutricionista.nomeCompleto = "";
+    this.nutricionista.senha = "";
+    this.nutricionista.CRN = "";
   }
   trocaTelaRegistro(): void {
     this.loginERegisterView = true;
-    this.loginCRN="";
-    this.loginSenha="";
+    this.loginCRN = "";
+    this.loginSenha = "";
   }
 
-    //Modal confirmação
-    aparecerModalConfirmarRegister:boolean = false;
-    tituloConfirmacao:string;
-    dados:string[] = [];
+  //Modal confirmação
+  aparecerModalConfirmarRegister: boolean = false;
+  tituloConfirmacao: string;
+  dados: string[] = [];
 
-    //Modal aviso
-    aparecerModalAvisoRegister:boolean = false;
-    tituloErro:string;
-    erro:string;
-    abrirModalRegistrar():void{
-      if(this.nutricionista.CRN == "" || this.nutricionista.nomeCompleto == "" || this.nutricionista.email == "" || this.nutricionista.senha == ""  ) {
-        this.tituloErro = "Atenção no Cadastro!";
-        this.erro = "Todos os campos devem ser preenchidos!";
-        this.aparecerModalAvisoRegister = true;
-      } else{
-        if(this.verificarFormatoCRN(this.nutricionista.CRN)){
-          this.tituloConfirmacao = "Confirme seus Dados";
-          this.dados.push("Nome: " + this.nutricionista.nomeCompleto);
-          this.dados.push("E-mail: " + this.nutricionista.email);
-          this.dados.push("CRN: " + this.nutricionista.CRN);
-          this.aparecerModalConfirmarRegister = true;
-        } else{
-          this.verificarFormatoCRNModal();
-        }
-      }
+  //Modal aviso
+  aparecerModalAvisoRegister: boolean = false;
+  tituloErro: string;
+  erro: string;
+  abrirModalRegistrar(): void {
+    if (this.nutricionista.CRN == "" || this.nutricionista.nomeCompleto == "" || this.nutricionista.email == "" || this.nutricionista.senha == "") {
+      this.tituloErro = "Atenção no Cadastro!";
+      this.erro = "Todos os campos devem ser preenchidos!";
+      this.aparecerModalAvisoRegister = true;
+    } else {
+    if (this.verificarFormatoCRN(this.nutricionista.CRN)) {
+      this.tituloConfirmacao = "Confirme seus Dados";
+      this.dados.push("Nome: " + this.nutricionista.nomeCompleto);
+      this.dados.push("E-mail: " + this.nutricionista.email);
+      this.dados.push("CRN: " + this.nutricionista.CRN);
+      this.aparecerModalConfirmarRegister = true;
+    } else {
+      this.verificarFormatoCRNModal();
     }
+    }
+  }
 
 
-    fecharModalConfirmRegister():void{
-      this.aparecerModalConfirmarRegister = false;
-      this.dados = [];
-    }
-    fecharModalAvisoRegister():void{
-      this.aparecerModalAvisoRegister = false;
-    }
+  fecharModalConfirmRegister(): void {
+    this.aparecerModalConfirmarRegister = false;
+    this.dados = [];
+  }
+  fecharModalAvisoRegister(): void {
+    this.aparecerModalAvisoRegister = false;
+  }
   //
 
-  nutricionista : Nutricionista  = {
+  nutricionista: Nutricionista = {
     nomeCompleto: "",
     email: "",
     senha: "",
-    CRN:"",
-    listaPacientes : []
+    CRN: "",
+    listaPacientes: []
   }
 
 
   //Confirmar Cadastro
-  confirmarRegister():void{
+  confirmarRegister(): void {
     this.aparecerModalConfirmarRegister = false;
     this.dados = [];
-    let verificarCRNExistente:boolean = false;
-    if( this.nutricionistasLista.length > 0 ){
-      if( this.nutricionistasLista.find( (nutricionista) => nutricionista.CRN == this.nutricionista.CRN) != null){
+    let verificarCRNExistente: boolean = false;
+    if (this.nutricionistasLista.length > 0) {
+      if (this.nutricionistasLista.find((nutricionista) => nutricionista.CRN == this.nutricionista.CRN) != null) {
         verificarCRNExistente = true;
       }
     }
-    if(!verificarCRNExistente){
+    if (!verificarCRNExistente) {
       const novoNutricionista: Nutricionista = {
         nomeCompleto: this.nutricionista.nomeCompleto,
         email: this.nutricionista.email,
@@ -116,12 +117,12 @@ export class MenuInicialComponent implements OnInit {
         listaPacientes: []
       }
       this.nutricionistasLista.push(novoNutricionista);
-      localStorage.setItem('NutricionistasLista', JSON.stringify(this.embaralhamentoLista(JSON.stringify(this.nutricionistasLista))));
+      this.LocalStorageService.setLocalStorageListaNutricionista(this.nutricionistasLista);
       this.nutricionista.nomeCompleto = "";
       this.nutricionista.email = "";
       this.nutricionista.senha = "";
       this.nutricionista.CRN = "";
-    } else{
+    } else {
       this.tituloErro = "ATENÇÃO";
       this.erro = "Já existe outro nutricionista cadastrado com o CRN " + this.nutricionista.CRN;
       this.aparecerModalAvisoRegister = true;
@@ -129,56 +130,43 @@ export class MenuInicialComponent implements OnInit {
     this.loginERegisterView = false;
   }
 
-  embaralhamentoLista(nutricionistasListaString: string): String {
-    const arrayCaracteres = nutricionistasListaString.split('');
-
-  // Embaralha a array de caracteres usando o algoritmo de Fisher-Yates
-  for (let i = arrayCaracteres.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arrayCaracteres[i], arrayCaracteres[j]] = [arrayCaracteres[j], arrayCaracteres[i]];
-  }
-
-  // Junta os caracteres embaralhados de volta em uma string
-  const stringEmbaralhada = arrayCaracteres.join('');
-    
-  return stringEmbaralhada;
-  }
 
 
   // Verificação e redireção do login
-  loginCRN:string;
-  loginSenha:string;
-  verificacaoLogin():void {
-    if(!this.verificarFormatoCRN(this.loginCRN)){
+  loginCRN: string;
+  loginSenha: string;
+  verificacaoLogin(): void {
+    if (!this.verificarFormatoCRN(this.loginCRN)) {
       this.verificarFormatoCRNModal();
     }
-    else{
+    else {
       let verificarCRNExistente: boolean = false;
-      this.nutricionistasLista.forEach( (nutricionistaFor) => {
-        if(nutricionistaFor.CRN == this.loginCRN) {
+      this.nutricionistasLista.forEach((nutricionistaFor) => {
+        if (nutricionistaFor.CRN == this.loginCRN) {
           verificarCRNExistente = true;
-          if(nutricionistaFor.senha == this.loginSenha) {
-            this.nutricionistaService.setNutricionistaLogado(nutricionistaFor);
+          if (nutricionistaFor.senha == this.loginSenha) {
+            this.LocalStorageService.setLocalStorageNutricionistaLogado(nutricionistaFor);
+            this.LocalStorageService.setLocalStorageListaNutricionista(this.nutricionistasLista);
             this.router.navigate(['/Menu-Principal'])
-          }else{
+          } else {
             this.tituloErro = "CRN ou Senha Incorretos";
             this.erro = "Por favor insira novamente";
             this.aparecerModalAvisoRegister = true;
           }
         }
-    });
-    if(!verificarCRNExistente){
-      this.tituloErro = "CRN ou Senha Incorretos";
-      this.erro = "Por favor insira novamente";
-      this.aparecerModalAvisoRegister = true;
+      });
+      if (!verificarCRNExistente) {
+        this.tituloErro = "CRN ou Senha Incorretos";
+        this.erro = "Por favor insira novamente";
+        this.aparecerModalAvisoRegister = true;
+      }
+      this.loginCRN = "";
+      this.loginSenha = "";
     }
-    this.loginCRN = "";
-    this.loginSenha = "";
-  }
   }
 
   //Verificação de formato da CRN
-  verificarFormatoCRNModal():void{
+  verificarFormatoCRNModal(): void {
     this.tituloErro = "Formato de CRN Inválido";
     this.erro = "Formato correto: XX-XXXX";
     this.aparecerModalAvisoRegister = true;
@@ -189,14 +177,14 @@ export class MenuInicialComponent implements OnInit {
   }
 
   //Formatador de CRN no Login e no Registro
-  formatarCRNLogin():void{
+  formatarCRNLogin(): void {
     this.loginCRN = this.formatarCRN(this.loginCRN);
   }
-  formatarCRNRegistro():void{
+  formatarCRNRegistro(): void {
     this.nutricionista.CRN = this.formatarCRN(this.nutricionista.CRN);
   }
-  formatarCRN(crn:string):string {
+  formatarCRN(crn: string): string {
     const apenasDigitos = crn.replace(/\D/g, '');
-    return apenasDigitos.replace(/(\d{2})(\d{0,4})/, '$1-$2'); 
+    return apenasDigitos.replace(/(\d{2})(\d{0,4})/, '$1-$2');
   }
 }

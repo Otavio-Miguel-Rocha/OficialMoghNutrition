@@ -50,6 +50,7 @@ export class CadastroPacienteComponent implements OnInit {
     if(validaListaNutricionistas != null) {
       this.nutricionistasLista = validaListaNutricionistas;
     }
+    
   }
 
   //Modal confirmação

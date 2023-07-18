@@ -13,6 +13,8 @@ import { ModalComponent } from './modal/modal.component';
 import { FormsModule } from '@angular/forms';
 import { NutricionistaService } from 'src/services/user.service';
 import { AuthGuardService } from 'src/services/auth-guard.service';
+import { CriptografiaService } from '../services/criptografia.service';
+import { LocalStorageService } from '../services/LocalStorage.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { AuthGuardService } from 'src/services/auth-guard.service';
   ],
   providers: [
     AuthGuardService,
-    NutricionistaService
+    NutricionistaService,
+    CriptografiaService,
+    LocalStorageService
   ],
   bootstrap: [AppComponent]
 })
